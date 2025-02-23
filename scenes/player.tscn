@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbgtrq6dsnbid"]
+[gd_scene load_steps=12 format=3 uid="uid://uti1acrmf4mg"]
 
-[ext_resource type="Script" path="res://scripts/Player.cs" id="1_810nv"]
-[ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/player/free_character_1-3.png" id="1_cmt6h"]
-[ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/player/Shadow.png" id="1_kbq3v"]
+[ext_resource type="Script" path="res://scripts/Player.cs" id="1_3tyk6"]
+[ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/player/free_character_1-3.png" id="2_x1oss"]
+[ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/player/Shadow.png" id="3_tecgu"]
+[ext_resource type="Script" path="res://scripts/PlayerPointer.cs" id="4_ykpjy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x770g"]
 size = Vector2(12, 10)
@@ -14,7 +15,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -31,7 +32,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,21 +42,6 @@ tracks/0/keys = {
 "values": [4, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_2m8vw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
 [sub_resource type="Animation" id="Animation_8yo30"]
 resource_name = "walk_right"
 length = 0.8
@@ -63,7 +49,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -80,7 +66,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -92,40 +78,52 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qecux"]
 _data = {
-"RESET": SubResource("Animation_2m8vw"),
 "walk_down": SubResource("Animation_pppxl"),
 "walk_left": SubResource("Animation_bb41e"),
 "walk_right": SubResource("Animation_8yo30"),
 "walk_up": SubResource("Animation_sjj00")
 }
 
-[node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_810nv")
+[sub_resource type="CircleShape2D" id="CircleShape2D_qaxcg"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_cmt6h")
+[node name="Player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_3tyk6")
+
+[node name="Shadow" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, -3)
+scale = Vector2(0.9, 0.891)
+texture = ExtResource("3_tecgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_x1oss")
 hframes = 3
 vframes = 4
-frame = 4
+frame = 1
 region_enabled = true
-region_rect = Rect2(48, 0, 48, 80)
+region_rect = Rect2(48, 1, 48, 80)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_x770g")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 zoom = Vector2(1.5, 1.5)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_qecux")
 }
 
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(-0.5, -3)
-scale = Vector2(0.979167, 0.96875)
-texture = ExtResource("1_kbq3v")
-hframes = 3
-vframes = 4
-frame = 4
+[node name="InteractionPointer" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/InteractionPointer"]
+position = Vector2(0, 15)
+scale = Vector2(0.3, 0.3)
+shape = SubResource("CircleShape2D_qaxcg")
+debug_color = Color(1.44392e-06, 0.639087, 0.369648, 0.42)
+script = ExtResource("4_ykpjy")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://cdylen16f2mjn"]
+[gd_scene load_steps=4 format=4 uid="uid://cdylen16f2mjn"]
 
 [ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://tilemap/shop.tres" id="1_ubraj"]
-[ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/player.tscn" id="2_v3lkh"]
+[ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/player.tscn" id="2_v3lkh"]
+[ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/dude.tscn" id="3_w6mvc"]
 
 [node name="Shop" type="Node2D"]
 
@@ -29,5 +30,9 @@ tile_map_data = PackedByteArray("AAAIAAoAAAAMAAQAAAAIAAsAAAAMAAUAAAAIAAwAAAAMAAY
 tile_set = ExtResource("1_ubraj")
 
 [node name="Player" parent="." instance=ExtResource("2_v3lkh")]
-position = Vector2(1083, 458)
-scale = Vector2(4, 4)
+position = Vector2(1115, 460)
+scale = Vector2(3.5, 3.5)
+
+[node name="Dude" parent="." instance=ExtResource("3_w6mvc")]
+position = Vector2(732, 718)
+scale = Vector2(3.5, 3.5)

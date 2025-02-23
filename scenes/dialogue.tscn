@@ -40,6 +40,7 @@ yarnProject = ExtResource("2_vrj8y")
 variableStorage = NodePath("../InMemoryVariableStorage")
 dialogueViews = [NodePath("../LineView"), NodePath("../OptionsListView")]
 startNode = "Start"
+startAutomatically = false
 lineProvider = NodePath("../TextLineProvider")
 
 [node name="VariableDebugText" type="RichTextLabel" parent="."]

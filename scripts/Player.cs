@@ -1,12 +1,13 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class Player : CharacterBody2D
 {
     private float _runSpeedInitial = 100;
-    private float _runSpeed = 50;
+    private float _runSpeed = 100;
     private float _runSpeedCap = 400;
-    private float _friction = 0.9f;
+    private float _friction = 0.85f;
 
     private AnimationPlayer _animationPlayer;
 
@@ -17,12 +18,12 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        GetInput();
+        UpdateVelocity();
         UpdateAnimation();
         MoveAndSlide();
     }
 
-    private void GetInput()
+    private void UpdateVelocity()
     {
         var velocity = Velocity;
 
