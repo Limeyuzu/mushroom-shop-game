@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbgtrq6dsnbid"]
+[gd_scene load_steps=7 format=3 uid="uid://dbgtrq6dsnbid"]
 
 [ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/player/free_character_1-3.png" id="1_cmt6h"]
+[ext_resource type="Script" path="res://scripts/Npc.cs" id="1_dvu2j"]
 [ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/player/Shadow.png" id="1_kbq3v"]
 [ext_resource type="Script" path="res://scripts/NpcInteractionArea.cs" id="3_bfvlf"]
 
@@ -11,6 +12,7 @@ size = Vector2(12, 10)
 size = Vector2(16, 20)
 
 [node name="Npc" type="CharacterBody2D"]
+script = ExtResource("1_dvu2j")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(-0.5, -3)
@@ -32,10 +34,11 @@ shape = SubResource("RectangleShape2D_x770g")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." node_paths=PackedStringArray("_npc")]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("3_bfvlf")
+_npc = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 position = Vector2(0, 1)

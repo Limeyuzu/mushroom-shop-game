@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqe5yshlcmnpg"]
+[gd_scene load_steps=16 format=3 uid="uid://dqe5yshlcmnpg"]
 
+[ext_resource type="Script" path="res://scripts/DialogueNode.cs" id="1_a0dl5"]
 [ext_resource type="Script" path="res://addons/YarnSpinner-Godot/Runtime/DialogueRunner.cs" id="1_vq0dw"]
 [ext_resource type="Script" path="res://addons/YarnSpinner-Godot/Runtime/Views/LineView.cs" id="2_jd2og"]
 [ext_resource type="Resource" uid="uid://ckt66t6sshsa1" path="res://TestYarn.yarnproject" id="2_vrj8y"]
@@ -25,7 +26,9 @@ modulate_color = Color(0.356863, 0.529412, 0.501961, 1)
 texture = ExtResource("4_e01r3")
 modulate_color = Color(0.529412, 0.788235, 0.764706, 1)
 
-[node name="RoundedYarnSpinnerCanvasLayer" type="CanvasLayer"]
+[node name="DialogueCanvas" type="CanvasLayer" node_paths=PackedStringArray("DialogueRunner")]
+script = ExtResource("1_a0dl5")
+DialogueRunner = NodePath("DialogueRunner")
 
 [node name="DialogueRunner" type="Control" parent="." node_paths=PackedStringArray("variableStorage", "dialogueViews", "lineProvider")]
 layout_mode = 3
