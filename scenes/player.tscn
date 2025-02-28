@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://uti1acrmf4mg"]
+[gd_scene load_steps=13 format=3 uid="uid://uti1acrmf4mg"]
 
-[ext_resource type="Script" path="res://scripts/Player.cs" id="1_3tyk6"]
+[ext_resource type="Script" path="res://scripts/player/Player.cs" id="1_3tyk6"]
+[ext_resource type="Script" path="res://scripts/player/PlayerMovement.cs" id="2_le2lq"]
 [ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/player/free_character_1-3.png" id="2_x1oss"]
 [ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/player/Shadow.png" id="3_tecgu"]
-[ext_resource type="Script" path="res://scripts/PlayerPointer.cs" id="4_ykpjy"]
+[ext_resource type="Script" path="res://scripts/player/PlayerPointer.cs" id="4_ykpjy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x770g"]
 size = Vector2(12, 10)
@@ -87,9 +88,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_qaxcg"]
 
 [node name="Player" type="Node2D"]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_3tyk6")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_player")]
+script = ExtResource("2_le2lq")
+_player = NodePath("..")
 
 [node name="Shadow" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(-0.5, -3)

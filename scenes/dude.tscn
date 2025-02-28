@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dbgtrq6dsnbid"]
 
 [ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/player/free_character_1-3.png" id="1_cmt6h"]
-[ext_resource type="Script" path="res://scripts/Npc.cs" id="1_dvu2j"]
+[ext_resource type="Script" path="res://scripts/npc/Npc.cs" id="1_dvu2j"]
 [ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/player/Shadow.png" id="1_kbq3v"]
-[ext_resource type="Script" path="res://scripts/NpcInteractionArea.cs" id="3_bfvlf"]
+[ext_resource type="Script" path="res://scripts/npc/NpcInteractionArea.cs" id="3_bfvlf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x770g"]
 size = Vector2(12, 10)

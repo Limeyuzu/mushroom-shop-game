@@ -9,14 +9,13 @@ public partial class NpcInteractionArea : Area2D
 
     public override void _Ready()
     {
-        _dialogueRunner = _npc.DialogueNode.DialogueRunner;
+        _dialogueRunner = _npc.GlobalState.DialogueRunner;
     }
 
     public override void _Process(double delta)
     {
-        if (_isPointerInArea && Input.IsActionJustPressed("ui_accept"))
+        if (_isPointerInArea && !_dialogueRunner.IsDialogueRunning && Input.IsActionJustPressed("ui_accept"))
         {
-            GD.Print("pressed enter");
             _dialogueRunner.StartDialogue(_dialogueRunner.startNode);
         }
     }

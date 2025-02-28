@@ -1,8 +1,7 @@
 using Godot;
-using System;
 using YarnSpinnerGodot;
 
-public partial class DialogueNode : CanvasLayer
+public partial class DialogueRunnerCanvas : CanvasLayer
 {
     [Export] public DialogueRunner DialogueRunner;
 }

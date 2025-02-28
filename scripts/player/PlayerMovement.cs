@@ -1,8 +1,6 @@
 using Godot;
-using System;
-using System.Diagnostics;
 
-public partial class Player : CharacterBody2D
+public partial class PlayerMovement : CharacterBody2D
 {
     private float _runSpeedInitial = 100;
     private float _runSpeed = 100;
@@ -11,6 +9,8 @@ public partial class Player : CharacterBody2D
 
     private AnimationPlayer _animationPlayer;
 
+    [Export] private Player _player;
+
     public override void _Ready()
     {
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -18,9 +18,12 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        UpdateVelocity();
-        UpdateAnimation();
-        MoveAndSlide();
+        if (_player.CanMove())
+        {
+            UpdateVelocity();
+            UpdateAnimation();
+            MoveAndSlide();
+        }
     }
 
     private void UpdateVelocity()
