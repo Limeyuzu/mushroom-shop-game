@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnxviigjbiyye"]
+
+[ext_resource type="Script" path="res://scripts/ui/InventoryWrapper.cs" id="1_4d5hs"]
+[ext_resource type="Script" path="res://addons/gloot/core/inventory.gd" id="1_8p3k6"]
+[ext_resource type="JSON" path="res://items.json" id="2_oxvs6"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory.gd" id="4_jxr78"]
+[ext_resource type="Texture2D" uid="uid://betejwxbh6lhj" path="res://sprites/item/fa1447.png" id="4_td1xa"]
+[ext_resource type="Texture2D" uid="uid://dyhmawls3l4n" path="res://sprites/item/fa265.png" id="5_5h8se"]
+[ext_resource type="Script" path="res://scripts/ui/SelectButton.cs" id="7_udxoh"]
+
+[node name="InventoryWrapper" type="CanvasLayer"]
+script = ExtResource("1_4d5hs")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("1_8p3k6")
+protoset = ExtResource("2_oxvs6")
+_serialized_format = {
+"items": [{
+"protoset": "res://items.json",
+"prototype_id": "iron_sword"
+}, {
+"protoset": "res://items.json",
+"prototype_id": "health_potion"
+}],
+"node_name": "Inventory",
+"protoset": "res://items.json"
+}
+
+[node name="CtrlInventory" type="ItemList" parent="." node_paths=PackedStringArray("inventory")]
+offset_right = 330.0
+offset_bottom = 113.0
+item_count = 2
+item_0/text = "Iron Sword"
+item_0/icon = ExtResource("4_td1xa")
+item_1/text = "Health Potion"
+item_1/icon = ExtResource("5_5h8se")
+script = ExtResource("4_jxr78")
+inventory = NodePath("../Inventory")
+
+[node name="SelectButton" type="Button" parent="." node_paths=PackedStringArray("_ctrlInventory")]
+offset_left = 271.0
+offset_top = 78.0
+offset_right = 325.0
+offset_bottom = 109.0
+text = "Select"
+script = ExtResource("7_udxoh")
+_ctrlInventory = NodePath("../CtrlInventory")
+
+[connection signal="pressed" from="SelectButton" to="SelectButton" method="OnPressed"]

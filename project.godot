@@ -26,7 +26,7 @@ project/assembly_name="MushroomShop"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/YarnSpinner-Godot/plugin.cfg")
+enabled=PackedStringArray("res://addons/YarnSpinner-Godot/plugin.cfg", "res://addons/gloot/plugin.cfg")
 
 [rendering]
 

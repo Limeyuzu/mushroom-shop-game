@@ -1,0 +1,10 @@
+{
+	"iron_sword": {
+		"name": "Iron Sword",
+		"image": "res://sprites/item/fa1447.png"
+	},
+	"health_potion": {
+		"name": "Health Potion",
+		"image": "res://sprites/item/fa265.png"
+	}
+}

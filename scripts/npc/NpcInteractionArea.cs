@@ -5,18 +5,18 @@ public partial class NpcInteractionArea : Area2D
 {
     [Export] private Npc _npc;
     private bool _isPointerInArea = false;
-    private DialogueRunner _dialogueRunner;
+    private GlobalState _globalState;
 
     public override void _Ready()
     {
-        _dialogueRunner = _npc.GlobalState.DialogueRunner;
+        _globalState = _npc.GlobalState;
     }
 
     public override void _Process(double delta)
     {
-        if (_isPointerInArea && !_dialogueRunner.IsDialogueRunning && Input.IsActionJustPressed("ui_accept"))
+        if (_isPointerInArea && Input.IsActionJustPressed("ui_accept") && _globalState.PlayerHasControl())
         {
-            _dialogueRunner.StartDialogue(_dialogueRunner.startNode);
+            _globalState.DialogueRunner.StartDialogue(_globalState.DialogueRunner.startNode);
         }
     }
 
