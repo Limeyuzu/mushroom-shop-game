@@ -6,6 +6,8 @@ public partial class InventoryWrapper : CanvasLayer
 {
     [Export] public bool InitiallyVisible = true;
 
+    [Signal] public delegate void ItemSelectedEventHandler(GodotObject item);
+
     public override void _Ready() 
     {
         Visible = InitiallyVisible;
@@ -18,8 +20,10 @@ public partial class InventoryWrapper : CanvasLayer
         Visible = true;
     }
 
-    public void CloseInventory() 
+    public void SelectItem(GodotObject item) 
     {
+        GD.Print("selected item: " + item.Call("get_title"));
+        EmitSignal(SignalName.ItemSelected, item);
         GD.Print("close inventory");
         Visible = false;
     }

@@ -1,5 +1,4 @@
 using Godot;
-using YarnSpinnerGodot;
 
 public partial class NpcInteractionArea : Area2D
 {

@@ -54,3 +54,5 @@ _globalState = NodePath("../GlobalState")
 position = Vector2(732, 718)
 scale = Vector2(3.5, 3.5)
 GlobalState = NodePath("../GlobalState")
+
+[connection signal="ItemSelected" from="Inventory" to="DialogueCanvas" method="OnItemSelected"]

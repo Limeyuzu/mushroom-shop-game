@@ -5,3 +5,10 @@ Dude: Oh, hello!
     -> I want to show you an item.
         <<OpenInventory Inventory>>
 ===
+
+title: ShowItem
+---
+<<declare $selectedItem = "">>
+
+Dude: I see, a {$selectedItem}.
+===

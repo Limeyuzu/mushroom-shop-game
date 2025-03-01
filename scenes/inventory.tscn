@@ -37,7 +37,7 @@ item_1/icon = ExtResource("5_5h8se")
 script = ExtResource("4_jxr78")
 inventory = NodePath("../Inventory")
 
-[node name="SelectButton" type="Button" parent="." node_paths=PackedStringArray("_ctrlInventory")]
+[node name="SelectButton" type="Button" parent="." node_paths=PackedStringArray("_ctrlInventory", "_inventoryWrapper")]
 offset_left = 271.0
 offset_top = 78.0
 offset_right = 325.0
@@ -45,5 +45,6 @@ offset_bottom = 109.0
 text = "Select"
 script = ExtResource("7_udxoh")
 _ctrlInventory = NodePath("../CtrlInventory")
+_inventoryWrapper = NodePath("..")
 
 [connection signal="pressed" from="SelectButton" to="SelectButton" method="OnPressed"]

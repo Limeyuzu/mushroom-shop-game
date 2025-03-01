@@ -4,12 +4,12 @@ using System;
 public partial class SelectButton : Button
 {
     [Export] private Node _ctrlInventory;
+    [Export] private InventoryWrapper _inventoryWrapper;
 
     public void OnPressed() 
     {
-        GD.Print("pressed Select");
-        var selectedItem = _ctrlInventory.Call("get_selected_inventory_item");
-        var gObject = selectedItem.As<GodotObject>();
-        GD.Print("selected item: " + gObject.Call("get_title"));
+        var selectedItem = _ctrlInventory.Call("get_selected_inventory_item").As<GodotObject>();
+
+        _inventoryWrapper.SelectItem(selectedItem);
     }
 }
