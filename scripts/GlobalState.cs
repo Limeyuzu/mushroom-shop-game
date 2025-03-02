@@ -1,13 +1,14 @@
 using Godot;
-using YarnSpinnerGodot;
 
 public partial class GlobalState : Node
 {
-    [Export] private DialogueRunnerCanvas _dialogueRunnerCanvas;
-    [Export] private InventoryWrapper _inventoryWrapper;
+    private bool IsDialogueRunning = false;
+    private bool IsInventoryOpen = false;
 
-    public DialogueRunner DialogueRunner => _dialogueRunnerCanvas.DialogueRunner;
-    public InventoryWrapper InventoryWrapper => _inventoryWrapper;
+    public bool PlayerHasControl() => !IsDialogueRunning && !IsInventoryOpen;
 
-    public bool PlayerHasControl() => !DialogueRunner.IsDialogueRunning && !InventoryWrapper.Visible;
+    public void OnDialogueStarted() => IsDialogueRunning = true;
+    public void OnDialogueCompleted() => IsDialogueRunning = false;
+    public void OnInventoryOpened() => IsInventoryOpen = true;
+    public void OnInventoryClosed() => IsInventoryOpen = false;
 }

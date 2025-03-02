@@ -3,19 +3,14 @@ using Godot;
 public partial class NpcInteractionArea : Area2D
 {
     [Export] private Npc _npc;
-    private bool _isPointerInArea = false;
-    private GlobalState _globalState;
 
-    public override void _Ready()
-    {
-        _globalState = _npc.GlobalState;
-    }
+    private bool _isPointerInArea = false;
 
     public override void _Process(double delta)
     {
-        if (_isPointerInArea && Input.IsActionJustPressed("ui_accept") && _globalState.PlayerHasControl())
+        if (_isPointerInArea && Input.IsActionJustPressed("ui_accept"))
         {
-            _globalState.DialogueRunner.StartDialogue(_globalState.DialogueRunner.startNode);
+            _npc.EmitStartDialogueAttempt();
         }
     }
 

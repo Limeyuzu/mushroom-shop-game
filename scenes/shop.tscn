@@ -9,12 +9,11 @@
 
 [node name="Shop" type="Node2D"]
 
-[node name="GlobalState" type="Node" parent="." node_paths=PackedStringArray("_dialogueRunnerCanvas", "_inventoryWrapper")]
+[node name="GlobalState" type="Node" parent="."]
 script = ExtResource("1_y06ua")
-_dialogueRunnerCanvas = NodePath("../DialogueCanvas")
-_inventoryWrapper = NodePath("../Inventory")
 
-[node name="DialogueCanvas" parent="." instance=ExtResource("1_ngheg")]
+[node name="DialogueCanvas" parent="." node_paths=PackedStringArray("_globalState") instance=ExtResource("1_ngheg")]
+_globalState = NodePath("../GlobalState")
 
 [node name="Inventory" parent="." instance=ExtResource("5_46u0s")]
 offset = Vector2(350, 300)
@@ -54,5 +53,11 @@ _globalState = NodePath("../GlobalState")
 position = Vector2(732, 718)
 scale = Vector2(3.5, 3.5)
 GlobalState = NodePath("../GlobalState")
+DialogueNode = "Start"
 
+[connection signal="DialogueCompleted" from="DialogueCanvas" to="GlobalState" method="OnDialogueCompleted"]
+[connection signal="DialogueStarted" from="DialogueCanvas" to="GlobalState" method="OnDialogueStarted"]
+[connection signal="InventoryClosed" from="Inventory" to="GlobalState" method="OnInventoryClosed"]
+[connection signal="InventoryOpened" from="Inventory" to="GlobalState" method="OnInventoryOpened"]
 [connection signal="ItemSelected" from="Inventory" to="DialogueCanvas" method="OnItemSelected"]
+[connection signal="StartDialogueAttempt" from="Dude" to="DialogueCanvas" method="OnInteractionStartAttempt"]

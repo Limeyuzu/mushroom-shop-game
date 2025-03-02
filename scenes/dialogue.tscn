@@ -303,3 +303,6 @@ script = ExtResource("5_88l4y")
 
 [node name="TextLineProvider" type="Node2D" parent="."]
 script = ExtResource("6_5v3f4")
+
+[connection signal="onDialogueComplete" from="DialogueRunner" to="." method="OnDialogueComplete"]
+[connection signal="onDialogueStart" from="DialogueRunner" to="." method="OnDialogueStart"]
