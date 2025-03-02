@@ -1,9 +1,19 @@
 {
+	"weapon": {
+		"name": "weapon"
+	},
+	"sword": {
+		"inherits": "weapon",
+		"name": "sword"
+	},
+	"potion": {},
 	"iron_sword": {
+		"inherits": "sword",
 		"name": "Iron Sword",
 		"image": "res://sprites/item/fa1447.png"
 	},
 	"health_potion": {
+		"inherits": "potion",
 		"name": "Health Potion",
 		"image": "res://sprites/item/fa265.png"
 	}

@@ -2,13 +2,13 @@ using Godot;
 
 public partial class GlobalState : Node
 {
-    private bool IsDialogueRunning = false;
-    private bool IsInventoryOpen = false;
+    public bool IsInDialogue { get; private set;}
+    public bool IsInventoryOpen { get; private set; }
 
-    public bool PlayerHasControl() => !IsDialogueRunning && !IsInventoryOpen;
+    public bool PlayerHasControl() => !IsInDialogue && !IsInventoryOpen;
 
-    public void OnDialogueStarted() => IsDialogueRunning = true;
-    public void OnDialogueCompleted() => IsDialogueRunning = false;
-    public void OnInventoryOpened() => IsInventoryOpen = true;
-    public void OnInventoryClosed() => IsInventoryOpen = false;
+    private void OnDialogueStarted(Npc dialogueNpc) => IsInDialogue = true;
+    private void OnDialogueCompleted() => IsInDialogue = false;
+    private void OnInventoryOpened() => IsInventoryOpen = true;
+    private void OnInventoryClosed() => IsInventoryOpen = false;
 }

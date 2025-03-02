@@ -9,6 +9,12 @@ Dude: Oh, hello!
 title: ShowItem
 ---
 <<declare $selectedItem = "">>
+<<declare $desiredItem = "">>
+<<declare $isDesired = false>>
 
-Dude: I see, a {$selectedItem}.
+<<if $isDesired>>
+    Dude: Oooh, a {$selectedItem}. Is it for sale?
+<<else>>
+    Dude: A {$selectedItem}? That's nice, but I'm not interested.
+<<endif>>
 ===
