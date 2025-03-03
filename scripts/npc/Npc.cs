@@ -1,21 +1,21 @@
 using Godot;
-using Godot.Collections;
 
 public partial class Npc : CharacterBody2D
 {
 	[Export] public string DialogueNode;
-	[Export] public Node DesiredItems;
+	[Export] private Node _desiredItems;
 
 	[Signal] public delegate void StartDialogueAttemptEventHandler(Npc npc);
 
-	public void EmitStartDialogueAttempt()
+	public Inventory DesiredItems;
+
+    public override void _Ready()
 	{
-		EmitSignal(SignalName.StartDialogueAttempt, this);
+		DesiredItems = new Inventory(_desiredItems);
 	}
 
-	public override void _Ready()
+    public void EmitStartDialogueAttempt()
 	{
-		var firstItem = DesiredItems.Call("get_items").As<Array>()[0].As<GodotObject>();
-		GD.Print(firstItem.Call("get_prototype").As<GodotObject>().Call("get_id"));
+		EmitSignal(SignalName.StartDialogueAttempt, this);
 	}
 }

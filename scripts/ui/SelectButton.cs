@@ -1,15 +1,19 @@
 using Godot;
-using System;
 
 public partial class SelectButton : Button
 {
     [Export] private Node _ctrlInventory;
-    [Export] private InventoryWrapper _inventoryWrapper;
+    [Export] private InventoryCanvas _inventoryCanvas;
 
-    public void OnPressed() 
+    public CtrlInventory CtrlInventory;
+
+    public override void _Ready()
     {
-        var selectedItem = _ctrlInventory.Call("get_selected_inventory_item").As<GodotObject>();
+        CtrlInventory = new CtrlInventory(_ctrlInventory);
+    }
 
-        _inventoryWrapper.SelectItem(selectedItem);
+    public void OnPressed()
+    {
+        _inventoryCanvas.SelectItem(CtrlInventory.GetSelectedInventoryItem());
     }
 }

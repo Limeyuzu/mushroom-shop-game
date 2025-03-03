@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 using YarnSpinnerGodot;
 
 public partial class DialogueRunnerCanvas : CanvasLayer
@@ -27,27 +26,26 @@ public partial class DialogueRunnerCanvas : CanvasLayer
         EmitSignal(SignalName.DialogueCompleted);
     }
 
-    public void OnItemSelected(GodotObject item)
+    public void OnItemSelected(InventoryItem item)
     {
-        DialogueRunner.VariableStorage.SetValue("$selectedItem", item.Call("get_title").As<string>());
-        DialogueRunner.VariableStorage.SetValue("$desiredItem", GetNpcDesiredItem(_currentDialogueNpc).Call("get_title").As<string>());
+        DialogueRunner.VariableStorage.SetValue("$selectedItem", item.GetTitle());
+        DialogueRunner.VariableStorage.SetValue("$desiredItem", GetNpcDesiredItem(_currentDialogueNpc).GetTitle());
         DialogueRunner.VariableStorage.SetValue("$isDesired", IsDesiredItem(_currentDialogueNpc, item));
         DialogueRunner.StartDialogue("ShowItem");
     }
 
-    private GodotObject GetNpcDesiredItem(Npc npc)
+    private InventoryItem GetNpcDesiredItem(Npc npc)
     {
-        var firstItem = npc.DesiredItems.Call("get_items").As<Array>()[0].As<GodotObject>();
+        var firstItem = npc.DesiredItems.GetItems()[0];
         return firstItem;
     }
 
-    private bool IsDesiredItem(Npc npc, GodotObject item)
+    private bool IsDesiredItem(Npc npc, InventoryItem item)
     {
-        var firstItem = npc.DesiredItems.Call("get_items").As<Array>()[0].As<GodotObject>();
-        var itemId = firstItem.Call("get_prototype").As<GodotObject>().Call("get_id");
+        var itemId = GetNpcDesiredItem(npc).GetPrototype().GetId();
         GD.Print("desired: " + itemId);
-        GD.Print("offered: " + item.Call("get_title"));
-        var isDesired = item.Call("get_prototype").As<GodotObject>().Call("inherits", itemId).As<bool>();
+        GD.Print("offered: " + item.GetTitle());
+        var isDesired = item.GetPrototype().Inherits(itemId);
         return isDesired;
-    } 
+    }
 }

@@ -1,12 +1,11 @@
 using Godot;
-using System;
 using YarnSpinnerGodot;
 
-public partial class InventoryWrapper : CanvasLayer
+public partial class InventoryCanvas : CanvasLayer
 {
     [Export] public bool InitiallyVisible = true;
 
-    [Signal] public delegate void ItemSelectedEventHandler(GodotObject item);
+    [Signal] public delegate void ItemSelectedEventHandler(InventoryItem item);
     [Signal] public delegate void InventoryOpenedEventHandler();
     [Signal] public delegate void InventoryClosedEventHandler();
 
@@ -22,9 +21,9 @@ public partial class InventoryWrapper : CanvasLayer
         EmitSignal(SignalName.InventoryOpened);
     }
 
-    public void SelectItem(GodotObject item)
+    public void SelectItem(InventoryItem item)
     {
-        GD.Print("selected item: " + item.Call("get_title"));
+        GD.Print("selected item: " + item.GetTitle());
         EmitSignal(SignalName.ItemSelected, item);
         Visible = false;
         EmitSignal(SignalName.InventoryClosed);

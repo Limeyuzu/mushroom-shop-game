@@ -51,11 +51,11 @@ position = Vector2(1115, 460)
 scale = Vector2(3.5, 3.5)
 _globalState = NodePath("../GlobalState")
 
-[node name="Dude" parent="." node_paths=PackedStringArray("DesiredItems") instance=ExtResource("3_w6mvc")]
+[node name="Dude" parent="." node_paths=PackedStringArray("_desiredItems") instance=ExtResource("3_w6mvc")]
 position = Vector2(732, 718)
 scale = Vector2(3.5, 3.5)
 DialogueNode = "Start"
-DesiredItems = NodePath("DesiredItems")
+_desiredItems = NodePath("DesiredItems")
 
 [node name="DesiredItems" type="Node" parent="Dude"]
 script = ExtResource("7_vt3xh")
