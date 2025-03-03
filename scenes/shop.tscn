@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/npc.tscn" id="3_w6mvc"]
 [ext_resource type="PackedScene" uid="uid://bnxviigjbiyye" path="res://scenes/inventory.tscn" id="5_46u0s"]
 [ext_resource type="Script" path="res://addons/gloot/core/inventory.gd" id="7_vt3xh"]
-[ext_resource type="JSON" path="res://items.json" id="8_3oumh"]
+[ext_resource type="JSON" path="res://Items.json" id="8_3oumh"]
 
 [node name="Shop" type="Node2D"]
 
@@ -62,15 +62,13 @@ script = ExtResource("7_vt3xh")
 protoset = ExtResource("8_3oumh")
 _serialized_format = {
 "items": [{
-"protoset": "res://items.json",
+"protoset": "res://Items.json",
 "prototype_id": "weapon"
 }],
 "node_name": "DesiredItems",
-"protoset": "res://items.json"
+"protoset": "res://Items.json"
 }
 
-[connection signal="DialogueCompleted" from="DialogueCanvas" to="GlobalState" method="OnDialogueCompleted"]
-[connection signal="DialogueStarted" from="DialogueCanvas" to="GlobalState" method="OnDialogueStarted"]
 [connection signal="InventoryClosed" from="Inventory" to="GlobalState" method="OnInventoryClosed"]
 [connection signal="InventoryOpened" from="Inventory" to="GlobalState" method="OnInventoryOpened"]
 [connection signal="ItemSelected" from="Inventory" to="DialogueCanvas" method="OnItemSelected"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://dqe5yshlcmnpg"]
 
-[ext_resource type="Script" path="res://scripts/DialogueRunnerCanvas.cs" id="1_5r7vc"]
+[ext_resource type="Script" path="res://scripts/UI/DialogueRunnerCanvas.cs" id="1_5r7vc"]
 [ext_resource type="Script" path="res://addons/YarnSpinner-Godot/Runtime/DialogueRunner.cs" id="1_vq0dw"]
 [ext_resource type="Script" path="res://addons/YarnSpinner-Godot/Runtime/Views/LineView.cs" id="2_jd2og"]
 [ext_resource type="Resource" uid="uid://ckt66t6sshsa1" path="res://TestYarn.yarnproject" id="2_vrj8y"]
