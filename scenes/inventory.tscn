@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnxviigjbiyye"]
 
-[ext_resource type="Script" path="res://scripts/UI/InventoryCanvas.cs" id="1_4d5hs"]
-[ext_resource type="Script" path="res://addons/gloot/core/inventory.gd" id="1_8p3k6"]
+[ext_resource type="Script" uid="uid://c0uhihwyym5e0" path="res://scripts/UI/InventoryCanvas.cs" id="1_4d5hs"]
+[ext_resource type="Script" uid="uid://d1t3kux5jf4pd" path="res://addons/gloot/core/inventory.gd" id="1_8p3k6"]
 [ext_resource type="JSON" path="res://Items.json" id="2_oxvs6"]
-[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory.gd" id="4_jxr78"]
+[ext_resource type="Script" uid="uid://cxxh6k35p55d1" path="res://addons/gloot/ui/ctrl_inventory.gd" id="4_jxr78"]
 [ext_resource type="Texture2D" uid="uid://betejwxbh6lhj" path="res://sprites/item/fa1447.png" id="4_td1xa"]
 [ext_resource type="Texture2D" uid="uid://dyhmawls3l4n" path="res://sprites/item/fa265.png" id="5_5h8se"]
-[ext_resource type="Script" path="res://scripts/UI/SelectButton.cs" id="7_udxoh"]
+[ext_resource type="Script" uid="uid://dpvrmp1yu3cka" path="res://scripts/UI/SelectButton.cs" id="7_udxoh"]
 
 [node name="InventoryCanvas" type="CanvasLayer"]
 script = ExtResource("1_4d5hs")

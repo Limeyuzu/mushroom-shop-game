@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://uti1acrmf4mg"]
 
-[ext_resource type="Script" path="res://scripts/Player/Player.cs" id="1_3tyk6"]
-[ext_resource type="Script" path="res://scripts/Player/PlayerMovement.cs" id="2_le2lq"]
+[ext_resource type="Script" uid="uid://c7equtv3u3uhr" path="res://scripts/Player/Player.cs" id="1_3tyk6"]
+[ext_resource type="Script" uid="uid://doooffy2e14ms" path="res://scripts/Player/PlayerMovement.cs" id="2_le2lq"]
 [ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/player/free_character_1-3.png" id="2_x1oss"]
 [ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/player/Shadow.png" id="3_tecgu"]
-[ext_resource type="Script" path="res://scripts/Player/PlayerPointer.cs" id="4_ykpjy"]
+[ext_resource type="Script" uid="uid://cwgwhhj2hodyd" path="res://scripts/Player/PlayerPointer.cs" id="4_ykpjy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x770g"]
 size = Vector2(12, 10)
@@ -79,10 +79,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qecux"]
 _data = {
-"walk_down": SubResource("Animation_pppxl"),
-"walk_left": SubResource("Animation_bb41e"),
-"walk_right": SubResource("Animation_8yo30"),
-"walk_up": SubResource("Animation_sjj00")
+&"walk_down": SubResource("Animation_pppxl"),
+&"walk_left": SubResource("Animation_bb41e"),
+&"walk_right": SubResource("Animation_8yo30"),
+&"walk_up": SubResource("Animation_sjj00")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qaxcg"]

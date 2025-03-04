@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/dialogue.tscn" id="1_ngheg"]
 [ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://tilemap/shop.tres" id="1_ubraj"]
-[ext_resource type="Script" path="res://scripts/GlobalState.cs" id="1_y06ua"]
+[ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_y06ua"]
 [ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/player.tscn" id="2_v3lkh"]
 [ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/npc.tscn" id="3_w6mvc"]
 [ext_resource type="PackedScene" uid="uid://bnxviigjbiyye" path="res://scenes/inventory.tscn" id="5_46u0s"]
-[ext_resource type="Script" path="res://addons/gloot/core/inventory.gd" id="7_vt3xh"]
+[ext_resource type="Script" uid="uid://d1t3kux5jf4pd" path="res://addons/gloot/core/inventory.gd" id="7_vt3xh"]
 [ext_resource type="JSON" path="res://Items.json" id="8_3oumh"]
 
 [node name="Shop" type="Node2D"]
