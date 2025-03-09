@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnxviigjbiyye"]
+[gd_scene load_steps=7 format=3 uid="uid://bnxviigjbiyye"]
 
 [ext_resource type="Script" uid="uid://c0uhihwyym5e0" path="res://scripts/UI/InventoryCanvas.cs" id="1_4d5hs"]
 [ext_resource type="Script" uid="uid://d1t3kux5jf4pd" path="res://addons/gloot/core/inventory.gd" id="1_8p3k6"]
@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://cxxh6k35p55d1" path="res://addons/gloot/ui/ctrl_inventory.gd" id="4_jxr78"]
 [ext_resource type="Texture2D" uid="uid://betejwxbh6lhj" path="res://sprites/item/fa1447.png" id="4_td1xa"]
 [ext_resource type="Texture2D" uid="uid://dyhmawls3l4n" path="res://sprites/item/fa265.png" id="5_5h8se"]
-[ext_resource type="Script" uid="uid://dpvrmp1yu3cka" path="res://scripts/UI/SelectButton.cs" id="7_udxoh"]
 
-[node name="InventoryCanvas" type="CanvasLayer"]
+[node name="InventoryCanvas" type="CanvasLayer" node_paths=PackedStringArray("_ctrlInventoryNode")]
 script = ExtResource("1_4d5hs")
+_ctrlInventoryNode = NodePath("CtrlInventory")
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("1_8p3k6")
@@ -27,8 +27,8 @@ _serialized_format = {
 }
 
 [node name="CtrlInventory" type="ItemList" parent="." node_paths=PackedStringArray("inventory")]
-offset_right = 330.0
-offset_bottom = 113.0
+offset_right = 300.0
+offset_bottom = 120.0
 item_count = 2
 item_0/text = "Iron Sword"
 item_0/icon = ExtResource("4_td1xa")
@@ -37,14 +37,19 @@ item_1/icon = ExtResource("5_5h8se")
 script = ExtResource("4_jxr78")
 inventory = NodePath("../Inventory")
 
-[node name="SelectButton" type="Button" parent="." node_paths=PackedStringArray("_ctrlInventory", "_inventoryCanvas")]
-offset_left = 271.0
-offset_top = 78.0
-offset_right = 325.0
-offset_bottom = 109.0
+[node name="SelectButton" type="Button" parent="CtrlInventory"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -35.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "Select"
-script = ExtResource("7_udxoh")
-_ctrlInventory = NodePath("../CtrlInventory")
-_inventoryCanvas = NodePath("..")
 
-[connection signal="pressed" from="SelectButton" to="SelectButton" method="OnPressed"]
+[connection signal="pressed" from="CtrlInventory/SelectButton" to="." method="OnSelectPressed"]

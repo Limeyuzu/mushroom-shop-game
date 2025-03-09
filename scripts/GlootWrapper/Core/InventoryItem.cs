@@ -13,4 +13,6 @@ public partial class InventoryItem : RefCounted
 
     public string GetTitle() => _internalInventoryItem.Call("get_title").As<string>();
     public Prototype GetPrototype() => _prototype;
+
+    public override string ToString() => GetTitle();
 }

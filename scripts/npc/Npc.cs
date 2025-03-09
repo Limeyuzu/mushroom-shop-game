@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Npc : CharacterBody2D
+public partial class Npc : CharacterBody2D, ICharacterInteractable
 {
 	[Export] public string DialogueNode;
 	[Export] private Node _desiredItems;
@@ -14,8 +14,5 @@ public partial class Npc : CharacterBody2D
 		DesiredItems = new Inventory(_desiredItems);
 	}
 
-    public void EmitStartDialogueAttempt()
-	{
-		EmitSignal(SignalName.StartDialogueAttempt, this);
-	}
+	public void Interact() => EmitSignal(SignalName.StartDialogueAttempt, this);
 }

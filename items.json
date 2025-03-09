@@ -1,6 +1,7 @@
 {
 	"weapon": {
-		"name": "weapon"
+		"name": "weapon",
+		"power": 1
 	},
 	"sword": {
 		"inherits": "weapon",
@@ -10,7 +11,14 @@
 	"iron_sword": {
 		"inherits": "sword",
 		"name": "Iron Sword",
-		"image": "res://sprites/item/fa1447.png"
+		"image": "res://sprites/item/fa1447.png",
+		"power": 3
+	},
+	"iron_sword_enhanced": {
+		"inherits": "iron_sword",
+		"name": "Enhanced Iron Sword",
+		"image": "res://sprites/item/fa1447_enhanced.png",
+		"power": 4
 	},
 	"health_potion": {
 		"inherits": "potion",

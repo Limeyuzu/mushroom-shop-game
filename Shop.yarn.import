@@ -1,0 +1,14 @@
+[remap]
+
+importer="yarnscript"
+type="Resource"
+uid="uid://bop01kxidirvq"
+path="res://.godot/imported/Shop.yarn-9743fc1f23b098ee1c8ea68d87ef95e1.tres"
+
+[deps]
+
+source_file="res://Shop.yarn"
+dest_files=["res://.godot/imported/Shop.yarn-9743fc1f23b098ee1c8ea68d87ef95e1.tres"]
+
+[params]
+
