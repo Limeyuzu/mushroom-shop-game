@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cdylen16f2mjn"]
+[gd_scene load_steps=12 format=4 uid="uid://cdylen16f2mjn"]
 
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/dialogue.tscn" id="1_ngheg"]
 [ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://tilemap/shop.tres" id="1_ubraj"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://crm01wmd8iytl" path="res://scenes/CraftingTable.tscn" id="6_heatd"]
 [ext_resource type="Script" uid="uid://d1t3kux5jf4pd" path="res://addons/gloot/core/inventory.gd" id="7_vt3xh"]
 [ext_resource type="JSON" path="res://Items.json" id="8_3oumh"]
+[ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/GlootWrapper/Core/Inventory.cs" id="8_44xle"]
 [ext_resource type="PackedScene" uid="uid://dg0u7ov2w6c4n" path="res://scenes/CraftingTableCanvas.tscn" id="9_m4ofw"]
 
 [node name="Shop" type="Node2D"]
@@ -19,11 +20,12 @@ script = ExtResource("1_y06ua")
 [node name="DialogueCanvas" parent="." node_paths=PackedStringArray("_globalState") instance=ExtResource("1_ngheg")]
 _globalState = NodePath("../GlobalState")
 
-[node name="InventoryCanvas" parent="." instance=ExtResource("5_46u0s")]
+[node name="InventoryCanvas" parent="." node_paths=PackedStringArray("_playerInventory") instance=ExtResource("5_46u0s")]
 offset = Vector2(350, 300)
 scale = Vector2(2.5, 2.5)
 transform = Transform2D(2.5, 0, 0, 2.5, 350, 300)
 InitiallyVisible = false
+_playerInventory = NodePath("../Player/PlayerInventoryWrapper")
 
 [node name="CraftingTableCanvas" parent="." instance=ExtResource("9_m4ofw")]
 offset = Vector2(350, 300)
@@ -54,22 +56,46 @@ tile_set = ExtResource("1_ubraj")
 tile_map_data = PackedByteArray("AAAIAAoAAAAMAAQAAAAIAAsAAAAMAAUAAAAIAAwAAAAMAAYAAAAJAAoAAAANAAQAAAAJAAsAAAANAAUAAAAJAAwAAAANAAYAAAAKAAoAAAAOAAQAAAAKAAsAAAAOAAUAAAAKAAwAAAAOAAYAAAADAAgAAAAMAAQAAAADAAkAAAAMAAUAAAADAAoAAAAMAAYAAAAEAAgAAAANAAQAAAAEAAkAAAANAAUAAAAEAAoAAAANAAYAAAAFAAgAAAAOAAQAAAAFAAkAAAAOAAUAAAAFAAoAAAAOAAYAAAAYAAcAAAAbAAMAAAAYAAgAAAAbAAQAAAAYAAkAAAAbAAUAAAAZAAcAAAAcAAMAAAAZAAgAAAAcAAQAAAAZAAkAAAAcAAUAAAAaAAcAAAAdAAMAAAAaAAgAAAAdAAQAAAAaAAkAAAAdAAUAAAAaAAsAAAANAAwAAAAaAAwAAAANAA0AAAAbAAsAAAAUAAIAAAAbAAwAAAAUAAIAAAAbAAcAAAANAAoAAAANAAMAAAAPAAoAAAAMAAMAAAAPAAoAAAARAAMAAAANAAoAAAAOAAMAAAAMAAoAAAATAAgAAAAZAA8AAAASAAgAAAAZAA4AAAARAAgAAAAZAA4AAAAQAAgAAAAZAA4AAAAPAAgAAAAZAA4AAAAOAAgAAAAZAA4AAAANAAgAAAAZAA4AAAAMAAgAAAAaAA8AAAAMAAYAAAAbAA4AAAAMAAUAAAAYAA4AAAAKAAYAAAAQAAsAAAAKAAcAAAAQAAwAAAATAAcAAAARAA4AAAATAAYAAAARAA0AAAACAAkAAAAPAAYAAAALAAsAAAAPAAgAAAAHAAsAAAAPAAYAAAAEAAsAAAAIAAcAAAADAAsAAAAIAAcAAAAVAAcAAAALAAoAAAAVAAgAAAALAAsAAAAIAAYAAAAVAAcAAAAIAAcAAAAVAAgAAAAJAAYAAAAWAAcAAAAJAAcAAAAWAAgAAAA=")
 tile_set = ExtResource("1_ubraj")
 
-[node name="CraftingTable" parent="Map" node_paths=PackedStringArray("_craftingTableCanvas") instance=ExtResource("6_heatd")]
+[node name="CraftingTable" parent="Map" node_paths=PackedStringArray("_playerInventory") instance=ExtResource("6_heatd")]
 position = Vector2(443.5, 176)
-_craftingTableCanvas = NodePath("../../CraftingTableCanvas")
+_playerInventory = NodePath("../../Player/PlayerInventoryWrapper")
 
 [node name="Player" parent="." node_paths=PackedStringArray("_globalState") instance=ExtResource("2_v3lkh")]
 position = Vector2(1115, 460)
 scale = Vector2(3.5, 3.5)
 _globalState = NodePath("../GlobalState")
 
-[node name="Dude" parent="." node_paths=PackedStringArray("_desiredItems") instance=ExtResource("3_w6mvc")]
+[node name="PlayerInventoryWrapper" type="Node2D" parent="Player" node_paths=PackedStringArray("_internalObject")]
+script = ExtResource("8_44xle")
+_internalObject = NodePath("PlayerInventory")
+
+[node name="PlayerInventory" type="Node" parent="Player/PlayerInventoryWrapper"]
+script = ExtResource("7_vt3xh")
+protoset = ExtResource("8_3oumh")
+_serialized_format = {
+"items": [{
+"protoset": "res://Items.json",
+"prototype_id": "iron_sword"
+}, {
+"protoset": "res://Items.json",
+"prototype_id": "health_potion"
+}],
+"node_name": "PlayerInventory",
+"protoset": "res://Items.json"
+}
+metadata/_custom_type_script = "uid://d1t3kux5jf4pd"
+
+[node name="Dude" parent="." node_paths=PackedStringArray("DesiredItems") instance=ExtResource("3_w6mvc")]
 position = Vector2(732, 718)
 scale = Vector2(3.5, 3.5)
 DialogueNode = "Start"
-_desiredItems = NodePath("DesiredItems")
+DesiredItems = NodePath("DesiredItemsWrapper")
 
-[node name="DesiredItems" type="Node" parent="Dude"]
+[node name="DesiredItemsWrapper" type="Node2D" parent="Dude" node_paths=PackedStringArray("_internalObject")]
+script = ExtResource("8_44xle")
+_internalObject = NodePath("DesiredItems")
+
+[node name="DesiredItems" type="Node" parent="Dude/DesiredItemsWrapper"]
 script = ExtResource("7_vt3xh")
 protoset = ExtResource("8_3oumh")
 _serialized_format = {
@@ -83,8 +109,11 @@ _serialized_format = {
 
 [connection signal="DialogueCompleted" from="DialogueCanvas" to="GlobalState" method="OnDialogueCompleted"]
 [connection signal="DialogueStarted" from="DialogueCanvas" to="GlobalState" method="OnDialogueStarted"]
-[connection signal="InventoryClosed" from="InventoryCanvas" to="GlobalState" method="OnInventoryClosed"]
-[connection signal="InventoryOpened" from="InventoryCanvas" to="GlobalState" method="OnInventoryOpened"]
+[connection signal="InventoryClosed" from="InventoryCanvas" to="GlobalState" method="OnMenuClosed"]
+[connection signal="InventoryOpened" from="InventoryCanvas" to="GlobalState" method="OnMenuOpened"]
 [connection signal="ItemSelected" from="InventoryCanvas" to="DialogueCanvas" method="OnItemSelected"]
+[connection signal="CraftingClosed" from="CraftingTableCanvas" to="GlobalState" method="OnMenuClosed"]
+[connection signal="CraftingOpened" from="CraftingTableCanvas" to="GlobalState" method="OnMenuOpened"]
 [connection signal="CraftingSelectionChosen" from="CraftingTableCanvas" to="Map/CraftingTable" method="StartCrafting"]
+[connection signal="CraftingTableInteracted" from="Map/CraftingTable" to="CraftingTableCanvas" method="OpenCrafting"]
 [connection signal="StartDialogueAttempt" from="Dude" to="DialogueCanvas" method="OnInteractionStartAttempt"]

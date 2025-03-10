@@ -4,18 +4,17 @@ using System.Threading.Tasks;
 
 public partial class CraftingTable : StaticBody2D, ICharacterInteractable
 {
-    [Export] private CraftingTableCanvas _craftingTableCanvas;
     [Export] private Sprite2D _offSprite;
     [Export] private Sprite2D _onSprite;
+    [Export] private Inventory _playerInventory;
     [Export] public float CraftingTimeSeconds = 1f;
+
+    [Signal] public delegate void CraftingTableInteractedEventHandler(Inventory craftingList);
 
     private bool _craftComplete;
     private InventoryItem _itemToCraft;
 
-    public void Interact()
-    {
-        _craftingTableCanvas.Visible = true;
-    }
+    public void Interact() => EmitSignal(SignalName.CraftingTableInteracted, GetAvailableCrafts(_playerInventory));
 
     public async void StartCrafting(InventoryItem itemToCraft)
     {
@@ -34,5 +33,13 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
         _offSprite.Visible = true;
         _craftComplete = true;
         GD.Print("crafted: " + _itemToCraft);
+    }
+
+    public Inventory GetAvailableCrafts(Inventory playerInventory)
+    {
+        // var craftingList = new Inventory();
+        // var result = craftingList.CreateAndAddItem("iron_sword_enhanced");
+        // GD.Print(result);
+        return playerInventory;
     }
 }

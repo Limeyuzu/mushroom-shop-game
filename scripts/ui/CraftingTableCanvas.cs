@@ -6,6 +6,8 @@ public partial class CraftingTableCanvas : CanvasLayer
     [Export] private Node _ctrlInventoryNode;
 
     [Signal] public delegate void CraftingSelectionChosenEventHandler(InventoryItem chosen);
+    [Signal] public delegate void CraftingOpenedEventHandler();
+    [Signal] public delegate void CraftingClosedEventHandler();
 
     private CtrlInventory _ctrlInventory;
 
@@ -15,9 +17,17 @@ public partial class CraftingTableCanvas : CanvasLayer
         _ctrlInventory = new CtrlInventory(_ctrlInventoryNode);
     }
 
+    public void OpenCrafting(Inventory craftingList)
+    {
+        _ctrlInventory.SetInventory(craftingList);
+        Visible = true;
+        EmitSignal(SignalName.CraftingOpened);
+    }
+
     public void OnItemSelected()
     {
-        Visible = false;
         EmitSignal(SignalName.CraftingSelectionChosen, _ctrlInventory.GetSelectedInventoryItem());
+        Visible = false;
+        EmitSignal(SignalName.CraftingClosed);
     }
 }

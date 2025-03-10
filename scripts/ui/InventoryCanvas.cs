@@ -5,6 +5,7 @@ public partial class InventoryCanvas : CanvasLayer
 {
     [Export] public bool InitiallyVisible = true;
     [Export] private Node _ctrlInventoryNode;
+    [Export] private Inventory _playerInventory;
 
     [Signal] public delegate void ItemSelectedEventHandler(InventoryItem item);
     [Signal] public delegate void InventoryOpenedEventHandler();
@@ -17,6 +18,7 @@ public partial class InventoryCanvas : CanvasLayer
     {
         Visible = InitiallyVisible;
         _ctrlInventory = new CtrlInventory(_ctrlInventoryNode);
+        _ctrlInventory.SetInventory(_playerInventory);
     }
 
     [YarnCommand("OpenInventory")]
@@ -28,9 +30,7 @@ public partial class InventoryCanvas : CanvasLayer
 
     public void OnSelectPressed()
     {
-        var item = _ctrlInventory.GetSelectedInventoryItem();
-        GD.Print("selected item: " + item.GetTitle());
-        EmitSignal(SignalName.ItemSelected, item);
+        EmitSignal(SignalName.ItemSelected, _ctrlInventory.GetSelectedInventoryItem());
         Visible = false;
         EmitSignal(SignalName.InventoryClosed);
     }
