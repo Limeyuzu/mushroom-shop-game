@@ -1,27 +1,18 @@
 {
-	"weapon": {
-		"name": "weapon",
-		"power": 1
-	},
-	"sword": {
-		"inherits": "weapon",
-		"name": "sword"
-	},
-	"potion": {},
 	"iron_sword": {
-		"inherits": "sword",
+		"types": ["weapon", "sword"],
 		"name": "Iron Sword",
 		"image": "res://sprites/item/fa1447.png",
 		"power": 3
 	},
 	"iron_sword_enhanced": {
-		"inherits": "iron_sword",
+		"types": ["weapon", "sword"],
 		"name": "Enhanced Iron Sword",
 		"image": "res://sprites/item/fa1447_enhanced.png",
 		"power": 4
 	},
 	"health_potion": {
-		"inherits": "potion",
+		"types": ["potion"],
 		"name": "Health Potion",
 		"image": "res://sprites/item/fa265.png"
 	}

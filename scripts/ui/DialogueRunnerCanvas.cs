@@ -8,6 +8,7 @@ public partial class DialogueRunnerCanvas : CanvasLayer
 
     [Signal] public delegate void DialogueStartedEventHandler(Npc dialogueNpc);
     [Signal] public delegate void DialogueCompletedEventHandler();
+    [Signal] public delegate void OpenInventoryRequestedEventHandler(Node requester);
 
     private Npc _currentDialogueNpc { get; set; }
 
@@ -21,31 +22,33 @@ public partial class DialogueRunnerCanvas : CanvasLayer
         }
     }
 
-    public void OnDialogueComplete()
-    {
-        EmitSignal(SignalName.DialogueCompleted);
-    }
+    public void OnDialogueComplete() => EmitSignal(SignalName.DialogueCompleted);
 
-    public void OnItemSelected(InventoryItem item)
+    [YarnCommand("OpenInventory")]
+    public void OpenInventory() => EmitSignal(SignalName.OpenInventoryRequested, this);
+
+    public void OnItemSelected(InventoryItem item, Node requester)
     {
-        DialogueRunner.VariableStorage.SetValue("$selectedItem", item.GetTitle());
-        DialogueRunner.VariableStorage.SetValue("$desiredItem", GetNpcDesiredItem(_currentDialogueNpc).GetTitle());
+        if (requester != this)
+            return;
+
+        DialogueRunner.VariableStorage.SetValue("$selectedItem", item.GetName());
+        DialogueRunner.VariableStorage.SetValue("$desiredItem", GetNpcDesiredItem(_currentDialogueNpc));
         DialogueRunner.VariableStorage.SetValue("$isDesired", IsDesiredItem(_currentDialogueNpc, item));
         DialogueRunner.StartDialogue("ShowItem");
     }
 
-    private InventoryItem GetNpcDesiredItem(Npc npc)
+    private string GetNpcDesiredItem(Npc npc)
     {
-        var firstItem = npc.DesiredItems.GetItems()[0];
+        var firstItem = npc.DesiredItemTypesOrNames[0];
         return firstItem;
     }
 
     private bool IsDesiredItem(Npc npc, InventoryItem item)
     {
-        var itemId = GetNpcDesiredItem(npc).GetPrototype().GetId();
-        GD.Print("desired: " + itemId);
-        GD.Print("offered: " + item.GetTitle());
-        var isDesired = item.GetPrototype().Inherits(itemId);
+        var itemNameOrType = GetNpcDesiredItem(npc);
+        GD.Print("desired: " + itemNameOrType);
+        var isDesired = item.GetPrototype().IsTypeOf(itemNameOrType);
         return isDesired;
     }
 }

@@ -1,37 +1,41 @@
 using Godot;
-using YarnSpinnerGodot;
 
 public partial class InventoryCanvas : CanvasLayer
 {
     [Export] public bool InitiallyVisible = true;
-    [Export] private Node _ctrlInventoryNode;
-    [Export] private Inventory _playerInventory;
+    [Export] private CtrlInventory _ctrlInventory;
+    [Export] public Inventory Inventory;
 
-    [Signal] public delegate void ItemSelectedEventHandler(InventoryItem item);
+    [Signal] public delegate void ItemSelectedEventHandler(InventoryItem item, Node requestingNode);
     [Signal] public delegate void InventoryOpenedEventHandler();
     [Signal] public delegate void InventoryClosedEventHandler();
 
     private InventoryItem _selectedItem;
-    private CtrlInventory _ctrlInventory;
+    private Node _openInventoryActionRequester;
 
-    public override void _Ready()
+    public override async void _Ready()
     {
         Visible = InitiallyVisible;
-        _ctrlInventory = new CtrlInventory(_ctrlInventoryNode);
-        _ctrlInventory.SetInventory(_playerInventory);
+        if (_ctrlInventory != null && Inventory != null)
+        {
+            await ToSignal(Inventory, SignalName.Ready);
+            _ctrlInventory.SetInventory(Inventory);
+        }
     }
 
-    [YarnCommand("OpenInventory")]
-    public void OpenInventory()
+    public void OpenInventory(Node openInventoryActionRequester)
     {
+        _openInventoryActionRequester = openInventoryActionRequester;
         Visible = true;
         EmitSignal(SignalName.InventoryOpened);
     }
 
-    public void OnSelectPressed()
+    public void OnItemSelected(InventoryItem item)
     {
-        EmitSignal(SignalName.ItemSelected, _ctrlInventory.GetSelectedInventoryItem());
+        EmitSignal(SignalName.ItemSelected, item, _openInventoryActionRequester);
+        _openInventoryActionRequester = null;
         Visible = false;
         EmitSignal(SignalName.InventoryClosed);
+        GD.Print($"InventoryCanvas: selected {item.GetName()}");
     }
 }

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MushroomShop"
-run/main_scene="res://scenes/shop.tscn"
+run/main_scene="res://scenes/Shop.tscn"
 config/features=PackedStringArray("4.4", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -26,7 +26,7 @@ project/assembly_name="MushroomShop"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/YarnSpinner-Godot/plugin.cfg", "res://addons/gloot/plugin.cfg")
+enabled=PackedStringArray("res://addons/YarnSpinner-Godot/plugin.cfg")
 
 [rendering]
 

@@ -3,7 +3,7 @@ tags:
 ---
 Dude: Oh, hello!
     -> I want to show you an item.
-        <<OpenInventory InventoryCanvas>>
+        <<OpenInventory DialogueRunnerCanvas>>
 ===
 
 title: ShowItem
