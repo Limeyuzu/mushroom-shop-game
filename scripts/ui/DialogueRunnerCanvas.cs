@@ -8,24 +8,27 @@ public partial class DialogueRunnerCanvas : CanvasLayer
 
     [Signal] public delegate void DialogueStartedEventHandler(Npc dialogueNpc);
     [Signal] public delegate void DialogueCompletedEventHandler();
-    [Signal] public delegate void OpenInventoryRequestedEventHandler(Node requester);
+    [Signal] public delegate void OpenInventoryRequestedEventHandler(Inventory inventory, Node requester);
 
-    private Npc _currentDialogueNpc { get; set; }
+    private Player _player;
+    private Npc _currentDialogueNpc;
 
-    public void OnInteractionStartAttempt(Npc dialogueNpc)
+    public void OnInteractionStartAttempt(Npc dialogueNpc, Node2D interactedBy)
     {
-        if (_globalState.PlayerHasControl())
+        if (_globalState.PlayerHasControl() && interactedBy is PlayerPointer playerPointer)
         {
             DialogueRunner.StartDialogue(dialogueNpc.DialogueNode);
             EmitSignal(SignalName.DialogueStarted, dialogueNpc);
+            _player = playerPointer.Player;
             _currentDialogueNpc = dialogueNpc;
+            GD.Print($"{nameof(DialogueRunnerCanvas)}: interaction started by {_player.GetName()}");
         }
     }
 
     public void OnDialogueComplete() => EmitSignal(SignalName.DialogueCompleted);
 
     [YarnCommand("OpenInventory")]
-    public void OpenInventory() => EmitSignal(SignalName.OpenInventoryRequested, this);
+    public void OpenInventory() => EmitSignal(SignalName.OpenInventoryRequested, _player.Inventory, this);
 
     public void OnItemSelected(InventoryItem item, Node requester)
     {
@@ -47,7 +50,7 @@ public partial class DialogueRunnerCanvas : CanvasLayer
     private bool IsDesiredItem(Npc npc, InventoryItem item)
     {
         var itemNameOrType = GetNpcDesiredItem(npc);
-        GD.Print("desired: " + itemNameOrType);
+        GD.Print($"{nameof(DialogueRunnerCanvas)}: desired: {itemNameOrType}");
         var isDesired = item.GetPrototype().IsTypeOf(itemNameOrType);
         return isDesired;
     }

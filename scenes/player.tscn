@@ -120,13 +120,14 @@ libraries = {
 &"": SubResource("AnimationLibrary_qecux")
 }
 
-[node name="InteractionPointer" type="Area2D" parent="CharacterBody2D"]
+[node name="InteractionPointer" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("Player")]
+position = Vector2(0, 15)
 collision_layer = 2
 collision_mask = 2
+script = ExtResource("4_ykpjy")
+Player = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/InteractionPointer"]
-position = Vector2(0, 15)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("CircleShape2D_qaxcg")
 debug_color = Color(1.44392e-06, 0.639087, 0.369648, 0.42)
-script = ExtResource("4_ykpjy")

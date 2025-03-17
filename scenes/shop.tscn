@@ -18,12 +18,11 @@ script = ExtResource("1_skkvx")
 [node name="DialogueRunnerCanvas" parent="." node_paths=PackedStringArray("_globalState") instance=ExtResource("2_eo1la")]
 _globalState = NodePath("../GlobalState")
 
-[node name="InventoryCanvas" parent="." node_paths=PackedStringArray("Inventory") instance=ExtResource("3_toxd1")]
+[node name="InventoryCanvas" parent="." instance=ExtResource("3_toxd1")]
 offset = Vector2(350, 300)
 scale = Vector2(2.5, 2.5)
 transform = Transform2D(2.5, 0, 0, 2.5, 350, 300)
 InitiallyVisible = false
-Inventory = NodePath("../Player/Inventory")
 
 [node name="Map" type="Node2D" parent="."]
 scale = Vector2(2, 2)
@@ -52,10 +51,11 @@ tile_set = ExtResource("4_47hci")
 [node name="CraftingTable" parent="Map" instance=ExtResource("5_hd80v")]
 position = Vector2(443.5, 176)
 
-[node name="Player" parent="." node_paths=PackedStringArray("_globalState") instance=ExtResource("6_abjrc")]
+[node name="Player" parent="." node_paths=PackedStringArray("_globalState", "Inventory") instance=ExtResource("6_abjrc")]
 position = Vector2(1115, 460)
 scale = Vector2(3.5, 3.5)
 _globalState = NodePath("../GlobalState")
+Inventory = NodePath("Inventory")
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("7_jccym")

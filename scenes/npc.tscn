@@ -45,5 +45,5 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_jkm7j")
 debug_color = Color(0.323463, 0.605189, 0.441858, 0.42)
 
-[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="OnPlayerPointerEntered"]
-[connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="OnPlayerPointerExited"]
+[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="OnAreaEntered"]
+[connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="OnAreaExited"]

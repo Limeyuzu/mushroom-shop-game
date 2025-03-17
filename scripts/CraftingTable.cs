@@ -8,12 +8,19 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
     [Export] private Sprite2D _onSprite;
     [Export] public float CraftingTimeSeconds = 1f;
 
-    [Signal] public delegate void OpenInventoryRequestedEventHandler(Node requester);
+    [Signal] public delegate void OpenInventoryRequestedEventHandler(Node2D interactedBy, Node requester);
 
     private bool _craftComplete;
     private InventoryItem _itemToCraft;
 
-    public void Interact() => EmitSignal(SignalName.OpenInventoryRequested, this);
+    public void Interact(Node2D interactedBy)
+    {
+        if (interactedBy is PlayerPointer playerPointer)
+        {
+            var craftingList = Crafting.GetAvailableCrafts(playerPointer.Player.Inventory);
+            EmitSignal(SignalName.OpenInventoryRequested, craftingList, this);
+        } 
+    } 
 
     public void OnItemSelected(InventoryItem item, Node requester)
     {
@@ -39,12 +46,6 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
         _onSprite.Visible = false;
         _offSprite.Visible = true;
         _craftComplete = true;
-        GD.Print("crafted: " + _itemToCraft);
-    }
-
-    public Inventory GetAvailableCrafts(Inventory playerInventory)
-    {
-        // todo
-        return playerInventory;
+        GD.Print($"{nameof(CraftingTable)}: crafted: " + _itemToCraft);
     }
 }

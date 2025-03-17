@@ -6,19 +6,19 @@ public partial class CharacterInteractionArea : Area2D
 {
     [Export] private Node2D _subject;
 
-    private bool _isPointerInArea = false;
+    private Area2D _currentAreaInside;
 
     public override void _Process(double delta)
     {
-        if (_isPointerInArea && Input.IsActionJustPressed("ui_accept") && _subject is ICharacterInteractable interactable)
+        if (_currentAreaInside != null && Input.IsActionJustPressed("ui_accept") && _subject is ICharacterInteractable interactable)
         {
-            interactable.Interact();
+            interactable.Interact(_currentAreaInside);
         }
     }
 
-    public void OnPlayerPointerEntered(Area2D area) => _isPointerInArea = true;
+    public void OnAreaEntered(Area2D area) => _currentAreaInside = area;
 
-    public void OnPlayerPointerExited(Area2D area) => _isPointerInArea = false;
+    public void OnAreaExited(Area2D area) => _currentAreaInside = null;
 
     public override string[] _GetConfigurationWarnings()
     {

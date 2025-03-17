@@ -1,14 +1,12 @@
 using Godot;
-using System;
 
-public partial class PlayerPointer : CollisionShape2D
+public partial class PlayerPointer : Area2D
 {
+    [Export] public Player Player;
+
     public float DistanceFromPlayer = 15;
 
-    public override void _Process(double delta)
-    {
-        UpdateFacing();
-    }
+    public override void _Process(double delta) => UpdateFacing();
 
     private void UpdateFacing() 
     {
