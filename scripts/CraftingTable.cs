@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 public partial class CraftingTable : StaticBody2D, ICharacterInteractable
 {
+    [Export] private CraftingRecipes _craftingRecipes;
     [Export] private Sprite2D _offSprite;
     [Export] private Sprite2D _onSprite;
     [Export] public float CraftingTimeSeconds = 1f;
@@ -17,7 +18,7 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
     {
         if (interactedBy is PlayerPointer playerPointer)
         {
-            var craftingList = Crafting.GetAvailableCrafts(playerPointer.Player.Inventory);
+            var craftingList = _craftingRecipes.GetAvailableCrafts(playerPointer.Player.Inventory);
             EmitSignal(SignalName.OpenInventoryRequested, craftingList, this);
         } 
     } 

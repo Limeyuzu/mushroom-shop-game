@@ -3,7 +3,7 @@ using Godot;
 
 public partial class Prototype : RefCounted
 {
-    public Prototype() {}
+    public Prototype() { }
     public Prototype(string id, string name, CompressedTexture2D image, List<string> types, Dictionary<string, Variant> properties)
     {
         ID = id;

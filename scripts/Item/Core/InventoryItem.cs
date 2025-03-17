@@ -16,4 +16,6 @@ public partial class InventoryItem : RefCounted
     public CompressedTexture2D GetImage() => _prototype.Image;
     public Prototype GetPrototype() => _prototype;
     public override string ToString() => GetName();
+
+    public override bool Equals(object obj) => obj is InventoryItem otherItem && GetID() == otherItem.GetID();
 }

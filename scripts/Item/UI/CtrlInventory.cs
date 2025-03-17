@@ -28,7 +28,11 @@ public partial class CtrlInventory : ItemList
 
     public void GetSelectedInventoryItem()
     {
-        var selectedIndex = GetSelectedItems()[0];
+        var selected = GetSelectedItems();
+        if (selected.Length == 0)
+            return;
+
+        var selectedIndex = selected[0];
         EmitSignal(SignalName.OnItemSelected, _listIndexToItemMapping[selectedIndex]);
     }
 

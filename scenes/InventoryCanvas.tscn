@@ -28,5 +28,21 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Select"
 
+[node name="CancelButton" type="Button" parent="CtrlInventory"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -38.0
+offset_right = -68.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Cancel"
+
 [connection signal="OnItemSelected" from="CtrlInventory" to="." method="OnItemSelected"]
 [connection signal="pressed" from="CtrlInventory/SelectButton" to="CtrlInventory" method="GetSelectedInventoryItem"]
+[connection signal="pressed" from="CtrlInventory/CancelButton" to="." method="OnNoneSelected"]

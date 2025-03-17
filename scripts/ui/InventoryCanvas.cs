@@ -27,11 +27,17 @@ public partial class InventoryCanvas : CanvasLayer
 
     public void OnItemSelected(InventoryItem item)
     {
+        EmitSignal(SignalName.InventoryClosed);
         EmitSignal(SignalName.ItemSelected, item, _openInventoryActionRequester);
         _openInventoryActionRequester = null;
         Visible = false;
-        EmitSignal(SignalName.InventoryClosed);
         GD.Print($"{nameof(InventoryCanvas)}: selected {item.GetName()}");
+    }
+
+    public void OnNoneSelected()
+    {
+        EmitSignal(SignalName.InventoryClosed);
+        Visible = false;
     }
 
     private void SetInventory(Inventory inventory)

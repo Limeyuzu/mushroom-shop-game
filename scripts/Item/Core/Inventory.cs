@@ -1,19 +1,23 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
 [GlobalClass, Icon("res://editor/icon_inventory.svg")]
 public partial class Inventory : Node
 {
-    [Export(PropertyHint.File, "*.json")] public Json PrototypeTreeJson;
     [Export] private Array<string> _itemNames;
     public List<InventoryItem> Items = [];
     private PrototypeTree _prototypeTree;
     private Dictionary _serialisedFormat = [];
 
+    public Inventory() { }
+    public Inventory(PrototypeTree prototypeTree) => _prototypeTree = prototypeTree;
+
     public override void _Ready()
     {
-        _prototypeTree = new PrototypeTree(PrototypeTreeJson);
+        _prototypeTree ??= this.ShopGlobal().PrototypeTree;
+
         foreach (var itemName in _itemNames)
         {
             CreateAndAddItem(itemName);
@@ -44,4 +48,7 @@ public partial class Inventory : Node
 
         return null;
     }
+
+    public bool Contains(InventoryItem item) => Items.Contains(item);
+    public bool Contains(List<string> itemIds) => !itemIds.Except(Items.Select(i => i.GetID())).Any();
 }

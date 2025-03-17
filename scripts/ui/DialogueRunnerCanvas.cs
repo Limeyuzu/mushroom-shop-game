@@ -4,7 +4,6 @@ using YarnSpinnerGodot;
 public partial class DialogueRunnerCanvas : CanvasLayer
 {
     [Export] public DialogueRunner DialogueRunner;
-    [Export] private GlobalState _globalState;
 
     [Signal] public delegate void DialogueStartedEventHandler(Npc dialogueNpc);
     [Signal] public delegate void DialogueCompletedEventHandler();
@@ -15,7 +14,7 @@ public partial class DialogueRunnerCanvas : CanvasLayer
 
     public void OnInteractionStartAttempt(Npc dialogueNpc, Node2D interactedBy)
     {
-        if (_globalState.PlayerHasControl() && interactedBy is PlayerPointer playerPointer)
+        if (this.ShopGlobal().PlayerHasControl() && interactedBy is PlayerPointer playerPointer)
         {
             DialogueRunner.StartDialogue(dialogueNpc.DialogueNode);
             EmitSignal(SignalName.DialogueStarted, dialogueNpc);

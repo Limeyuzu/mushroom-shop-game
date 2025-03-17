@@ -10,13 +10,11 @@
 [ext_resource type="JSON" path="res://Items.json" id="8_plhqw"]
 [ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Npc.tscn" id="9_a6yfk"]
 
-[node name="Shop" type="Node2D"]
-
-[node name="GlobalState" type="Node" parent="."]
+[node name="Shop" type="Node"]
 script = ExtResource("1_skkvx")
+PrototypeTreeJson = ExtResource("8_plhqw")
 
-[node name="DialogueRunnerCanvas" parent="." node_paths=PackedStringArray("_globalState") instance=ExtResource("2_eo1la")]
-_globalState = NodePath("../GlobalState")
+[node name="DialogueRunnerCanvas" parent="." instance=ExtResource("2_eo1la")]
 
 [node name="InventoryCanvas" parent="." instance=ExtResource("3_toxd1")]
 offset = Vector2(350, 300)
@@ -51,15 +49,13 @@ tile_set = ExtResource("4_47hci")
 [node name="CraftingTable" parent="Map" instance=ExtResource("5_hd80v")]
 position = Vector2(443.5, 176)
 
-[node name="Player" parent="." node_paths=PackedStringArray("_globalState", "Inventory") instance=ExtResource("6_abjrc")]
+[node name="Player" parent="." node_paths=PackedStringArray("Inventory") instance=ExtResource("6_abjrc")]
 position = Vector2(1115, 460)
 scale = Vector2(3.5, 3.5)
-_globalState = NodePath("../GlobalState")
 Inventory = NodePath("Inventory")
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("7_jccym")
-PrototypeTreeJson = ExtResource("8_plhqw")
 _itemNames = Array[String](["iron_sword", "health_potion"])
 metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
@@ -69,11 +65,11 @@ scale = Vector2(3.5, 3.5)
 DialogueNode = "Start"
 DesiredItemTypesOrNames = Array[String](["weapon"])
 
-[connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="GlobalState" method="OnDialogueCompleted"]
-[connection signal="DialogueStarted" from="DialogueRunnerCanvas" to="GlobalState" method="OnDialogueStarted"]
+[connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
+[connection signal="DialogueStarted" from="DialogueRunnerCanvas" to="." method="OnDialogueStarted"]
 [connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="InventoryCanvas" method="OpenInventory"]
-[connection signal="InventoryClosed" from="InventoryCanvas" to="GlobalState" method="OnMenuClosed"]
-[connection signal="InventoryOpened" from="InventoryCanvas" to="GlobalState" method="OnMenuOpened"]
+[connection signal="InventoryClosed" from="InventoryCanvas" to="." method="OnMenuClosed"]
+[connection signal="InventoryOpened" from="InventoryCanvas" to="." method="OnMenuOpened"]
 [connection signal="ItemSelected" from="InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]
 [connection signal="ItemSelected" from="InventoryCanvas" to="Map/CraftingTable" method="OnItemSelected"]
 [connection signal="OpenInventoryRequested" from="Map/CraftingTable" to="InventoryCanvas" method="OpenInventory"]
