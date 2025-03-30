@@ -22,5 +22,5 @@ public partial class Prototype : RefCounted
 
     public bool IsTypeOf(string type) => Types.Contains(type);
     public void SetProperty(string key, Variant value) => _properties[key] = value;
-    public Variant GetProperty(string key) => _properties[key];
+    public Variant GetProperty(string key) => _properties.ContainsKey(key) ? _properties[key] : default;
 }

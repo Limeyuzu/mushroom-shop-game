@@ -56,7 +56,7 @@ Inventory = NodePath("Inventory")
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("7_jccym")
-_itemNames = Array[String](["iron_sword", "health_potion"])
+_itemNames = Array[String](["broken_sword", "health_potion"])
 metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
 [node name="Dude" parent="." instance=ExtResource("9_a6yfk")]

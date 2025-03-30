@@ -23,12 +23,12 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
         } 
     } 
 
-    public void OnItemSelected(InventoryItem item, Node requester)
+    public async void OnItemSelected(InventoryItem item, Node requester)
     {
         if (requester != this)
             return;
 
-        StartCrafting(item).ConfigureAwait(false);
+        await StartCrafting(item);
     }
 
     public async Task StartCrafting(InventoryItem itemToCraft)

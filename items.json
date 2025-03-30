@@ -1,4 +1,10 @@
 {
+	"broken_sword": {
+		"types": ["junk"],
+		"name": "Broken Sword",
+		"image": "res://sprites/item/fa195.png",
+		"power": 1
+	},
 	"iron_sword": {
 		"types": ["weapon", "sword"],
 		"name": "Iron Sword",
@@ -15,5 +21,15 @@
 		"types": ["potion"],
 		"name": "Health Potion",
 		"image": "res://sprites/item/fa265.png"
+	},
+	"enhance_potion": {
+		"types": ["potion"],
+		"name": "Enhancing Potion",
+		"image": "res://sprites/item/item_31.png"
+	},
+	"fire_stone": {
+		"name": "Fire Stone",
+		"image": "res://sprites/item/fa2117.png",
+		"elements": [10,0,0,0,0]
 	}
 }

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cv6uw3ucx7nku" path="res://scripts/CraftingTable.cs" id="1_51x1i"]
 [ext_resource type="Texture2D" uid="uid://dnix7wjv7t7w8" path="res://sprites/shop/shop_tileset.png" id="1_nywqb"]
-[ext_resource type="Script" uid="uid://bkqdawys85bvm" path="res://scripts/Item/Core/CraftingRecipes.cs" id="2_6idbe"]
+[ext_resource type="Script" uid="uid://bkqdawys85bvm" path="res://scripts/Item/Crafting/CraftingRecipes.cs" id="2_6idbe"]
 [ext_resource type="JSON" path="res://CraftingRecipes.json" id="3_h330b"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="3_kxfph"]
 
