@@ -1,0 +1,135 @@
+[gd_scene load_steps=19 format=3 uid="uid://cwcmiy8lxu53n"]
+
+[ext_resource type="Texture2D" uid="uid://dlwfwahlbrvfq" path="res://sprites/shop/cauldron.png" id="4_wamsx"]
+[ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="5_ir52o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x74j4"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(288, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1lyg"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe12o"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex7mg"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir52o"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(0, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx00t"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(48, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqpyu"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(96, 240, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el0pq"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(0, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlguj"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(48, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i02ne"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(96, 288, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fx6fv"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(0, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr3xb"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(48, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iexsd"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(96, 336, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_503sp"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1lyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe12o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ex7mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir52o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx00t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqpyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el0pq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlguj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i02ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fx6fv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr3xb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iexsd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxfph"]
+size = Vector2(21.1111, 20.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ofvbw"]
+size = Vector2(31.1111, 28.8889)
+
+[node name="CraftingTable" type="StaticBody2D"]
+
+[node name="OffSprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_x74j4")
+
+[node name="OnSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_503sp")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.555556, 6.33333)
+shape = SubResource("RectangleShape2D_kxfph")
+
+[node name="InteractionArea" type="Area2D" parent="." node_paths=PackedStringArray("_subject")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_ir52o")
+_subject = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, 7.77778)
+shape = SubResource("RectangleShape2D_ofvbw")
+debug_color = Color(0.323463, 0.605189, 0.441858, 0.42)
+
+[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="OnAreaEntered"]
+[connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="OnAreaExited"]

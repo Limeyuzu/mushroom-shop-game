@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sqo2y5wt0di0"
-path="res://.godot/imported/fa2119.png-500c311e48957ba53ba216641dda4b3e.ctex"
+uid="uid://do7wm0gcmd75a"
+path="res://.godot/imported/Truffle.png-59e2cf5c663c535a6467b8f598c7d214.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/item/fa2119.png"
-dest_files=["res://.godot/imported/fa2119.png-500c311e48957ba53ba216641dda4b3e.ctex"]
+source_file="res://sprites/item/ingredients/mushrooms/Truffle.png"
+dest_files=["res://.godot/imported/Truffle.png-59e2cf5c663c535a6467b8f598c7d214.ctex"]
 
 [params]
 

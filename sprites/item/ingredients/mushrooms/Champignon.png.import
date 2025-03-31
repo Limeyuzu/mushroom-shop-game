@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7dd36b6afd0n"
-path="res://.godot/imported/item_31.png-c19810d65329ed6a013b9aa3283c5579.ctex"
+uid="uid://1hjbbbaf46cv"
+path="res://.godot/imported/Champignon.png-51c68d6b1bf6e289638a1d6c8c79bdfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/item/item_31.png"
-dest_files=["res://.godot/imported/item_31.png-c19810d65329ed6a013b9aa3283c5579.ctex"]
+source_file="res://sprites/item/ingredients/mushrooms/Champignon.png"
+dest_files=["res://.godot/imported/Champignon.png-51c68d6b1bf6e289638a1d6c8c79bdfa.ctex"]
 
 [params]
 

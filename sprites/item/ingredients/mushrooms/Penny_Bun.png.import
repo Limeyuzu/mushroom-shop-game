@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtw37dyaxi7vt"
-path="res://.godot/imported/fa2117.png-c0fee1ee9b26bc459bc0ea6ede4460ca.ctex"
+uid="uid://1js6i12l4hi8"
+path="res://.godot/imported/Penny_Bun.png-2c5dcf8bec57b28d47c6dab145f99dd5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/item/fa2117.png"
-dest_files=["res://.godot/imported/fa2117.png-c0fee1ee9b26bc459bc0ea6ede4460ca.ctex"]
+source_file="res://sprites/item/ingredients/mushrooms/Penny_Bun.png"
+dest_files=["res://.godot/imported/Penny_Bun.png-2c5dcf8bec57b28d47c6dab145f99dd5.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cdylen16f2mjn"]
+[gd_scene load_steps=11 format=4 uid="uid://cdylen16f2mjn"]
 
 [ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_skkvx"]
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/DialogueRunnerCanvas.tscn" id="2_eo1la"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://tilemap/shop.tres" id="4_47hci"]
 [ext_resource type="PackedScene" uid="uid://crm01wmd8iytl" path="res://scenes/CraftingTable.tscn" id="5_hd80v"]
 [ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Player.tscn" id="6_abjrc"]
+[ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/Cauldron.tscn" id="7_eo1la"]
 [ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="7_jccym"]
 [ext_resource type="JSON" path="res://Items.json" id="8_plhqw"]
 [ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Npc.tscn" id="9_a6yfk"]
@@ -15,8 +16,10 @@ script = ExtResource("1_skkvx")
 PrototypeTreeJson = ExtResource("8_plhqw")
 
 [node name="DialogueRunnerCanvas" parent="." instance=ExtResource("2_eo1la")]
+visible = false
 
 [node name="InventoryCanvas" parent="." instance=ExtResource("3_toxd1")]
+visible = false
 offset = Vector2(350, 300)
 scale = Vector2(2.5, 2.5)
 transform = Transform2D(2.5, 0, 0, 2.5, 350, 300)
@@ -48,6 +51,10 @@ tile_set = ExtResource("4_47hci")
 
 [node name="CraftingTable" parent="Map" instance=ExtResource("5_hd80v")]
 position = Vector2(443.5, 176)
+
+[node name="Cauldron" parent="Map" instance=ExtResource("7_eo1la")]
+position = Vector2(483.5, 169)
+scale = Vector2(0.9, 0.9)
 
 [node name="Player" parent="." node_paths=PackedStringArray("Inventory") instance=ExtResource("6_abjrc")]
 position = Vector2(1115, 460)

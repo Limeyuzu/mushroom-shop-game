@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 public partial class CraftingTable : StaticBody2D, ICharacterInteractable
 {
     [Export] private CraftingRecipes _craftingRecipes;
-    [Export] private Sprite2D _offSprite;
-    [Export] private Sprite2D _onSprite;
+    [Export] private CanvasItem _offSprite;
+    [Export] private CanvasItem _onSprite;
     [Export] public float CraftingTimeSeconds = 1f;
 
     [Signal] public delegate void OpenInventoryRequestedEventHandler(Node2D interactedBy, Node requester);
@@ -20,8 +20,8 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
         {
             var craftingList = _craftingRecipes.GetAvailableCrafts(playerPointer.Player.Inventory);
             EmitSignal(SignalName.OpenInventoryRequested, craftingList, this);
-        } 
-    } 
+        }
+    }
 
     public async void OnItemSelected(InventoryItem item, Node requester)
     {

@@ -20,16 +20,16 @@
 	"health_potion": {
 		"types": ["potion"],
 		"name": "Health Potion",
-		"image": "res://sprites/item/fa265.png"
+		"image": "res://sprites/item/potions/fa265.png"
 	},
 	"enhance_potion": {
 		"types": ["potion"],
 		"name": "Enhancing Potion",
-		"image": "res://sprites/item/item_31.png"
+		"image": "res://sprites/item/potions/item_31.png"
 	},
 	"fire_stone": {
 		"name": "Fire Stone",
-		"image": "res://sprites/item/fa2117.png",
+		"image": "res://sprites/item/ingredients/fa2117.png",
 		"elements": [10,0,0,0,0]
 	}
 }

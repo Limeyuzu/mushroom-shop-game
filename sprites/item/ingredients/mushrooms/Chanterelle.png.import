@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjxcnwb1r18g"
-path="res://.godot/imported/fa2121.png-fac2b684f3de0344bffc8a4576d2d2ab.ctex"
+uid="uid://y5fgqocpvc0v"
+path="res://.godot/imported/Chanterelle.png-bef3d678580ae345100286fb69179f75.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/item/fa2121.png"
-dest_files=["res://.godot/imported/fa2121.png-fac2b684f3de0344bffc8a4576d2d2ab.ctex"]
+source_file="res://sprites/item/ingredients/mushrooms/Chanterelle.png"
+dest_files=["res://.godot/imported/Chanterelle.png-bef3d678580ae345100286fb69179f75.ctex"]
 
 [params]
 
