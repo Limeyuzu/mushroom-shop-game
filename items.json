@@ -27,10 +27,34 @@
 		"name": "Enhancing Potion",
 		"image": "res://sprites/item/potions/item_31.png"
 	},
+	"earth_stone": {
+		"types": ["ingredient"],
+		"name": "Earth Stone",
+		"image": "res://sprites/item/ingredients/fa2118.png",
+		"elements": [10,0,0,0,0]
+	},
+	"water_stone": {
+		"types": ["ingredient"],
+		"name": "Water Stone",
+		"image": "res://sprites/item/ingredients/fa2119.png",
+		"elements": [0,10,0,0,0]
+	},
+	"air_stone": {
+		"types": ["ingredient"],
+		"name": "Air Stone",
+		"image": "res://sprites/item/ingredients/fa2120.png",
+		"elements": [0,0,10,0,0]
+	},
 	"fire_stone": {
 		"types": ["ingredient"],
 		"name": "Fire Stone",
 		"image": "res://sprites/item/ingredients/fa2117.png",
-		"elements": [10,0,0,0,0]
+		"elements": [0,0,0,10,0]
+	},
+	"dark_stone": {
+		"types": ["ingredient"],
+		"name": "Dark Stone",
+		"image": "res://sprites/item/ingredients/fa2121.png",
+		"elements": [0,0,0,0,10]
 	}
 }

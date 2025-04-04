@@ -1,48 +1,110 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci8crkaf4md6q"]
+[gd_scene load_steps=4 format=3 uid="uid://ci8crkaf4md6q"]
 
 [ext_resource type="Script" uid="uid://bwomtccjybo1i" path="res://scripts/UI/ElementalCraftingCanvas.cs" id="1_n7b2y"]
 [ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_n7b2y"]
+[ext_resource type="Script" uid="uid://cvolvwegxwcod" path="res://scripts/UI/CauldronItemList.cs" id="3_0gwlk"]
 
-[node name="ElementalCraftingCanvas" type="CanvasLayer" node_paths=PackedStringArray("_ctrlInventory")]
+[node name="ElementalCraftingCanvas" type="Control" node_paths=PackedStringArray("_ctrlInventory")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_n7b2y")
-_ctrlInventory = NodePath("CtrlInventory")
+_ctrlInventory = NodePath("Control/CtrlInventory")
 
-[node name="CtrlInventory" type="ItemList" parent="."]
-offset_right = 305.0
-offset_bottom = 116.0
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+
+[node name="CtrlInventory" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.4
+offset_top = -69.2
+offset_right = 120.6
+offset_bottom = 46.8
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2_n7b2y")
 metadata/_custom_type_script = "uid://ixvd2uv580t8"
 
-[node name="SelectButton" type="Button" parent="CtrlInventory"]
+[node name="SelectedItems" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 121.1
+offset_top = -69.2
+offset_right = 241.1
+offset_bottom = 82.8
+grow_horizontal = 2
+grow_vertical = 2
+allow_search = false
+max_columns = 3
+same_column_width = true
+icon_scale = 2.0
+script = ExtResource("3_0gwlk")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.9
+offset_top = 46.8
+offset_right = 121.1
+offset_bottom = 82.8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectButton" type="Button" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -38.0
-offset_right = -10.0
-offset_bottom = -7.0
+offset_left = -62.0
+offset_top = -34.0
+offset_right = -2.0
+offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Select"
 
-[node name="CancelButton" type="Button" parent="CtrlInventory"]
+[node name="CancelButton" type="Button" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -122.0
-offset_top = -38.0
-offset_right = -68.0
-offset_bottom = -7.0
+offset_left = -123.0
+offset_top = -34.0
+offset_right = -63.0
+offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Cancel"
 
-[connection signal="OnItemSelected" from="CtrlInventory" to="." method="AddSelectedItem"]
-[connection signal="pressed" from="CtrlInventory/SelectButton" to="CtrlInventory" method="GetSelectedInventoryItem"]
-[connection signal="pressed" from="CtrlInventory/CancelButton" to="." method="OnNoneSelected"]
+[connection signal="OnItemSelected" from="Control/CtrlInventory" to="Control/SelectedItems" method="AddItem"]
+[connection signal="item_activated" from="Control/SelectedItems" to="Control/SelectedItems" method="Remove"]
+[connection signal="pressed" from="Control/Panel/SelectButton" to="Control/CtrlInventory" method="GetSelectedInventoryItem"]
+[connection signal="pressed" from="Control/Panel/CancelButton" to="." method="OnNoneSelected"]

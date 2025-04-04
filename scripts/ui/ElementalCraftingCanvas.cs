@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class ElementalCraftingCanvas : CanvasLayer
+public partial class ElementalCraftingCanvas : Control
 {
     [Export] public bool InitiallyVisible = true;
     [Export] private CtrlInventory _ctrlInventory;
@@ -21,11 +21,6 @@ public partial class ElementalCraftingCanvas : CanvasLayer
         Visible = true;
         EmitSignal(SignalName.InventoryOpened);
         GD.Print($"{nameof(ElementalCraftingCanvas)}: opened by {openInventoryActionRequester.GetName()}");
-    }
-
-    public void AddSelectedItem(InventoryItem item)
-    {
-        GD.Print($"{nameof(ElementalCraftingCanvas)}: added {item} to elemental craft");
     }
 
     public void OnNoneSelected()

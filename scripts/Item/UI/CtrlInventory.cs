@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Godot;
 
 [GlobalClass, Icon("res://editor/icon_ctrl_inventory.svg")]
@@ -8,8 +7,6 @@ public partial class CtrlInventory : ItemList
 
     [Signal] public delegate void OnItemSelectedEventHandler(InventoryItem item);
 
-    private Dictionary<int, InventoryItem> _listIndexToItemMapping = [];
-
     public Inventory GetInventory() => _inventory;
 
     public void SetInventory(Inventory inventory)
@@ -18,11 +15,11 @@ public partial class CtrlInventory : ItemList
             return;
 
         _inventory = inventory;
-        ClearCurrentInventory();
+        Clear();
         foreach (var item in inventory.Items)
         {
             var listIndex = AddItem(item.GetName(), item.GetImage());
-            _listIndexToItemMapping.Add(listIndex, item);
+            SetItemMetadata(listIndex, item);
         }
     }
 
@@ -33,12 +30,6 @@ public partial class CtrlInventory : ItemList
             return;
 
         var selectedIndex = selected[0];
-        EmitSignal(SignalName.OnItemSelected, _listIndexToItemMapping[selectedIndex]);
-    }
-
-    private void ClearCurrentInventory()
-    {
-        Clear();
-        _listIndexToItemMapping = [];
+        EmitSignal(SignalName.OnItemSelected, GetItemMetadata(selectedIndex));
     }
 }

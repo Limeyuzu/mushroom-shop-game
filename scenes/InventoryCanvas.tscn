@@ -3,46 +3,73 @@
 [ext_resource type="Script" uid="uid://c0uhihwyym5e0" path="res://scripts/UI/InventoryCanvas.cs" id="1_4d5hs"]
 [ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_4mbv4"]
 
-[node name="InventoryCanvas" type="CanvasLayer" node_paths=PackedStringArray("_ctrlInventory")]
+[node name="InventoryCanvas" type="Control" node_paths=PackedStringArray("_ctrlInventory")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_4d5hs")
-_ctrlInventory = NodePath("CtrlInventory")
+_ctrlInventory = NodePath("Control/CtrlInventory")
 
-[node name="CtrlInventory" type="ItemList" parent="."]
-offset_right = 305.0
-offset_bottom = 116.0
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+
+[node name="CtrlInventory" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.5
+offset_top = -58.0
+offset_right = 152.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2_4mbv4")
 metadata/_custom_type_script = "uid://ixvd2uv580t8"
 
-[node name="SelectButton" type="Button" parent="CtrlInventory"]
+[node name="Panel" type="Panel" parent="Control"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -38.0
-offset_right = -10.0
-offset_bottom = -7.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Select"
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = 58.0
+offset_right = 153.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="CancelButton" type="Button" parent="CtrlInventory"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -122.0
-offset_top = -38.0
-offset_right = -68.0
-offset_bottom = -7.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="CancelButton" type="Button" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 2.0
+offset_right = 242.0
+offset_bottom = 34.0
 text = "Cancel"
 
-[connection signal="OnItemSelected" from="CtrlInventory" to="." method="OnItemSelected"]
-[connection signal="pressed" from="CtrlInventory/SelectButton" to="CtrlInventory" method="GetSelectedInventoryItem"]
-[connection signal="pressed" from="CtrlInventory/CancelButton" to="." method="OnNoneSelected"]
+[node name="SelectButton" type="Button" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 2.0
+offset_right = 303.0
+offset_bottom = 34.0
+text = "Select"
+
+[connection signal="OnItemSelected" from="Control/CtrlInventory" to="." method="OnItemSelected"]
+[connection signal="pressed" from="Control/Panel/CancelButton" to="." method="OnNoneSelected"]
+[connection signal="pressed" from="Control/Panel/SelectButton" to="Control/CtrlInventory" method="GetSelectedInventoryItem"]

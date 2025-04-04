@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cdylen16f2mjn"]
+[gd_scene load_steps=12 format=4 uid="uid://cawqii00cmhr1"]
 
 [ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_skkvx"]
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/DialogueRunnerCanvas.tscn" id="2_eo1la"]
@@ -54,7 +54,7 @@ Inventory = NodePath("Inventory")
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("7_jccym")
-_itemNames = Array[String](["broken_sword", "health_potion", "fire_stone"])
+_itemNames = Array[String](["broken_sword", "health_potion", "earth_stone", "water_stone", "air_stone", "fire_stone", "dark_stone"])
 metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
 [node name="Dude" parent="." instance=ExtResource("9_a6yfk")]
@@ -64,31 +64,24 @@ DialogueNode = "Start"
 DesiredItemTypesOrNames = Array[String](["weapon"])
 
 [node name="DialogueRunnerCanvas" parent="." instance=ExtResource("2_eo1la")]
-visible = false
 
-[node name="InventoryCanvas" parent="." instance=ExtResource("3_toxd1")]
-visible = false
-offset = Vector2(350, 300)
-scale = Vector2(2.5, 2.5)
-transform = Transform2D(2.5, 0, 0, 2.5, 350, 300)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ElementalCraftingCanvas" parent="CanvasLayer" instance=ExtResource("5_toxd1")]
 InitiallyVisible = false
 
-[node name="ElementalCraftingCanvas" parent="." instance=ExtResource("5_toxd1")]
-visible = false
-offset = Vector2(350, 300)
-scale = Vector2(2.5, 2.5)
-transform = Transform2D(2.5, 0, 0, 2.5, 350, 300)
+[node name="InventoryCanvas" parent="CanvasLayer" instance=ExtResource("3_toxd1")]
 InitiallyVisible = false
 
-[connection signal="OpenInventoryRequested" from="Map/CraftingTable" to="InventoryCanvas" method="OpenInventory"]
-[connection signal="OpenInventoryRequested" from="Map/Cauldron" to="ElementalCraftingCanvas" method="OpenInventory"]
+[connection signal="OpenInventoryRequested" from="Map/CraftingTable" to="CanvasLayer/InventoryCanvas" method="OpenInventory"]
+[connection signal="OpenInventoryRequested" from="Map/Cauldron" to="CanvasLayer/ElementalCraftingCanvas" method="OpenInventory"]
 [connection signal="StartDialogueAttempt" from="Dude" to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
 [connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
 [connection signal="DialogueStarted" from="DialogueRunnerCanvas" to="." method="OnDialogueStarted"]
-[connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="InventoryCanvas" method="OpenInventory"]
-[connection signal="InventoryClosed" from="InventoryCanvas" to="." method="OnMenuClosed"]
-[connection signal="InventoryOpened" from="InventoryCanvas" to="." method="OnMenuOpened"]
-[connection signal="ItemSelected" from="InventoryCanvas" to="Map/CraftingTable" method="OnItemSelected"]
-[connection signal="ItemSelected" from="InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]
-[connection signal="InventoryClosed" from="ElementalCraftingCanvas" to="." method="OnMenuClosed"]
-[connection signal="InventoryOpened" from="ElementalCraftingCanvas" to="." method="OnMenuOpened"]
+[connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="CanvasLayer/InventoryCanvas" method="OpenInventory"]
+[connection signal="InventoryClosed" from="CanvasLayer/ElementalCraftingCanvas" to="." method="OnMenuClosed"]
+[connection signal="InventoryOpened" from="CanvasLayer/ElementalCraftingCanvas" to="." method="OnMenuOpened"]
+[connection signal="InventoryClosed" from="CanvasLayer/InventoryCanvas" to="." method="OnMenuClosed"]
+[connection signal="InventoryOpened" from="CanvasLayer/InventoryCanvas" to="." method="OnMenuOpened"]
+[connection signal="ItemSelected" from="CanvasLayer/InventoryCanvas" to="Map/CraftingTable" method="OnItemSelected"]
+[connection signal="ItemSelected" from="CanvasLayer/InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]

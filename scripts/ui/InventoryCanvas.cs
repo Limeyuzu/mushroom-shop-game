@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class InventoryCanvas : CanvasLayer
+public partial class InventoryCanvas : Control
 {
     [Export] public bool InitiallyVisible = true;
     [Export] private CtrlInventory _ctrlInventory;
