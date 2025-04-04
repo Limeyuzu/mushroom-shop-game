@@ -18,6 +18,7 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
     {
         if (interactedBy is PlayerPointer playerPointer)
         {
+            // Display a list of craftable items instead of the inventory
             var craftingList = _craftingRecipes.GetAvailableCrafts(playerPointer.Player.Inventory);
             EmitSignal(SignalName.OpenInventoryRequested, craftingList, this);
         }

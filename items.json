@@ -28,6 +28,7 @@
 		"image": "res://sprites/item/potions/item_31.png"
 	},
 	"fire_stone": {
+		"types": ["ingredient"],
 		"name": "Fire Stone",
 		"image": "res://sprites/item/ingredients/fa2117.png",
 		"elements": [10,0,0,0,0]

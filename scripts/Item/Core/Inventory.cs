@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -47,6 +48,15 @@ public partial class Inventory : Node
         }
 
         return null;
+    }
+
+    public Inventory Duplicate()
+    {
+        var newInventory = new Inventory(_prototypeTree)
+        {
+            Items = Items
+        };
+        return newInventory;
     }
 
     public bool Contains(InventoryItem item) => Items.Contains(item);

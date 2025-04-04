@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci8crkaf4md6q"]
+
+[ext_resource type="Script" uid="uid://bwomtccjybo1i" path="res://scripts/UI/ElementalCraftingCanvas.cs" id="1_n7b2y"]
+[ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_n7b2y"]
+
+[node name="ElementalCraftingCanvas" type="CanvasLayer" node_paths=PackedStringArray("_ctrlInventory")]
+script = ExtResource("1_n7b2y")
+_ctrlInventory = NodePath("CtrlInventory")
+
+[node name="CtrlInventory" type="ItemList" parent="."]
+offset_right = 305.0
+offset_bottom = 116.0
+script = ExtResource("2_n7b2y")
+metadata/_custom_type_script = "uid://ixvd2uv580t8"
+
+[node name="SelectButton" type="Button" parent="CtrlInventory"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -38.0
+offset_right = -10.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Select"
+
+[node name="CancelButton" type="Button" parent="CtrlInventory"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -38.0
+offset_right = -68.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Cancel"
+
+[connection signal="OnItemSelected" from="CtrlInventory" to="." method="AddSelectedItem"]
+[connection signal="pressed" from="CtrlInventory/SelectButton" to="CtrlInventory" method="GetSelectedInventoryItem"]
+[connection signal="pressed" from="CtrlInventory/CancelButton" to="." method="OnNoneSelected"]

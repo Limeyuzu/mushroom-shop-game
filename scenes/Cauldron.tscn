@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cwcmiy8lxu53n"]
+[gd_scene load_steps=20 format=3 uid="uid://cwcmiy8lxu53n"]
 
+[ext_resource type="Script" uid="uid://crqu3gbmt1xha" path="res://scripts/Cauldron.cs" id="1_quaa6"]
 [ext_resource type="Texture2D" uid="uid://dlwfwahlbrvfq" path="res://sprites/shop/cauldron.png" id="4_wamsx"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="5_ir52o"]
 
@@ -106,7 +107,8 @@ size = Vector2(21.1111, 20.6667)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ofvbw"]
 size = Vector2(31.1111, 28.8889)
 
-[node name="CraftingTable" type="StaticBody2D"]
+[node name="Cauldron" type="StaticBody2D"]
+script = ExtResource("1_quaa6")
 
 [node name="OffSprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_x74j4")

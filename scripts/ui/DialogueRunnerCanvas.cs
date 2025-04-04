@@ -50,7 +50,7 @@ public partial class DialogueRunnerCanvas : CanvasLayer
     {
         var itemNameOrType = GetNpcDesiredItem(npc);
         GD.Print($"{nameof(DialogueRunnerCanvas)}: desired: {itemNameOrType}");
-        var isDesired = item.GetPrototype().IsTypeOf(itemNameOrType);
+        var isDesired = item.IsTypeOf(itemNameOrType);
         return isDesired;
     }
 }
