@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci8crkaf4md6q"]
+[gd_scene load_steps=5 format=3 uid="uid://ci8crkaf4md6q"]
 
 [ext_resource type="Script" uid="uid://bwomtccjybo1i" path="res://scripts/UI/ElementalCraftingCanvas.cs" id="1_n7b2y"]
 [ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_n7b2y"]
 [ext_resource type="Script" uid="uid://cvolvwegxwcod" path="res://scripts/UI/CauldronItemList.cs" id="3_0gwlk"]
+[ext_resource type="Script" uid="uid://bc7sxsv2okpjx" path="res://scripts/UI/CauldronItemText.cs" id="4_ne1n5"]
 
 [node name="ElementalCraftingCanvas" type="Control" node_paths=PackedStringArray("_ctrlInventory")]
 layout_mode = 3
@@ -32,49 +33,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -184.4
+offset_left = -244.4
 offset_top = -69.2
-offset_right = 120.6
+offset_right = 60.6
 offset_bottom = 46.8
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_n7b2y")
 metadata/_custom_type_script = "uid://ixvd2uv580t8"
 
-[node name="SelectedItems" type="ItemList" parent="Control"]
+[node name="Buttons" type="Panel" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 121.1
-offset_top = -69.2
-offset_right = 241.1
-offset_bottom = 82.8
-grow_horizontal = 2
-grow_vertical = 2
-allow_search = false
-max_columns = 3
-same_column_width = true
-icon_scale = 2.0
-script = ExtResource("3_0gwlk")
-
-[node name="Panel" type="Panel" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -183.9
+offset_left = -243.9
 offset_top = 46.8
-offset_right = 121.1
+offset_right = 61.1
 offset_bottom = 82.8
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SelectButton" type="Button" parent="Control/Panel"]
+[node name="SelectButton" type="Button" parent="Control/Buttons"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -89,7 +71,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Select"
 
-[node name="CancelButton" type="Button" parent="Control/Panel"]
+[node name="CancelButton" type="Button" parent="Control/Buttons"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -104,7 +86,34 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Cancel"
 
-[connection signal="OnItemSelected" from="Control/CtrlInventory" to="Control/SelectedItems" method="AddItem"]
-[connection signal="item_activated" from="Control/SelectedItems" to="Control/SelectedItems" method="Remove"]
-[connection signal="pressed" from="Control/Panel/SelectButton" to="Control/CtrlInventory" method="GetSelectedInventoryItem"]
-[connection signal="pressed" from="Control/Panel/CancelButton" to="." method="OnNoneSelected"]
+[node name="CauldronPanel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = -69.0
+offset_right = 252.0
+offset_bottom = 83.0
+
+[node name="CauldronItem" type="ItemList" parent="Control/CauldronPanel"]
+layout_mode = 1
+offset_right = 120.0
+offset_bottom = 152.0
+allow_search = false
+max_columns = 3
+same_column_width = true
+icon_scale = 2.0
+script = ExtResource("3_0gwlk")
+
+[node name="CauldronItemText" type="RichTextLabel" parent="Control/CauldronPanel" node_paths=PackedStringArray("_cauldronItemList")]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 9.0
+offset_right = 186.0
+offset_bottom = 151.0
+script = ExtResource("4_ne1n5")
+_cauldronItemList = NodePath("../CauldronItem")
+
+[connection signal="OnItemSelected" from="Control/CtrlInventory" to="Control/CauldronPanel/CauldronItem" method="AddItem"]
+[connection signal="pressed" from="Control/Buttons/SelectButton" to="Control/CtrlInventory" method="GetSelectedInventoryItem"]
+[connection signal="pressed" from="Control/Buttons/CancelButton" to="." method="OnNoneSelected"]
+[connection signal="ItemListUpdated" from="Control/CauldronPanel/CauldronItem" to="Control/CauldronPanel/CauldronItemText" method="OnCauldronUpdated"]
+[connection signal="item_activated" from="Control/CauldronPanel/CauldronItem" to="Control/CauldronPanel/CauldronItem" method="Remove"]
