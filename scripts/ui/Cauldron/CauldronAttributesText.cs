@@ -1,8 +1,10 @@
 using Godot;
 
-public partial class CauldronItemText : RichTextLabel
+public partial class CauldronAttributesText : RichTextLabel
 {
     [Export] private CauldronItemList _cauldronItemList;
+
+    public override void _Ready() => Clear();
 
     public void OnCauldronUpdated()
     {

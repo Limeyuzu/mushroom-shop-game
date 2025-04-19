@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class CauldronItemList : ItemList
@@ -22,13 +23,12 @@ public partial class CauldronItemList : ItemList
 
     public ElementAttribute GetTotalAttributes()
     {
-        var total = new ElementAttribute();
+        var items = new List<InventoryItem>();
         for (int i = 0; i < ItemCount; i++)
         {
-            var item = GetItemMetadata(i).As<InventoryItem>();
-            total += item.GetElementAttribute();
+            items.Add(GetItemMetadata(i).As<InventoryItem>());
         }
 
-        return total;
+        return PotionBrewing.GetAttributes(items);
     }
 }
