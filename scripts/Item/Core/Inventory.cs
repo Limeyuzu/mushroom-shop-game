@@ -25,12 +25,19 @@ public partial class Inventory : Node
         }
     }
 
+    public void Add(InventoryItem item) => Items.Add(item);
+    public void Remove(InventoryItem item) => Items.Remove(item);
+    public void RemoveAll(Predicate<InventoryItem> condition) => Items.RemoveAll(condition);
+
+    public InventoryItem CreateItem(string prototypeId)
+        => !_prototypeTree.Tree.TryGetValue(prototypeId, out Prototype value) ? null : new InventoryItem(value);
+
     public InventoryItem CreateAndAddItem(string prototypeId)
     {
         if (!_prototypeTree.Tree.ContainsKey(prototypeId))
             return null;
 
-        var item = new InventoryItem(_prototypeTree.Tree[prototypeId]);
+        var item = CreateItem(prototypeId);
         Items.Add(item);
 
         return item;

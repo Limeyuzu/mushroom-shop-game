@@ -11,10 +11,7 @@ public partial class InventoryCanvas : Control
 
     private Node _openInventoryActionRequester;
 
-    public override void _Ready()
-    {
-        Visible = InitiallyVisible;
-    }
+    public override void _Ready() => Visible = InitiallyVisible;
 
     public void OpenInventory(Inventory inventory, Node openInventoryActionRequester)
     {

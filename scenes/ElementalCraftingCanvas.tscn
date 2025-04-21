@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://ci8crkaf4md6q"]
+[gd_scene load_steps=7 format=3 uid="uid://ci8crkaf4md6q"]
 
 [ext_resource type="Script" uid="uid://bwomtccjybo1i" path="res://scripts/UI/ElementalCraftingCanvas.cs" id="1_n7b2y"]
 [ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_n7b2y"]
 [ext_resource type="Script" uid="uid://cvolvwegxwcod" path="res://scripts/UI/Cauldron/CauldronItemList.cs" id="3_0gwlk"]
+[ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="3_12fbo"]
 [ext_resource type="Script" uid="uid://bc7sxsv2okpjx" path="res://scripts/UI/Cauldron/CauldronAttributesText.cs" id="4_ne1n5"]
 [ext_resource type="Script" uid="uid://2l7lenprops1" path="res://scripts/UI/Cauldron/CauldronStabilityText.cs" id="5_0n5oa"]
 
-[node name="ElementalCraftingCanvas" type="Control" node_paths=PackedStringArray("_ctrlInventory")]
+[node name="ElementalCraftingCanvas" type="Control" node_paths=PackedStringArray("_ctrlInventory", "_cauldronItemList")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n7b2y")
 _ctrlInventory = NodePath("Control/CtrlInventory")
+_cauldronItemList = NodePath("Control/CauldronPanel/CauldronItem")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -27,21 +29,27 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.5, 2.5)
 
-[node name="CtrlInventory" type="ItemList" parent="Control"]
+[node name="CtrlInventory" type="ItemList" parent="Control" node_paths=PackedStringArray("_originalInventory")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -244.4
-offset_top = -69.2
-offset_right = 60.6
-offset_bottom = 46.8
+offset_left = -244.0
+offset_top = -69.0
+offset_right = 61.0
+offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_n7b2y")
+_originalInventory = NodePath("TestInventory")
 metadata/_custom_type_script = "uid://ixvd2uv580t8"
+
+[node name="TestInventory" type="Node" parent="Control/CtrlInventory"]
+script = ExtResource("3_12fbo")
+_itemNames = Array[String](["earth_stone", "water_stone", "air_stone", "fire_stone"])
+metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
 [node name="Buttons" type="Panel" parent="Control"]
 layout_mode = 1
@@ -50,10 +58,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -243.9
-offset_top = 46.8
-offset_right = 61.1
-offset_bottom = 82.8
+offset_left = -244.0
+offset_top = 83.0
+offset_right = 252.0
+offset_bottom = 119.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -70,7 +78,7 @@ offset_right = -2.0
 offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Select"
+text = "Brew"
 
 [node name="CancelButton" type="Button" parent="Control/Buttons"]
 layout_mode = 1
@@ -89,7 +97,7 @@ text = "Cancel"
 
 [node name="CauldronPanel" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 62.0
+offset_left = 61.0
 offset_top = -69.0
 offset_right = 252.0
 offset_bottom = 83.0
@@ -134,8 +142,11 @@ script = ExtResource("5_0n5oa")
 _cauldronItemList = NodePath("../CauldronItem")
 
 [connection signal="OnItemSelected" from="Control/CtrlInventory" to="Control/CauldronPanel/CauldronItem" method="AddItem"]
-[connection signal="pressed" from="Control/Buttons/SelectButton" to="Control/CtrlInventory" method="GetSelectedInventoryItem"]
+[connection signal="item_activated" from="Control/CtrlInventory" to="Control/CtrlInventory" method="GetSelectedInventoryItem"]
+[connection signal="pressed" from="Control/Buttons/SelectButton" to="." method="OnBrew"]
 [connection signal="pressed" from="Control/Buttons/CancelButton" to="." method="OnNoneSelected"]
+[connection signal="ItemAdded" from="Control/CauldronPanel/CauldronItem" to="Control/CtrlInventory" method="RemoveItemFromDisplay"]
 [connection signal="ItemListUpdated" from="Control/CauldronPanel/CauldronItem" to="Control/CauldronPanel/CauldronAttributesText" method="OnCauldronUpdated"]
 [connection signal="ItemListUpdated" from="Control/CauldronPanel/CauldronItem" to="Control/CauldronPanel/CauldronStabilityText" method="OnCauldronUpdated"]
+[connection signal="ItemRemoved" from="Control/CauldronPanel/CauldronItem" to="Control/CtrlInventory" method="AddItemToDisplay"]
 [connection signal="item_activated" from="Control/CauldronPanel/CauldronItem" to="Control/CauldronPanel/CauldronItem" method="Remove"]

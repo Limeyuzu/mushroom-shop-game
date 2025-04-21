@@ -9,7 +9,7 @@ public partial class Cauldron : StaticBody2D, ICharacterInteractable
         if (interactedBy is PlayerPointer playerPointer)
         {
             var inventory = playerPointer.Player.Inventory.Duplicate();
-            inventory.Items.RemoveAll(i => !i.IsTypeOf("ingredient"));
+            inventory.RemoveAll(i => !i.IsTypeOf("ingredient"));
             EmitSignal(SignalName.OpenInventoryRequested, inventory, this);
         }
     }

@@ -1,17 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Godot;
 
 public static class PotionBrewing
 {
-    public static ElementAttribute GetElementAttribute(List<InventoryItem> ingredients)
-    {
-        return ingredients
-            .Select(i => i.GetElementAttribute())
-            .Aggregate((a, b) => a + b);
-    }
-
     public static Stability GetStability(ElementAttribute targetRatios, ElementAttribute totalAttributes)
     {
         var targetNormal = targetRatios.Normalise();
@@ -31,6 +22,8 @@ public static class PotionBrewing
 
     public static string GetPotion(List<InventoryItem> ingredients)
     {
+        // find closest potion
+
         return "enhance_potion";
     }
 
