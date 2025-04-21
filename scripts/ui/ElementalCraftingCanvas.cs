@@ -32,6 +32,8 @@ public partial class ElementalCraftingCanvas : Control
     public void OnBrew()
     {
         var brewedItemProto = _cauldronItemList.GetResultPrototype();
+        if (brewedItemProto == null) return;
+
         var brewedItem = _inventory.CreateItem(brewedItemProto);
 
         EmitSignal(SignalName.InventoryClosed);

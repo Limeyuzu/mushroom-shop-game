@@ -25,7 +25,7 @@ public partial class CauldronItemList : ItemList
         GD.Print($"{nameof(CauldronItemList)}: removed {item} from cauldron");
     }
 
-    public string GetResultPrototype() => PotionBrewing.GetPotion(GetItems());
+    public string GetResultPrototype() => PotionBrewing.GetClosestPotion(GetItems());
 
     public ElementAttribute GetTotalAttributes() => PotionBrewing.GetAttributes(GetItems());
 
