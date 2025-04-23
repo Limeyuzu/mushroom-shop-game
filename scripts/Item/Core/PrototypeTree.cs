@@ -1,28 +1,39 @@
 using System.Collections.Generic;
 using Godot;
 
-public partial class PrototypeTree : RefCounted
+public partial class PrototypeTree : Node
 {
-    public PrototypeTree() {}
+    public static PrototypeTree Instance { get; private set; }
 
-    public PrototypeTree(Json jsonFile)
+    public override void _Ready()
     {
-        if (jsonFile != null)
+        Variant jsonFile;
+        try
         {
-            Deserialise(jsonFile);
+            var file = FileAccess.Open("res://Items.json", FileAccess.ModeFlags.Read).GetAsText();
+            jsonFile = Json.ParseString(file);
         }
+        catch
+        {
+            GD.PrintErr("can't find or parse res://Items.json");
+            throw;
+        }
+        Deserialise(jsonFile);
+
+        Instance = this;
     }
 
     public Godot.Collections.Dictionary<string, Prototype> Tree = [];
 
-    public void Deserialise(Json jsonFile)
+    public void Deserialise(Variant jsonFile)
     {
-        foreach (var item in jsonFile.Data.As<Godot.Collections.Dictionary<string, Variant>>())
+        foreach (var item in jsonFile.As<Godot.Collections.Dictionary<string, Variant>>())
         {
             var id = item.Key;
             List<string> types = [];
             string name = string.Empty;
             CompressedTexture2D image = null;
+            string imagePath = string.Empty;
             Dictionary<string, Variant> otherProperties = [];
 
             var properties = item.Value.As<Godot.Collections.Dictionary<string, Variant>>();
@@ -38,6 +49,7 @@ public partial class PrototypeTree : RefCounted
                 }
                 else if (prop.Key == "image")
                 {
+                    imagePath = prop.Value.As<string>();
                     image = GD.Load<CompressedTexture2D>(prop.Value.As<string>());
                 }
                 else
@@ -46,7 +58,7 @@ public partial class PrototypeTree : RefCounted
                 }
             }
 
-            Tree.Add(id, new Prototype(id, name, image, types, otherProperties));
+            Tree.Add(id, new Prototype(id, name, image, imagePath, types, otherProperties));
         }
     }
 }

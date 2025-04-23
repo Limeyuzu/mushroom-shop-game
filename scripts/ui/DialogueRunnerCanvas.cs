@@ -14,7 +14,7 @@ public partial class DialogueRunnerCanvas : CanvasLayer
 
     public void OnInteractionStartAttempt(Npc dialogueNpc, Node2D interactedBy)
     {
-        if (this.ShopGlobal().PlayerHasControl() && interactedBy is PlayerPointer playerPointer)
+        if (GlobalState.Instance.PlayerHasControl() && interactedBy is PlayerPointer playerPointer)
         {
             DialogueRunner.StartDialogue(dialogueNpc.DialogueNode);
             EmitSignal(SignalName.DialogueStarted, dialogueNpc);
@@ -38,6 +38,7 @@ public partial class DialogueRunnerCanvas : CanvasLayer
         DialogueRunner.VariableStorage.SetValue("$desiredItem", GetNpcDesiredItem(_currentDialogueNpc));
         DialogueRunner.VariableStorage.SetValue("$isDesired", IsDesiredItem(_currentDialogueNpc, item));
         DialogueRunner.StartDialogue("ShowItem");
+        EmitSignal(SignalName.DialogueStarted, _currentDialogueNpc);
     }
 
     private string GetNpcDesiredItem(Npc npc)

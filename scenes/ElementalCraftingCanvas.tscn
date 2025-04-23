@@ -130,13 +130,12 @@ _cauldronItemList = NodePath("../CauldronItem")
 
 [node name="CauldronStabilityText" type="RichTextLabel" parent="Control/CauldronPanel" node_paths=PackedStringArray("_cauldronItemList")]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 118.0
-offset_right = 189.0
-offset_bottom = 152.0
+offset_left = 3.0
+offset_top = 121.0
+offset_right = 188.0
+offset_bottom = 149.0
 bbcode_enabled = true
-text = "Stability: [color=#60a060]blah[/color]"
-horizontal_alignment = 1
+text = "[img]res://sprites/item/potions/fa265.png[/img] Stability: [color=#60a060]blah[/color]"
 vertical_alignment = 1
 script = ExtResource("5_0n5oa")
 _cauldronItemList = NodePath("../CauldronItem")

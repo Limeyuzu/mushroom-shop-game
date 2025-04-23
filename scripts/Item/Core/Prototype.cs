@@ -4,11 +4,18 @@ using Godot;
 public partial class Prototype : RefCounted
 {
     public Prototype() { }
-    public Prototype(string id, string name, CompressedTexture2D image, List<string> types, Dictionary<string, Variant> properties)
+    public Prototype(
+        string id,
+        string name,
+        CompressedTexture2D image,
+        string imagePath,
+        List<string> types,
+        Dictionary<string, Variant> properties)
     {
         ID = id;
         Name = name;
         Image = image;
+        ImagePath = imagePath;
         Types = types;
         _properties = properties;
     }
@@ -16,6 +23,7 @@ public partial class Prototype : RefCounted
     public string ID { get; private set; }
     public string Name { get; private set; }
     public CompressedTexture2D Image { get; private set; }
+    public string ImagePath { get; private set; }
     public List<string> Types { get; private set; }
     private Dictionary<string, Variant> _properties;
     private Prototype _parent;

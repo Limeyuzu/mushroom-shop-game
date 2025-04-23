@@ -8,6 +8,8 @@ public partial class CtrlInventory : ItemList
 
     [Signal] public delegate void OnItemSelectedEventHandler(InventoryItem item);
 
+    public override void _Ready() => SetInventory(_originalInventory);
+
     public void SetInventory(Inventory inventory)
     {
         if (inventory == null)

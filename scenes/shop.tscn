@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cawqii00cmhr1"]
+[gd_scene load_steps=11 format=4 uid="uid://cawqii00cmhr1"]
 
 [ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_skkvx"]
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/DialogueRunnerCanvas.tscn" id="2_eo1la"]
@@ -9,12 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Player.tscn" id="6_abjrc"]
 [ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/Cauldron.tscn" id="7_eo1la"]
 [ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="7_jccym"]
-[ext_resource type="JSON" path="res://Items.json" id="8_plhqw"]
 [ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Npc.tscn" id="9_a6yfk"]
 
 [node name="Shop" type="Node"]
 script = ExtResource("1_skkvx")
-PrototypeTreeJson = ExtResource("8_plhqw")
 
 [node name="Map" type="Node2D" parent="."]
 scale = Vector2(2, 2)

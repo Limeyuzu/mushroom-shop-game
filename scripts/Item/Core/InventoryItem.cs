@@ -14,6 +14,7 @@ public partial class InventoryItem : RefCounted
     public string GetID() => _prototype.ID;
     public string GetName() => _prototype.Name;
     public CompressedTexture2D GetImage() => _prototype.Image;
+    public string GetImagePath() => _prototype.ImagePath;
     public bool IsTypeOf(string type) => _prototype.IsTypeOf(type);
     public ElementAttribute GetElementAttribute() => new ElementAttribute(_prototype.GetProperty("elements"));
 

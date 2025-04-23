@@ -18,6 +18,7 @@ public partial class CauldronStabilityText : RichTextLabel
             { Stability.Uncraftable, "#c1272c" }
         };
 
-        Text = $"{potionName} Stability: [color={colours[stability]}]{stability}[/color]";
+        var potion = ItemDB.GetItem(potionName);
+        Text = $"[img]{potion.GetImagePath()}[/img] Stability: [color={colours[stability]}]{stability}[/color]";
     }
 }

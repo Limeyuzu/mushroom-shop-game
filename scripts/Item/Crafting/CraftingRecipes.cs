@@ -12,7 +12,7 @@ public partial class CraftingRecipes : Node
 
     public Inventory GetAvailableCrafts(Inventory playerInventory)
     {
-        var craftables = new Inventory(this.ShopGlobal().PrototypeTree);
+        var craftables = new Inventory();
         foreach (var item in _recipes)
         {
             var recipes = item.Value;

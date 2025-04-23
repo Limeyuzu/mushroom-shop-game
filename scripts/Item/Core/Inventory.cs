@@ -12,12 +12,11 @@ public partial class Inventory : Node
     private PrototypeTree _prototypeTree;
     private Dictionary _serialisedFormat = [];
 
-    public Inventory() { }
-    public Inventory(PrototypeTree prototypeTree) => _prototypeTree = prototypeTree;
+    public Inventory() => _prototypeTree = PrototypeTree.Instance;
 
     public override void _Ready()
     {
-        _prototypeTree ??= this.ShopGlobal().PrototypeTree;
+        _prototypeTree = PrototypeTree.Instance;
 
         foreach (var itemName in _itemNames)
         {
@@ -25,19 +24,12 @@ public partial class Inventory : Node
         }
     }
 
-    public void Add(InventoryItem item) => Items.Add(item);
-    public void Remove(InventoryItem item) => Items.Remove(item);
-    public void RemoveAll(Predicate<InventoryItem> condition) => Items.RemoveAll(condition);
-
-    public InventoryItem CreateItem(string prototypeId)
-        => !_prototypeTree.Tree.TryGetValue(prototypeId, out Prototype value) ? null : new InventoryItem(value);
-
     public InventoryItem CreateAndAddItem(string prototypeId)
     {
         if (!_prototypeTree.Tree.ContainsKey(prototypeId))
             return null;
 
-        var item = CreateItem(prototypeId);
+        var item = ItemDB.GetItem(prototypeId);
         Items.Add(item);
 
         return item;
@@ -45,7 +37,7 @@ public partial class Inventory : Node
 
     public InventoryItem GetItemWithId(string prototypeId)
     {
-        if (!_prototypeTree.Tree.ContainsKey(prototypeId))
+        if (!ItemDB.Exists(prototypeId))
             return null;
 
         foreach (var item in Items)
@@ -57,15 +49,11 @@ public partial class Inventory : Node
         return null;
     }
 
-    public Inventory Duplicate()
-    {
-        var newInventory = new Inventory(_prototypeTree)
-        {
-            Items = Items
-        };
-        return newInventory;
-    }
+    public Inventory Duplicate() => new Inventory { Items = Items };
 
+    public void Add(InventoryItem item) => Items.Add(item);
+    public void Remove(InventoryItem item) => Items.Remove(item);
+    public void RemoveAll(Predicate<InventoryItem> condition) => Items.RemoveAll(condition);
     public bool Contains(InventoryItem item) => Items.Contains(item);
     public bool Contains(List<string> itemIds) => !itemIds.Except(Items.Select(i => i.GetID())).Any();
 }

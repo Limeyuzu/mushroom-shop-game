@@ -2,8 +2,10 @@ using Godot;
 
 public partial class GlobalState : Node
 {
-    [Export(PropertyHint.File, "*.json")] public Json PrototypeTreeJson;
-    public PrototypeTree PrototypeTree { get; private set; }
+    public static GlobalState Instance { get; private set; }
+
+    public override void _Ready() => Instance = this;
+
     public bool IsInDialogue { get; private set; }
     public bool IsMenuOpen { get; private set; }
 
@@ -13,6 +15,4 @@ public partial class GlobalState : Node
     private void OnDialogueCompleted() => IsInDialogue = false;
     private void OnMenuOpened() => IsMenuOpen = true;
     private void OnMenuClosed() => IsMenuOpen = false;
-
-    public override void _EnterTree() => PrototypeTree = new PrototypeTree(PrototypeTreeJson);
 }
