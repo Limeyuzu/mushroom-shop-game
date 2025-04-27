@@ -9,9 +9,6 @@ public static class PotionBrewing
         { new ElementAttribute(1, 0, 0, 1, 0), "enhance_potion" }
     };
 
-    public static Stability GetStability(ElementAttribute targetRatio, ElementAttribute totalAttributes)
-        => GetStability(GetDeviation(targetRatio, totalAttributes));
-
     public static ElementAttribute GetAttributes(List<InventoryItem> ingredients)
         => ingredients
             .Select(i => i.GetElementAttribute())

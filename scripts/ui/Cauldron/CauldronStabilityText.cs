@@ -10,6 +10,13 @@ public partial class CauldronStabilityText : RichTextLabel
     public void OnCauldronUpdated()
     {
         var (potionName, stability) = PotionBrewing.GetClosestPotionAndStability(_cauldronItemList.GetItems());
+
+        if (potionName == null)
+        {
+            Text = string.Empty;
+            return;
+        }
+
         var colours = new Dictionary<Stability, string>
         {
             { Stability.Perfect, "#99ff9c" },

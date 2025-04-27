@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class ElementalCraftingCanvas : Control
@@ -11,12 +12,13 @@ public partial class ElementalCraftingCanvas : Control
 
     private Node _openInventoryActionRequester;
     private Inventory _inventory;
+    private readonly Predicate<InventoryItem> _viewFilter = i => i.IsTypeOf("ingredient");
 
     public override void _Ready() => Visible = InitiallyVisible;
 
     public void OpenInventory(Inventory inventory, Node openInventoryActionRequester)
     {
-        SetInventory(inventory);
+        SetCtrlInventory(inventory);
         _openInventoryActionRequester = openInventoryActionRequester;
         Visible = true;
         EmitSignal(SignalName.InventoryOpened);
@@ -26,6 +28,8 @@ public partial class ElementalCraftingCanvas : Control
     public void OnNoneSelected()
     {
         EmitSignal(SignalName.InventoryClosed);
+        _cauldronItemList.RemoveAll();
+        _ctrlInventory.Revert();
         Visible = false;
     }
 
@@ -38,16 +42,22 @@ public partial class ElementalCraftingCanvas : Control
 
         EmitSignal(SignalName.InventoryClosed);
         EmitSignal(SignalName.ItemSelected, brewedItem, _openInventoryActionRequester);
+
+        _cauldronItemList.RemoveAll();
+
+        _inventory.RemoveAll(i => !_ctrlInventory.GetVirtualInventory().Contains(i));
+        _inventory.Add(brewedItem);
+
         _openInventoryActionRequester = null;
         Visible = false;
         GD.Print($"{nameof(ElementalCraftingCanvas)}: brewing {brewedItem.GetName()}");
     }
 
-    private void SetInventory(Inventory inventory)
+    private void SetCtrlInventory(Inventory inventory)
     {
         if (_ctrlInventory != null && inventory != null)
         {
-            _ctrlInventory.SetInventory(inventory);
+            _ctrlInventory.SetInventory(inventory, _viewFilter);
         }
         _inventory = inventory;
     }

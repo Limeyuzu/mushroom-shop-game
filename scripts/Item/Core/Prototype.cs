@@ -3,6 +3,11 @@ using Godot;
 
 public partial class Prototype : RefCounted
 {
+    public class Property
+    {
+        public const string ELEMENTS = "elements";
+    }
+
     public Prototype() { }
     public Prototype(
         string id,
@@ -30,5 +35,6 @@ public partial class Prototype : RefCounted
 
     public bool IsTypeOf(string type) => Types.Contains(type);
     public void SetProperty(string key, Variant value) => _properties[key] = value;
+    public bool HasProperty(string key) => _properties.ContainsKey(key);
     public Variant GetProperty(string key) => _properties.ContainsKey(key) ? _properties[key] : default;
 }

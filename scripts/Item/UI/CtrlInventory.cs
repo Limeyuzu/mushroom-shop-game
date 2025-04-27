@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass, Icon("res://editor/icon_ctrl_inventory.svg")]
@@ -10,15 +11,19 @@ public partial class CtrlInventory : ItemList
 
     public override void _Ready() => SetInventory(_originalInventory);
 
-    public void SetInventory(Inventory inventory)
+    public void SetInventory(Inventory inventory, Predicate<InventoryItem> viewFilter = null)
     {
         if (inventory == null)
             return;
 
         _originalInventory = inventory;
-        _virtualInventory = inventory.Duplicate();
+        _virtualInventory = inventory.DuplicateInventory();
+        if (viewFilter != null)
+        {
+            _virtualInventory.RemoveAll(i => !viewFilter(i));
+        }
 
-        ResetInventory(inventory);
+        ResetInventory(_virtualInventory);
     }
 
     private void ResetInventory(Inventory inventory)
@@ -56,4 +61,7 @@ public partial class CtrlInventory : ItemList
         _virtualInventory.Remove(item);
         ResetInventory(_virtualInventory);
     }
+
+    public void Revert() => SetInventory(_originalInventory);
+    public Inventory GetVirtualInventory() => _virtualInventory;
 }

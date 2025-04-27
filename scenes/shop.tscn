@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cawqii00cmhr1"]
+[gd_scene load_steps=11 format=4 uid="uid://bwxdsxmofnqr7"]
 
 [ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_skkvx"]
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/DialogueRunnerCanvas.tscn" id="2_eo1la"]

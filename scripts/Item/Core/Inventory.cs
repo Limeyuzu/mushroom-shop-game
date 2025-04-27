@@ -49,7 +49,12 @@ public partial class Inventory : Node
         return null;
     }
 
-    public Inventory Duplicate() => new Inventory { Items = Items };
+    public Inventory DuplicateInventory()
+    {
+        var newInventory = (Inventory)Duplicate();
+        newInventory.Items = [.. Items];
+        return newInventory;
+    }
 
     public void Add(InventoryItem item) => Items.Add(item);
     public void Remove(InventoryItem item) => Items.Remove(item);
