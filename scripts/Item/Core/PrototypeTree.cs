@@ -25,7 +25,7 @@ public partial class PrototypeTree : Node
 
     public Godot.Collections.Dictionary<string, Prototype> Tree = [];
 
-    public void Deserialise(Variant jsonFile)
+    private void Deserialise(Variant jsonFile)
     {
         foreach (var item in jsonFile.As<Godot.Collections.Dictionary<string, Variant>>())
         {

@@ -72,4 +72,4 @@ text = "Select"
 
 [connection signal="OnItemSelected" from="Control/CtrlInventory" to="." method="OnItemSelected"]
 [connection signal="pressed" from="Control/Panel/CancelButton" to="." method="OnNoneSelected"]
-[connection signal="pressed" from="Control/Panel/SelectButton" to="Control/CtrlInventory" method="GetSelectedInventoryItem"]
+[connection signal="pressed" from="Control/Panel/SelectButton" to="Control/CtrlInventory" method="EmitSelectedInventoryItem"]

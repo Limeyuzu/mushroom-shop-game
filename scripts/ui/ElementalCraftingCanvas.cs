@@ -38,14 +38,14 @@ public partial class ElementalCraftingCanvas : Control
         var brewedItemProto = _cauldronItemList.GetResultPrototype();
         if (brewedItemProto == null) return;
 
+        var consumedItems = _cauldronItemList.GetItems();
         var brewedItem = ItemDB.GetItem(brewedItemProto);
 
         EmitSignal(SignalName.InventoryClosed);
         EmitSignal(SignalName.ItemSelected, brewedItem, _openInventoryActionRequester);
 
+        _inventory.RemoveAll(consumedItems.Contains);
         _cauldronItemList.RemoveAll();
-
-        _inventory.RemoveAll(i => !_ctrlInventory.GetVirtualInventory().Contains(i));
         _inventory.Add(brewedItem);
 
         _openInventoryActionRequester = null;

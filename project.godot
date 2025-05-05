@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PrototypeTree="*res://scripts/Item/Core/PrototypeTree.cs"
 GlobalState="*res://scripts/GlobalState.cs"
+CraftingRecipes="*res://scripts/Item/Crafting/CraftingRecipes.cs"
 
 [display]
 

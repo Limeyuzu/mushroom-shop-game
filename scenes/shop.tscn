@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bwxdsxmofnqr7"]
+[gd_scene load_steps=12 format=4 uid="uid://bwxdsxmofnqr7"]
 
 [ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_skkvx"]
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/DialogueRunnerCanvas.tscn" id="2_eo1la"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/Cauldron.tscn" id="7_eo1la"]
 [ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="7_jccym"]
 [ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Npc.tscn" id="9_a6yfk"]
+[ext_resource type="PackedScene" uid="uid://b1m2tbaljawp1" path="res://scenes/CraftingCanvas.tscn" id="11_toxd1"]
 
 [node name="Shop" type="Node"]
 script = ExtResource("1_skkvx")
@@ -71,7 +72,10 @@ InitiallyVisible = false
 [node name="InventoryCanvas" parent="CanvasLayer" instance=ExtResource("3_toxd1")]
 InitiallyVisible = false
 
-[connection signal="OpenInventoryRequested" from="Map/CraftingTable" to="CanvasLayer/InventoryCanvas" method="OpenInventory"]
+[node name="CraftingCanvas" parent="CanvasLayer" instance=ExtResource("11_toxd1")]
+InitiallyVisible = false
+
+[connection signal="OpenCraftingRequested" from="Map/CraftingTable" to="CanvasLayer/CraftingCanvas" method="OpenCrafting"]
 [connection signal="OpenInventoryRequested" from="Map/Cauldron" to="CanvasLayer/ElementalCraftingCanvas" method="OpenInventory"]
 [connection signal="StartDialogueAttempt" from="Dude" to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
 [connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
@@ -83,3 +87,6 @@ InitiallyVisible = false
 [connection signal="InventoryOpened" from="CanvasLayer/InventoryCanvas" to="." method="OnMenuOpened"]
 [connection signal="ItemSelected" from="CanvasLayer/InventoryCanvas" to="Map/CraftingTable" method="OnItemSelected"]
 [connection signal="ItemSelected" from="CanvasLayer/InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]
+[connection signal="CraftingCanvasClosed" from="CanvasLayer/CraftingCanvas" to="." method="OnMenuClosed"]
+[connection signal="CraftingCanvasOpened" from="CanvasLayer/CraftingCanvas" to="." method="OnMenuOpened"]
+[connection signal="RecipeSelected" from="CanvasLayer/CraftingCanvas" to="Map/CraftingTable" method="OnRecipeSelected"]

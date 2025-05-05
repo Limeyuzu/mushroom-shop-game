@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1m2tbaljawp1"]
+
+[ext_resource type="Script" uid="uid://biei6f2j6mqas" path="res://scripts/UI/CraftingCanvas.cs" id="1_4vad5"]
+[ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_w1qh2"]
+
+[node name="CraftingCanvas" type="Control" node_paths=PackedStringArray("_recipeListCtrl", "_ingredientsListCtrl")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4vad5")
+_recipeListCtrl = NodePath("Control/RecipeListCtrlInventory")
+_ingredientsListCtrl = NodePath("Control/IngredientsCtrlInventory")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+
+[node name="RecipeListCtrlInventory" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -87.6
+offset_bottom = 28.4
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_w1qh2")
+metadata/_custom_type_script = "uid://ixvd2uv580t8"
+
+[node name="IngredientsCtrlInventory" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.899998
+offset_top = -88.0
+offset_right = 200.9
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_search = false
+script = ExtResource("2_w1qh2")
+metadata/_custom_type_script = "uid://ixvd2uv580t8"
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 28.8
+offset_right = 200.0
+offset_bottom = 64.8
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CancelButton" type="Button" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 275.9
+offset_top = 2.4
+offset_right = 335.9
+offset_bottom = 34.4
+text = "Cancel"
+
+[node name="CreateButton" type="Button" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 2.0
+offset_right = 397.0
+offset_bottom = 34.0
+text = "Create"
+
+[connection signal="OnItemHighlighted" from="Control/RecipeListCtrlInventory" to="." method="OnRecipeHighlighted"]
+[connection signal="OnItemSelected" from="Control/RecipeListCtrlInventory" to="." method="OnCraftChosen"]
+[connection signal="item_selected" from="Control/RecipeListCtrlInventory" to="Control/RecipeListCtrlInventory" method="OnInventoryItemHighlighted"]
+[connection signal="pressed" from="Control/Panel/CancelButton" to="." method="OnNoneSelected"]
+[connection signal="pressed" from="Control/Panel/CreateButton" to="Control/RecipeListCtrlInventory" method="EmitSelectedInventoryItem"]

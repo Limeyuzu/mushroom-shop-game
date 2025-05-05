@@ -8,6 +8,7 @@ public partial class CtrlInventory : ItemList
     private Inventory _virtualInventory;
 
     [Signal] public delegate void OnItemSelectedEventHandler(InventoryItem item);
+    [Signal] public delegate void OnItemHighlightedEventHandler(InventoryItem item);
 
     public override void _Ready() => SetInventory(_originalInventory);
 
@@ -36,17 +37,17 @@ public partial class CtrlInventory : ItemList
         }
     }
 
-    public void GetSelectedInventoryItem()
+    public void EmitSelectedInventoryItem()
     {
         var selected = GetSelectedItems();
         if (selected.Length == 0)
             return;
 
         var selectedIndex = selected[0];
-        GetSelectedInventoryItem(selectedIndex);
+        EmitSelectedInventoryItem(selectedIndex);
     }
 
-    public void GetSelectedInventoryItem(int index) => EmitSignal(SignalName.OnItemSelected, GetItemMetadata(index));
+    public void EmitSelectedInventoryItem(int index) => EmitSignal(SignalName.OnItemSelected, GetItemMetadata(index));
 
     // Adds an item to ItemList without affecting original Inventory
     public void AddItemToDisplay(InventoryItem item)
@@ -62,6 +63,7 @@ public partial class CtrlInventory : ItemList
         ResetInventory(_virtualInventory);
     }
 
+    public void OnInventoryItemHighlighted(int index) => EmitSignal(SignalName.OnItemHighlighted, GetItemMetadata(index));
+
     public void Revert() => SetInventory(_originalInventory);
-    public Inventory GetVirtualInventory() => _virtualInventory;
 }

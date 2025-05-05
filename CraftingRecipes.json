@@ -1,5 +1,5 @@
 {
-	"iron_sword": [
-		["broken_sword"],
+	"iron_sword_enhanced": [
+		["broken_sword", "enhance_potion"],
 	]
 }
