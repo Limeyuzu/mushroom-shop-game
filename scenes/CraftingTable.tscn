@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://crm01wmd8iytl"]
+[gd_scene load_steps=8 format=3 uid="uid://crm01wmd8iytl"]
 
-[ext_resource type="Script" uid="uid://cv6uw3ucx7nku" path="res://scripts/CraftingTable.cs" id="1_51x1i"]
+[ext_resource type="Script" uid="uid://cv6uw3ucx7nku" path="res://scripts/Interactable/CraftingStation/CraftingTable.cs" id="1_51x1i"]
 [ext_resource type="Texture2D" uid="uid://dnix7wjv7t7w8" path="res://sprites/shop/shop_tileset.png" id="1_nywqb"]
-[ext_resource type="Script" uid="uid://bkqdawys85bvm" path="res://scripts/Item/Crafting/CraftingRecipes.cs" id="2_6idbe"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="3_kxfph"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51x1i"]
@@ -23,9 +22,6 @@ size = Vector2(16, 20)
 script = ExtResource("1_51x1i")
 _offSprite = NodePath("Sprite2DOff")
 _onSprite = NodePath("Sprite2DOn")
-
-[node name="CraftingRecipes" type="Node" parent="."]
-script = ExtResource("2_6idbe")
 
 [node name="Sprite2DOn" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_51x1i")

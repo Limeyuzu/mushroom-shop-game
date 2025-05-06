@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dbgtrq6dsnbid"]
 
 [ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/player/free_character_1-3.png" id="1_cmt6h"]
-[ext_resource type="Script" uid="uid://c7lwn8yf8g78" path="res://scripts/Npc/Npc.cs" id="1_dvu2j"]
+[ext_resource type="Script" uid="uid://c7lwn8yf8g78" path="res://scripts/Interactable/Npc/Npc.cs" id="1_dvu2j"]
 [ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/player/Shadow.png" id="1_kbq3v"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="4_7n8xq"]
 

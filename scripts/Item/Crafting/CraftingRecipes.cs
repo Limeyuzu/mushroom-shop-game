@@ -6,25 +6,26 @@ public partial class CraftingRecipes : Node
 {
     public static CraftingRecipes Instance { get; private set; }
 
+    private const string FILE_PATH = "res://gamedata/CraftingRecipes.json";
+    private Dictionary<string, List<List<string>>> _recipes = [];
+
     public override void _Ready()
     {
         Variant jsonFile;
         try
         {
-            var file = FileAccess.Open("res://CraftingRecipes.json", FileAccess.ModeFlags.Read).GetAsText();
+            var file = FileAccess.Open(FILE_PATH, FileAccess.ModeFlags.Read).GetAsText();
             jsonFile = Json.ParseString(file);
         }
         catch
         {
-            GD.PrintErr("can't find or parse res://CraftingRecipes.json");
+            GD.PrintErr($"can't find or parse {FILE_PATH}");
             throw;
         }
         Deserialise(jsonFile);
 
         Instance = this;
     }
-
-    private Dictionary<string, List<List<string>>> _recipes = [];
 
     public List<Recipe> GetAvailableCrafts(Inventory playerInventory)
     {

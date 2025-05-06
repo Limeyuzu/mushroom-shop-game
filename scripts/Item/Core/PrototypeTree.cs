@@ -4,26 +4,27 @@ using Godot;
 public partial class PrototypeTree : Node
 {
     public static PrototypeTree Instance { get; private set; }
+    public Godot.Collections.Dictionary<string, Prototype> Tree = [];
+
+    private const string FILE_PATH = "res://gamedata/Items.json";
 
     public override void _Ready()
     {
         Variant jsonFile;
         try
         {
-            var file = FileAccess.Open("res://Items.json", FileAccess.ModeFlags.Read).GetAsText();
+            var file = FileAccess.Open(FILE_PATH, FileAccess.ModeFlags.Read).GetAsText();
             jsonFile = Json.ParseString(file);
         }
         catch
         {
-            GD.PrintErr("can't find or parse res://Items.json");
+            GD.PrintErr($"can't find or parse {FILE_PATH}");
             throw;
         }
         Deserialise(jsonFile);
 
         Instance = this;
     }
-
-    public Godot.Collections.Dictionary<string, Prototype> Tree = [];
 
     private void Deserialise(Variant jsonFile)
     {
