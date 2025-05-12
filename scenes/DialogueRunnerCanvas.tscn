@@ -57,6 +57,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_jd2og")
 viewControlPath = NodePath("ViewControl")
+ConvertHTMLToBBCode = true
 useFadeEffect = false
 lineTextPath = NodePath("ViewControl/LineText")
 characterNameText = NodePath("ViewControl/LineText/CharacterNameText")
@@ -101,7 +102,7 @@ theme_override_font_sizes/bold_font_size = 36
 theme_override_styles/focus = ExtResource("3_46gk8")
 theme_override_styles/normal = ExtResource("3_46gk8")
 bbcode_enabled = true
-text = "The dialogue text should appear here!"
+text = "The [color=orange]dialogue[/color] text should appear here!"
 fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
@@ -240,6 +241,7 @@ theme_override_font_sizes/normal_font_size = 36
 theme_override_font_sizes/bold_font_size = 36
 theme_override_styles/focus = ExtResource("3_46gk8")
 theme_override_styles/normal = ExtResource("3_46gk8")
+bbcode_enabled = true
 text = "The last line text goes here"
 scroll_active = false
 

@@ -8,5 +8,14 @@ public partial class Npc : CharacterBody2D, ICharacterInteractable
 
 	[Signal] public delegate void StartDialogueAttemptEventHandler(Npc npc, Node2D interactedBy);
 
+	public override void _Ready()
+	{
+		if (DesiredItemTypesOrNames.Count == 0)
+		{
+			DesiredItemTypesOrNames = GD.Randi() % 2 == 0 ? ["weapon"] : ["potion"];
+		}
+	}
+
+
 	public void Interact(Node2D interactedBy) => EmitSignal(SignalName.StartDialogueAttempt, this, interactedBy);
 }
