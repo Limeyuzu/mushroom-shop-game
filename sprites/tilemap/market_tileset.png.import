@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnix7wjv7t7w8"
-path="res://.godot/imported/shop_tileset.png-01def248f2b6100f08135530d2bffb57.ctex"
+uid="uid://btwksg605ul2n"
+path="res://.godot/imported/market_tileset.png-e42772be33822134a73de44c101576c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/shop/shop_tileset.png"
-dest_files=["res://.godot/imported/shop_tileset.png-01def248f2b6100f08135530d2bffb57.ctex"]
+source_file="res://sprites/tilemap/market_tileset.png"
+dest_files=["res://.godot/imported/market_tileset.png-e42772be33822134a73de44c101576c2.ctex"]
 
 [params]
 

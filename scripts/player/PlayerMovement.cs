@@ -2,19 +2,14 @@ using Godot;
 
 public partial class PlayerMovement : CharacterBody2D
 {
+    [Export] private AnimationPlayer _animationPlayer;
+    [Export] private Player _player;
+
     private float _runSpeedInitial = 100;
     private float _runSpeed = 100;
     private float _runSpeedCap = 400;
     private float _friction = 0.85f;
 
-    private AnimationPlayer _animationPlayer;
-
-    [Export] private Player _player;
-
-    public override void _Ready()
-    {
-        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-    }
 
     public override void _PhysicsProcess(double delta)
     {
@@ -37,7 +32,7 @@ public partial class PlayerMovement : CharacterBody2D
         Velocity = velocity;
     }
 
-    private void UpdateAnimation() 
+    private void UpdateAnimation()
     {
         if (_player.CanMove())
         {
@@ -59,7 +54,7 @@ public partial class PlayerMovement : CharacterBody2D
             }
         }
 
-        if (Velocity.Length() < 10) 
+        if (Velocity.Length() < 10)
         {
             _animationPlayer.Stop();
         }

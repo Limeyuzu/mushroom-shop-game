@@ -3,12 +3,11 @@ using Godot;
 public partial class PlayerPointer : Area2D
 {
     [Export] public Player Player;
-
-    public float DistanceFromPlayer = 15;
+    [Export] public float DistanceFromPlayer = 10;
 
     public override void _Process(double delta) => UpdateFacing();
 
-    private void UpdateFacing() 
+    private void UpdateFacing()
     {
         if (Input.IsActionPressed("ui_right"))
         {

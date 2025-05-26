@@ -87,11 +87,13 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qaxcg"]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_sprite")]
 script = ExtResource("1_3tyk6")
+_sprite = NodePath("CharacterBody2D/Sprite2D")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_player")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_animationPlayer", "_player")]
 script = ExtResource("2_le2lq")
+_animationPlayer = NodePath("AnimationPlayer")
 _player = NodePath("..")
 
 [node name="Shadow" type="Sprite2D" parent="CharacterBody2D"]
@@ -105,7 +107,7 @@ hframes = 3
 vframes = 4
 frame = 1
 region_enabled = true
-region_rect = Rect2(48, 1, 48, 80)
+region_rect = Rect2(48.1, 1, 48, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, 1)
@@ -121,9 +123,8 @@ libraries = {
 }
 
 [node name="InteractionPointer" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("Player")]
-position = Vector2(0, 15)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 0
 script = ExtResource("4_ykpjy")
 Player = NodePath("../..")
 

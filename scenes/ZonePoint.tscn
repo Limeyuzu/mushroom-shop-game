@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0srvjfcxmhgp"]
+
+[ext_resource type="Script" uid="uid://blplmiugp28g3" path="res://scripts/ZonePoint.cs" id="1_3ce2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uy2ug"]
+
+[node name="ZonePoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_3ce2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uy2ug")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="." to="." method="OnAreaExited"]

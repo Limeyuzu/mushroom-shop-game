@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MushroomShop"
-run/main_scene="res://scenes/Shop.tscn"
+run/main_scene="res://scenes/Maps/Shop.tscn"
 config/features=PackedStringArray("4.4", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -37,3 +37,4 @@ enabled=PackedStringArray("res://addons/YarnSpinner-Godot/plugin.cfg")
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.188235, 0.172549, 0.180392, 1)
