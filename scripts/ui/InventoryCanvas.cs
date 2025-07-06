@@ -13,6 +13,14 @@ public partial class InventoryCanvas : Control
 
     public override void _Ready() => Visible = InitiallyVisible;
 
+    public override void _Process(double delta)
+    {
+        if (Visible && Input.IsActionJustPressed("cancel"))
+        {
+            OnNoneSelected();
+        }
+    }
+
     public void OpenInventory(Inventory inventory, Node openInventoryActionRequester)
     {
         SetInventory(inventory);

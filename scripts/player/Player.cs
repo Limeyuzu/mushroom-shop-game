@@ -6,6 +6,8 @@ public partial class Player : Node2D
     [Export] public Inventory Inventory;
     [Export] public Vector2 InitialFacing = Vector2.Down;
 
+    [Signal] public delegate void OpenInventoryRequestedEventHandler(Inventory inventory, Node requester);
+
     [Export] private Sprite2D _sprite;
 
     public bool CanMove() => GlobalState.Instance.PlayerHasControl();
@@ -21,5 +23,13 @@ public partial class Player : Node2D
         };
 
         _sprite.Frame = directionToFrame[InitialFacing];
+    }
+
+    public override void _Process(double delta)
+    {
+        if (Input.IsActionJustPressed("inventory_open"))
+        {
+            EmitSignal(SignalName.OpenInventoryRequested, Inventory, this);
+        }
     }
 }

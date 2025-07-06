@@ -53,7 +53,6 @@ metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ElementalCraftingCanvas" parent="CanvasLayer" instance=ExtResource("9_4li35")]
 InitiallyVisible = false
@@ -64,6 +63,7 @@ InitiallyVisible = false
 [node name="CraftingCanvas" parent="CanvasLayer" instance=ExtResource("11_ov60o")]
 InitiallyVisible = false
 
+[connection signal="OpenInventoryRequested" from="Player" to="CanvasLayer/InventoryCanvas" method="OpenInventory"]
 [connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
 [connection signal="DialogueStarted" from="DialogueRunnerCanvas" to="." method="OnDialogueStarted"]
 [connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="CanvasLayer/InventoryCanvas" method="OpenInventory"]

@@ -75,7 +75,6 @@ DesiredItemTypesOrNames = Array[String]([])
 [node name="DialogueRunnerCanvas" parent="." instance=ExtResource("2_eo1la")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ElementalCraftingCanvas" parent="CanvasLayer" instance=ExtResource("5_toxd1")]
 InitiallyVisible = false
@@ -88,6 +87,7 @@ InitiallyVisible = false
 
 [connection signal="OpenCraftingRequested" from="Map/CraftingTable" to="CanvasLayer/CraftingCanvas" method="OpenCrafting"]
 [connection signal="OpenInventoryRequested" from="Map/Cauldron" to="CanvasLayer/ElementalCraftingCanvas" method="OpenInventory"]
+[connection signal="OpenInventoryRequested" from="Player" to="CanvasLayer/InventoryCanvas" method="OpenInventory"]
 [connection signal="StartDialogueAttempt" from="Npcs/Dude" to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
 [connection signal="StartDialogueAttempt" from="Npcs/Dude2" to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
 [connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
