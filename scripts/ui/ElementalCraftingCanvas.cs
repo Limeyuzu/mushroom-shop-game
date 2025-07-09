@@ -33,6 +33,7 @@ public partial class ElementalCraftingCanvas : Control
         Visible = false;
     }
 
+    // todo: move to Cauldron.cs
     public void OnBrew()
     {
         var brewedItemProto = _cauldronItemList.GetResultPrototype();

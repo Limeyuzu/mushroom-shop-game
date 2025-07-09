@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=4 uid="uid://cekdr32nxf4ml"]
+[gd_scene load_steps=5 format=4 uid="uid://cekdr32nxf4ml"]
 
-[ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_ickf6"]
+[ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_igmp0"]
 [ext_resource type="TileSet" uid="uid://bcfn7geprx6x6" path="res://gamedata/tilemap/Town16x16.tres" id="2_66q70"]
-[ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/ZonePoint.tscn" id="3_7q67j"]
-[ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Player.tscn" id="5_ot3mf"]
-[ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="6_ucdto"]
+[ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/Zoning/ZonePoint.tscn" id="3_7q67j"]
+[ext_resource type="PackedScene" uid="uid://cverrquh2uiie" path="res://scenes/Zoning/SpawnPoint.tscn" id="4_uriv1"]
 
-[node name="Town" type="Node"]
-script = ExtResource("1_ickf6")
+[node name="Town" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
+script = ExtResource("1_igmp0")
+SpawnPoints = [NodePath("Map/SpawnPoint")]
 
 [node name="Map" type="Node2D" parent="."]
 scale = Vector2(4, 4)
@@ -27,20 +27,17 @@ tile_set = ExtResource("2_66q70")
 tile_map_data = PackedByteArray("AAANAAUAAgAAAAIAAAAOAAUAAgABAAIAAAAPAAUAAgABAAIAAAAQAAUAAgABAAIAAAASAAUAAgABAAIAAAATAAUAAgABAAIAAAAUAAUAAgADAAIAAAAVAAUAAgABAAIAAAAWAAUAAgABAAIAAAAXAAUAAgABAAIAAAAYAAUAAgACAAIAAAARAAUAAwAAAAEAAAANAAQAAgAAAAEAAAANAAMAAgAAAAEAAAANAAIAAgAAAAAAAAAOAAIAAgABAAAAAAAPAAIAAgABAAAAAAAQAAIAAgABAAAAAAARAAIAAgABAAAAAAASAAIAAgABAAAAAAATAAIAAgABAAAAAAAUAAIAAgABAAAAAAAVAAIAAgABAAAAAAAWAAIAAgABAAAAAAAXAAIAAgABAAAAAAAYAAIAAgACAAAAAAAYAAMAAgACAAEAAAAYAAQAAgACAAEAAAA=")
 tile_set = ExtResource("2_66q70")
 
-[node name="ZonePoint" parent="Map/Buildings/Wall" instance=ExtResource("3_7q67j")]
-position = Vector2(279.75, 81)
-NextScene = "res://scenes/Maps/Shop.tscn"
-
 [node name="Roof" type="TileMapLayer" parent="Map/Buildings"]
 tile_map_data = PackedByteArray("AAAOAAIAAQABAAEAAAAOAAMAAQABAAIAAAAOAAQAAQABAAMAAAAOAAUAAQABAAQAAAAPAAIAAQABAAEAAAAPAAMAAQABAAIAAAAPAAQAAQABAAMAAAAPAAUAAQABAAQAAAAQAAIAAQABAAEAAAAQAAMAAQABAAIAAAAQAAQAAQABAAMAAAAQAAUAAQABAAQAAAARAAIAAQABAAEAAAARAAMAAQABAAIAAAARAAQAAQABAAMAAAARAAUAAQABAAQAAAASAAIAAQABAAEAAAASAAMAAQABAAIAAAASAAQAAQABAAMAAAASAAUAAQABAAQAAAATAAIAAQABAAEAAAATAAMAAQABAAIAAAATAAQAAQABAAMAAAATAAUAAQABAAQAAAAUAAIAAQABAAEAAAAUAAMAAQABAAIAAAAUAAQAAQABAAMAAAAUAAUAAQABAAQAAAAVAAIAAQABAAEAAAAVAAMAAQABAAIAAAAVAAQAAQABAAMAAAAVAAUAAQABAAQAAAAWAAIAAQABAAEAAAAWAAMAAQAFAAAAAAAWAAQAAQABAAMAAAAWAAUAAQABAAQAAAAXAAIAAQABAAEAAAAXAAMAAQABAAIAAAAXAAQAAQABAAMAAAAXAAUAAQABAAQAAAAOAAEAAQABAAAAAAAPAAEAAQABAAAAAAAQAAEAAQABAAAAAAARAAEAAQABAAAAAAASAAEAAQABAAAAAAATAAEAAQABAAAAAAAUAAEAAQABAAAAAAAVAAEAAQABAAAAAAAWAAEAAQABAAAAAAAXAAEAAQABAAAAAAANAAEAAQAAAAAAAAANAAIAAQAAAAEAAAANAAMAAQAAAAIAAAANAAQAAQAAAAMAAAANAAUAAQAAAAQAAAAYAAEAAQACAAAAAAAYAAIAAQACAAEAAAAYAAMAAQACAAIAAAAYAAQAAQACAAMAAAAYAAUAAQACAAQAAAA=")
 tile_set = ExtResource("2_66q70")
 
-[node name="Player" parent="." node_paths=PackedStringArray("Inventory") instance=ExtResource("5_ot3mf")]
-position = Vector2(1121, 412)
-scale = Vector2(3.5, 3.5)
-Inventory = NodePath("Inventory")
+[node name="ZonePoint" parent="Map" instance=ExtResource("3_7q67j")]
+position = Vector2(279.75, 80.75)
+NextScenePath = "res://scenes/Maps/Shop.tscn"
+DestinationSpawnId = "main-door"
 
-[node name="Inventory" type="Node" parent="Player"]
-script = ExtResource("6_ucdto")
-_itemNames = Array[String](["broken_sword", "health_potion", "earth_stone", "water_stone", "air_stone", "fire_stone", "dark_stone"])
-metadata/_custom_type_script = "uid://d3m6sgicj2cul"
+[node name="SpawnPoint" parent="Map" instance=ExtResource("4_uriv1")]
+position = Vector2(279.75, 106.75)
+SpawnId = "shop"
+
+[connection signal="MapChange" from="Map/ZonePoint" to="." method="OnZonePointEntered"]

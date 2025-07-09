@@ -9,16 +9,15 @@ public partial class CraftingCanvas : Control
     [Export] private CtrlInventory _ingredientsListCtrl;
     [Signal] public delegate void CraftingCanvasOpenedEventHandler();
     [Signal] public delegate void CraftingCanvasClosedEventHandler();
-    [Signal] public delegate void RecipeSelectedEventHandler(Recipe recipe, Node requestingNode);
 
-    private Node _openInventoryActionRequester;
+    private CraftingTable _craftingTableInstance;
     private List<Recipe> _recipes;
 
     public override void _Ready() => Visible = InitiallyVisible;
 
-    public void OpenCrafting(Inventory inventory, Node openInventoryActionRequester)
+    public void OpenCrafting(Inventory inventory, CraftingTable openInventoryActionRequester)
     {
-        _openInventoryActionRequester = openInventoryActionRequester;
+        _craftingTableInstance = openInventoryActionRequester;
 
         _recipes = CraftingRecipes.Instance.GetAvailableCrafts(inventory);
 
@@ -59,10 +58,11 @@ public partial class CraftingCanvas : Control
         // todo: find the actual recipe selected instead of the first option
         var recipe = _recipes.First(r => r.CompletedItem == item);
 
-        EmitSignal(SignalName.CraftingCanvasClosed);
-        EmitSignal(SignalName.RecipeSelected, recipe, _openInventoryActionRequester);
-        _openInventoryActionRequester = null;
-        Visible = false;
+        _craftingTableInstance.OnRecipeSelected(recipe);
         GD.Print($"{nameof(CraftingCanvas)}: selected {recipe.CompletedItem.GetName()}");
+
+        EmitSignal(SignalName.CraftingCanvasClosed);
+        _craftingTableInstance = null;
+        Visible = false;
     }
 }

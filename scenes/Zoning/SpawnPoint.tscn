@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cverrquh2uiie"]
+
+[ext_resource type="Script" uid="uid://cb7cvhsdha7a3" path="res://scripts/Zoning/SpawnPoint.cs" id="1_2epfp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4dgi"]
+
+[node name="SpawnPoint" type="Area2D"]
+monitoring = false
+monitorable = false
+script = ExtResource("1_2epfp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y4dgi")
+debug_color = Color(0.799787, 0.420119, 0.0564267, 0.42)

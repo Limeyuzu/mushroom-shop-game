@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://crm01wmd8iytl"]
 
-[ext_resource type="Script" uid="uid://cv6uw3ucx7nku" path="res://scripts/Interactable/CraftingStation/CraftingTable.cs" id="1_51x1i"]
+[ext_resource type="Script" uid="uid://cv6uw3ucx7nku" path="res://scripts/GameObjects/Crafting/CraftingTable.cs" id="1_51x1i"]
 [ext_resource type="Texture2D" uid="uid://dnix7wjv7t7w8" path="res://sprites/tilemap/shop_tileset.png" id="1_nywqb"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="3_kxfph"]
 

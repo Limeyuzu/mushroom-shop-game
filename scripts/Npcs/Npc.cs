@@ -6,8 +6,6 @@ public partial class Npc : CharacterBody2D, ICharacterInteractable
 	[Export] public string DialogueNode;
 	[Export] public Array<string> DesiredItemTypesOrNames;
 
-	[Signal] public delegate void StartDialogueAttemptEventHandler(Npc npc, Player interactedBy);
-
 	public override void _Ready()
 	{
 		if (DesiredItemTypesOrNames.Count == 0)
@@ -16,5 +14,6 @@ public partial class Npc : CharacterBody2D, ICharacterInteractable
 		}
 	}
 
-	public void Interact(Node2D interactedBy) => EmitSignal(SignalName.StartDialogueAttempt, this, (Player)interactedBy);
+	public void Interact(Node2D interactedBy)
+		=> UICanvas.Instance.StartDialogue(this, (Player)interactedBy);
 }

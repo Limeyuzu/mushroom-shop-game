@@ -20,6 +20,8 @@ InitiallyVisible = false
 [node name="CraftingCanvas" parent="." instance=ExtResource("5_jbqu7")]
 InitiallyVisible = false
 
+[connection signal="OpenCraftingCommand" from="." to="CraftingCanvas" method="OpenCrafting"]
+[connection signal="OpenElementalCraftingCommand" from="." to="ElementalCraftingCanvas" method="OpenInventory"]
 [connection signal="OpenInventoryCommand" from="." to="InventoryCanvas" method="OpenInventory"]
 [connection signal="StartDialogueAttempt" from="." to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
 [connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
@@ -27,10 +29,9 @@ InitiallyVisible = false
 [connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="InventoryCanvas" method="OpenInventory"]
 [connection signal="ElementalCraftingClosed" from="ElementalCraftingCanvas" to="." method="OnElementalCraftingClosed"]
 [connection signal="ElementalCraftingOpened" from="ElementalCraftingCanvas" to="." method="OnElementalCraftingOpened"]
+[connection signal="ItemSelected" from="ElementalCraftingCanvas" to="." method="OnElementalCraftSelected"]
 [connection signal="InventoryClosed" from="InventoryCanvas" to="." method="OnInventoryClosed"]
 [connection signal="InventoryOpened" from="InventoryCanvas" to="." method="OnInventoryOpened"]
-[connection signal="ItemSelected" from="InventoryCanvas" to="." method="OnItemSelected"]
 [connection signal="ItemSelected" from="InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]
 [connection signal="CraftingCanvasClosed" from="CraftingCanvas" to="." method="OnCraftingClosed"]
 [connection signal="CraftingCanvasOpened" from="CraftingCanvas" to="." method="OnCraftingOpened"]
-[connection signal="RecipeSelected" from="CraftingCanvas" to="." method="OnRecipeSelected"]

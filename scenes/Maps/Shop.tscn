@@ -1,18 +1,17 @@
-[gd_scene load_steps=11 format=4 uid="uid://dd3s4nq4pwmvf"]
+[gd_scene load_steps=9 format=4 uid="uid://dd3s4nq4pwmvf"]
 
-[ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_skkvx"]
-[ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/ZonePoint.tscn" id="3_47hci"]
+[ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_5q7qh"]
+[ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/Zoning/ZonePoint.tscn" id="3_47hci"]
 [ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://gamedata/tilemap/Shop32x32.tres" id="4_47hci"]
-[ext_resource type="PackedScene" uid="uid://crm01wmd8iytl" path="res://scenes/CraftingTable.tscn" id="5_hd80v"]
-[ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Player.tscn" id="6_abjrc"]
-[ext_resource type="PackedScene" uid="uid://b6tq2ydjfhwgo" path="res://scenes/ShopStartChair.tscn" id="6_j4pho"]
-[ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/Cauldron.tscn" id="7_eo1la"]
-[ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="7_jccym"]
-[ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Npc.tscn" id="9_a6yfk"]
-[ext_resource type="PackedScene" uid="uid://ck5f6f0halm2g" path="res://scenes/UI/UICanvas.tscn" id="10_pfjd0"]
+[ext_resource type="PackedScene" uid="uid://crm01wmd8iytl" path="res://scenes/GameObjects/Crafting/CraftingTable.tscn" id="5_hd80v"]
+[ext_resource type="PackedScene" uid="uid://cverrquh2uiie" path="res://scenes/Zoning/SpawnPoint.tscn" id="5_l5adj"]
+[ext_resource type="PackedScene" uid="uid://b6tq2ydjfhwgo" path="res://scenes/GameObjects/ShopStartChair.tscn" id="6_j4pho"]
+[ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/GameObjects/Crafting/Cauldron.tscn" id="7_eo1la"]
+[ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Npcs/Npc.tscn" id="9_a6yfk"]
 
-[node name="Shop" type="Node"]
-script = ExtResource("1_skkvx")
+[node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
+script = ExtResource("1_5q7qh")
+SpawnPoints = [NodePath("Map/Zoning/SpawnPoint")]
 
 [node name="Map" type="Node2D" parent="."]
 scale = Vector2(2, 2)
@@ -38,10 +37,6 @@ tile_set = ExtResource("4_47hci")
 tile_map_data = PackedByteArray("AAAMAAcAAQALAA0AAAA=")
 tile_set = ExtResource("4_47hci")
 
-[node name="ZonePoint" parent="Map" instance=ExtResource("3_47hci")]
-position = Vector2(416, 452.5)
-NextScene = "res://scenes/Maps/Town.tscn"
-
 [node name="CraftingTable" parent="Map" instance=ExtResource("5_hd80v")]
 position = Vector2(443.5, 176)
 
@@ -52,19 +47,19 @@ scale = Vector2(0.9, 0.9)
 [node name="ShopStartChair" parent="Map" instance=ExtResource("6_j4pho")]
 position = Vector2(430.5, 223)
 
-[node name="Player" parent="." node_paths=PackedStringArray("Inventory", "UICanvas") instance=ExtResource("6_abjrc")]
-position = Vector2(832, 841)
-scale = Vector2(3.5, 3.5)
-Inventory = NodePath("Inventory")
-UICanvas = NodePath("../UICanvas")
-InitialFacing = Vector2(0, -1)
+[node name="Zoning" type="Node2D" parent="Map"]
 
-[node name="Inventory" type="Node" parent="Player"]
-script = ExtResource("7_jccym")
-_itemNames = Array[String](["broken_sword", "health_potion", "earth_stone", "water_stone", "air_stone", "fire_stone", "dark_stone"])
-metadata/_custom_type_script = "uid://d3m6sgicj2cul"
+[node name="ZonePoint" parent="Map/Zoning" instance=ExtResource("3_47hci")]
+position = Vector2(416, 453)
+scale = Vector2(4, 1)
+NextScenePath = "res://scenes/Maps/Town.tscn"
+DestinationSpawnId = "shop"
 
-[node name="Npcs" type="Node" parent="."]
+[node name="SpawnPoint" parent="Map/Zoning" instance=ExtResource("5_l5adj")]
+position = Vector2(416, 432)
+SpawnId = "main-door"
+
+[node name="Npcs" type="Node2D" parent="."]
 
 [node name="Dude" parent="Npcs" instance=ExtResource("9_a6yfk")]
 position = Vector2(732, 718)
@@ -78,9 +73,4 @@ scale = Vector2(3.5, 3.5)
 DialogueNode = "Start"
 DesiredItemTypesOrNames = Array[String]([])
 
-[node name="UICanvas" parent="." instance=ExtResource("10_pfjd0")]
-
-[connection signal="OpenInventoryRequested" from="Player" to="UICanvas" method="OpenInventory"]
-[connection signal="StartDialogueAttempt" from="Npcs/Dude" to="UICanvas" method="StartDialogue"]
-[connection signal="StartDialogueAttempt" from="Npcs/Dude2" to="UICanvas" method="StartDialogue"]
-[connection signal="CraftingRecipeSelected" from="UICanvas" to="Map/CraftingTable" method="OnRecipeSelected"]
+[connection signal="MapChange" from="Map/Zoning/ZonePoint" to="." method="OnZonePointEntered"]

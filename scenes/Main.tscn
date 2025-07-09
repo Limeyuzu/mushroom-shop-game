@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwgfgorbsy4qp"]
+
+[ext_resource type="PackedScene" uid="uid://ck5f6f0halm2g" path="res://scenes/UI/UICanvas.tscn" id="1_0bbpv"]
+[ext_resource type="Script" uid="uid://nvhb140d4id6" path="res://scripts/Zoning/MapLoader.cs" id="2_rarhs"]
+[ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Player.tscn" id="2_vcsgt"]
+[ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="3_c01mt"]
+
+[node name="Main" type="Node"]
+
+[node name="UICanvas" parent="." instance=ExtResource("1_0bbpv")]
+
+[node name="MapLoader" type="Node2D" parent="." node_paths=PackedStringArray("_player")]
+script = ExtResource("2_rarhs")
+_initialScenePath = "res://scenes/Maps/Shop.tscn"
+_initialSpawnLocationId = "main-door"
+_player = NodePath("../Player")
+
+[node name="Player" parent="." node_paths=PackedStringArray("Inventory", "UICanvas") instance=ExtResource("2_vcsgt")]
+position = Vector2(833, 840)
+scale = Vector2(3.5, 3.5)
+Inventory = NodePath("Inventory")
+UICanvas = NodePath("../UICanvas")
+InitialFacing = Vector2(0, -1)
+
+[node name="Inventory" type="Node" parent="Player"]
+script = ExtResource("3_c01mt")
+_itemNames = Array[String](["broken_sword", "health_potion", "earth_stone", "water_stone", "air_stone", "fire_stone", "dark_stone"])
+metadata/_custom_type_script = "uid://d3m6sgicj2cul"
+
+[connection signal="OpenInventoryRequested" from="Player" to="UICanvas" method="OpenInventory"]

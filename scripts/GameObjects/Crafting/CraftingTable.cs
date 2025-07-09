@@ -8,26 +8,21 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
     [Export] private CanvasItem _onSprite;
     [Export] public float CraftingTimeSeconds = 1f;
 
-    [Signal] public delegate void OpenCraftingRequestedEventHandler(Inventory inventory, Node requester);
-
     private bool _craftComplete;
     private InventoryItem _itemToCraft;
     private Inventory _playerInventory;
 
     public void Interact(Node2D interactedBy)
     {
-        if (interactedBy is PlayerInteractionPointer playerPointer)
+        if (interactedBy is Player player)
         {
-            _playerInventory = playerPointer.Player.Inventory;
-            EmitSignal(SignalName.OpenCraftingRequested, playerPointer.Player.Inventory, this);
+            _playerInventory = player.Inventory;
+            UICanvas.Instance.OpenCrafting(player.Inventory, this);
         }
     }
 
-    public async void OnRecipeSelected(Recipe recipe, Node requester)
+    public async void OnRecipeSelected(Recipe recipe)
     {
-        if (requester != this)
-            return;
-
         await StartCrafting(recipe);
     }
 

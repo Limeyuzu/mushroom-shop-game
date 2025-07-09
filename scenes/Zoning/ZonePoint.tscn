@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0srvjfcxmhgp"]
 
-[ext_resource type="Script" uid="uid://blplmiugp28g3" path="res://scripts/ZonePoint.cs" id="1_3ce2m"]
+[ext_resource type="Script" uid="uid://blplmiugp28g3" path="res://scripts/Zoning/ZonePoint.cs" id="1_3ce2m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uy2ug"]
 
@@ -11,6 +11,7 @@ script = ExtResource("1_3ce2m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_uy2ug")
+debug_color = Color(0.846746, 0.000968006, 0.907656, 0.42)
 
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MushroomShop"
-run/main_scene="res://scenes/Maps/Shop.tscn"
+run/main_scene="uid://bwgfgorbsy4qp"
 config/features=PackedStringArray("4.4", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PrototypeTree="*res://scripts/Item/Core/PrototypeTree.cs"
 GlobalState="*res://scripts/GlobalState.cs"
 CraftingRecipes="*res://scripts/Item/Crafting/CraftingRecipes.cs"
+UiCanvas="*res://scripts/UI/UICanvas.cs"
 
 [display]
 

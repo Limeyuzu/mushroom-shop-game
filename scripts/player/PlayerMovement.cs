@@ -10,6 +10,7 @@ public partial class PlayerMovement : CharacterBody2D
     private float _runSpeedCap = 400;
     private float _friction = 0.85f;
 
+    public void OnResetVelocity() => Velocity = Vector2.Zero;
 
     public override void _PhysicsProcess(double delta)
     {

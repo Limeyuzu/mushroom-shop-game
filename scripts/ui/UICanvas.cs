@@ -2,16 +2,20 @@ using Godot;
 
 public partial class UICanvas : CanvasLayer
 {
+    public static UICanvas Instance { get; private set; }
+
     public bool IsUIOpen { get => _isDialogueRunning || _isElementalCraftingOpen || _isInventoryOpen || _isCraftingOpen; }
     private bool _isDialogueRunning = false;
     private bool _isElementalCraftingOpen = false;
     private bool _isInventoryOpen = false;
     private bool _isCraftingOpen = false;
 
-    [Signal] public delegate void StartDialogueAttemptEventHandler(Npc npc, Player interactedBy);
     [Signal] public delegate void OpenInventoryCommandEventHandler(Inventory inventory, Node openInventoryActionRequester);
-    [Signal] public delegate void ItemSelectedEventHandler(InventoryItem item, Node requestingNode);
-    [Signal] public delegate void CraftingRecipeSelectedEventHandler(Recipe recipe, Node requestingNode);
+    [Signal] public delegate void OpenCraftingCommandEventHandler(Inventory inventory, CraftingTable openInventoryActionRequester);
+    [Signal] public delegate void OpenElementalCraftingCommandEventHandler(Inventory inventory, Cauldron openInventoryActionRequester);
+    [Signal] public delegate void StartDialogueAttemptEventHandler(Npc npc, Player interactedBy);
+
+    public override void _Ready() => Instance = this;
 
     public void StartDialogue(Npc npc, Player interactedBy)
     {
@@ -21,14 +25,14 @@ public partial class UICanvas : CanvasLayer
         }
     }
 
-    public void OnItemSelected(InventoryItem item, Node requestingNode)
-        => EmitSignal(SignalName.ItemSelected, item, requestingNode);
-
-    public void OnRecipeSelected(Recipe recipe, Node requestingNode)
-        => EmitSignal(SignalName.CraftingRecipeSelected, recipe, requestingNode);
-
     public void OpenInventory(Inventory inventory, Node openInventoryActionRequester)
         => EmitSignal(SignalName.OpenInventoryCommand, inventory, openInventoryActionRequester);
+
+    public void OpenCrafting(Inventory inventory, CraftingTable requester)
+        => EmitSignal(SignalName.OpenCraftingCommand, inventory, requester);
+
+    public void OpenElementalCrafting(Inventory inventory, Cauldron requester)
+        => EmitSignal(SignalName.OpenElementalCraftingCommand, inventory, requester);
 
     public void OnDialogueStarted() => _isDialogueRunning = true;
     public void OnDialogueCompleted() => _isDialogueRunning = false;

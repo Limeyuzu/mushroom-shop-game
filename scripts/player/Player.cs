@@ -8,6 +8,7 @@ public partial class Player : Node2D
     [Export] public Vector2 InitialFacing = Vector2.Down;
 
     [Signal] public delegate void OpenInventoryRequestedEventHandler(Inventory inventory, Node requester);
+    [Signal] public delegate void ResetVelocityEventHandler();
 
     [Export] private Sprite2D _sprite;
 
@@ -33,4 +34,6 @@ public partial class Player : Node2D
             EmitSignal(SignalName.OpenInventoryRequested, Inventory, this);
         }
     }
+
+    public void OnMapChange() => EmitSignal(SignalName.ResetVelocity);
 }
