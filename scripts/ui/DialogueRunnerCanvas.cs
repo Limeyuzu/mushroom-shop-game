@@ -5,25 +5,22 @@ public partial class DialogueRunnerCanvas : Control
 {
     [Export] public DialogueRunner DialogueRunner;
 
-    [Signal] public delegate void DialogueStartedEventHandler(Npc dialogueNpc);
+    [Signal] public delegate void DialogueStartedEventHandler();
     [Signal] public delegate void DialogueCompletedEventHandler();
     [Signal] public delegate void OpenInventoryRequestedEventHandler(Inventory inventory, Node requester);
 
     private Player _player;
     private Npc _currentDialogueNpc;
 
-    public void OnInteractionStartAttempt(Npc dialogueNpc, Node2D interactedBy)
+    public void OnInteractionStartAttempt(Npc dialogueNpc, Player player)
     {
-        if (GlobalState.Instance.PlayerHasControl() && interactedBy is PlayerPointer playerPointer)
-        {
-            DialogueRunner.VariableStorage.SetValue("$desiredItem", GetNpcDesiredItem(dialogueNpc));
-            DialogueRunner.StartDialogue(dialogueNpc.DialogueNode);
+        DialogueRunner.VariableStorage.SetValue("$desiredItem", GetNpcDesiredItem(dialogueNpc));
+        DialogueRunner.StartDialogue(dialogueNpc.DialogueNode);
 
-            EmitSignal(SignalName.DialogueStarted, dialogueNpc);
-            _player = playerPointer.Player;
-            _currentDialogueNpc = dialogueNpc;
-            GD.Print($"{nameof(DialogueRunnerCanvas)}: interaction started by {_player.GetName()}");
-        }
+        EmitSignal(SignalName.DialogueStarted);
+        _player = player;
+        _currentDialogueNpc = dialogueNpc;
+        GD.Print($"{nameof(DialogueRunnerCanvas)}: interaction started by {_player.GetName()}");
     }
 
     public void OnDialogueComplete() => EmitSignal(SignalName.DialogueCompleted);
@@ -39,7 +36,7 @@ public partial class DialogueRunnerCanvas : Control
         DialogueRunner.VariableStorage.SetValue("$selectedItem", item.GetName());
         DialogueRunner.VariableStorage.SetValue("$isDesired", IsDesiredItem(_currentDialogueNpc, item));
         DialogueRunner.StartDialogue("ShowItem");
-        EmitSignal(SignalName.DialogueStarted, _currentDialogueNpc);
+        EmitSignal(SignalName.DialogueStarted);
     }
 
     private string GetNpcDesiredItem(Npc npc)

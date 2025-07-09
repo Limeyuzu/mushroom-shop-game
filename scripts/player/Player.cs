@@ -4,13 +4,14 @@ using Godot;
 public partial class Player : Node2D
 {
     [Export] public Inventory Inventory;
+    [Export] public UICanvas UICanvas;
     [Export] public Vector2 InitialFacing = Vector2.Down;
 
     [Signal] public delegate void OpenInventoryRequestedEventHandler(Inventory inventory, Node requester);
 
     [Export] private Sprite2D _sprite;
 
-    public bool CanMove() => GlobalState.Instance.PlayerHasControl();
+    public bool CanMove() => !UICanvas.IsUIOpen;
 
     public override void _Ready()
     {

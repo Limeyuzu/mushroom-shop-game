@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class PlayerPointer : Area2D
+public partial class PlayerInteractionPointer : Area2D
 {
     [Export] public Player Player;
     [Export] public float DistanceFromPlayer = 10;

@@ -8,9 +8,12 @@ public partial class CharacterInteractionArea : Area2D
 
     public override void _Process(double delta)
     {
-        if (_currentAreaInside != null && Input.IsActionJustPressed("ui_accept") && _subject is ICharacterInteractable interactable)
+        if (_currentAreaInside != null
+            && _currentAreaInside is PlayerInteractionPointer playerPointer
+            && Input.IsActionJustPressed("ui_accept")
+            && _subject is ICharacterInteractable interactable)
         {
-            interactable.Interact(_currentAreaInside);
+            interactable.Interact(playerPointer.Player);
         }
     }
 

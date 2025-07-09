@@ -6,7 +6,7 @@ public partial class Cauldron : StaticBody2D, ICharacterInteractable
 
     public void Interact(Node2D interactedBy)
     {
-        if (interactedBy is PlayerPointer playerPointer)
+        if (interactedBy is PlayerInteractionPointer playerPointer)
         {
             EmitSignal(SignalName.OpenInventoryRequested, playerPointer.Player.Inventory, this);
         }

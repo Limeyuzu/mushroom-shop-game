@@ -6,8 +6,8 @@ public partial class ElementalCraftingCanvas : Control
     [Export] public bool InitiallyVisible = true;
     [Export] private CtrlInventory _ctrlInventory;
     [Export] private CauldronItemList _cauldronItemList;
-    [Signal] public delegate void InventoryOpenedEventHandler();
-    [Signal] public delegate void InventoryClosedEventHandler();
+    [Signal] public delegate void ElementalCraftingOpenedEventHandler();
+    [Signal] public delegate void ElementalCraftingClosedEventHandler();
     [Signal] public delegate void ItemSelectedEventHandler(InventoryItem item, Node requestingNode);
 
     private Node _openInventoryActionRequester;
@@ -21,13 +21,13 @@ public partial class ElementalCraftingCanvas : Control
         SetCtrlInventory(inventory);
         _openInventoryActionRequester = openInventoryActionRequester;
         Visible = true;
-        EmitSignal(SignalName.InventoryOpened);
+        EmitSignal(SignalName.ElementalCraftingOpened);
         GD.Print($"{nameof(ElementalCraftingCanvas)}: opened by {openInventoryActionRequester.GetName()}");
     }
 
     public void OnNoneSelected()
     {
-        EmitSignal(SignalName.InventoryClosed);
+        EmitSignal(SignalName.ElementalCraftingClosed);
         _cauldronItemList.RemoveAll();
         _ctrlInventory.Revert();
         Visible = false;
@@ -41,7 +41,7 @@ public partial class ElementalCraftingCanvas : Control
         var consumedItems = _cauldronItemList.GetItems();
         var brewedItem = ItemDB.GetItem(brewedItemProto);
 
-        EmitSignal(SignalName.InventoryClosed);
+        EmitSignal(SignalName.ElementalCraftingClosed);
         EmitSignal(SignalName.ItemSelected, brewedItem, _openInventoryActionRequester);
 
         _inventory.RemoveAll(consumedItems.Contains);

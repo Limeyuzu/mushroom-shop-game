@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://ck5f6f0halm2g"]
+
+[ext_resource type="Script" uid="uid://cxfellsuwxktx" path="res://scripts/UI/UICanvas.cs" id="1_mmoom"]
+[ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/UI/DialogueRunnerCanvas.tscn" id="2_biu0c"]
+[ext_resource type="PackedScene" uid="uid://ci8crkaf4md6q" path="res://scenes/UI/ElementalCraftingCanvas.tscn" id="3_crwjp"]
+[ext_resource type="PackedScene" uid="uid://bnxviigjbiyye" path="res://scenes/UI/InventoryCanvas.tscn" id="4_848ib"]
+[ext_resource type="PackedScene" uid="uid://b1m2tbaljawp1" path="res://scenes/UI/CraftingCanvas.tscn" id="5_jbqu7"]
+
+[node name="UICanvas" type="CanvasLayer"]
+script = ExtResource("1_mmoom")
+
+[node name="DialogueRunnerCanvas" parent="." instance=ExtResource("2_biu0c")]
+
+[node name="ElementalCraftingCanvas" parent="." instance=ExtResource("3_crwjp")]
+InitiallyVisible = false
+
+[node name="InventoryCanvas" parent="." instance=ExtResource("4_848ib")]
+InitiallyVisible = false
+
+[node name="CraftingCanvas" parent="." instance=ExtResource("5_jbqu7")]
+InitiallyVisible = false
+
+[connection signal="OpenInventoryCommand" from="." to="InventoryCanvas" method="OpenInventory"]
+[connection signal="StartDialogueAttempt" from="." to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
+[connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
+[connection signal="DialogueStarted" from="DialogueRunnerCanvas" to="." method="OnDialogueStarted"]
+[connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="InventoryCanvas" method="OpenInventory"]
+[connection signal="ElementalCraftingClosed" from="ElementalCraftingCanvas" to="." method="OnElementalCraftingClosed"]
+[connection signal="ElementalCraftingOpened" from="ElementalCraftingCanvas" to="." method="OnElementalCraftingOpened"]
+[connection signal="InventoryClosed" from="InventoryCanvas" to="." method="OnInventoryClosed"]
+[connection signal="InventoryOpened" from="InventoryCanvas" to="." method="OnInventoryOpened"]
+[connection signal="ItemSelected" from="InventoryCanvas" to="." method="OnItemSelected"]
+[connection signal="ItemSelected" from="InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]
+[connection signal="CraftingCanvasClosed" from="CraftingCanvas" to="." method="OnCraftingClosed"]
+[connection signal="CraftingCanvasOpened" from="CraftingCanvas" to="." method="OnCraftingOpened"]
+[connection signal="RecipeSelected" from="CraftingCanvas" to="." method="OnRecipeSelected"]

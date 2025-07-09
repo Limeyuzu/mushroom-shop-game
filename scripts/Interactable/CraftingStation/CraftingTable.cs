@@ -16,7 +16,7 @@ public partial class CraftingTable : StaticBody2D, ICharacterInteractable
 
     public void Interact(Node2D interactedBy)
     {
-        if (interactedBy is PlayerPointer playerPointer)
+        if (interactedBy is PlayerInteractionPointer playerPointer)
         {
             _playerInventory = playerPointer.Player.Inventory;
             EmitSignal(SignalName.OpenCraftingRequested, playerPointer.Player.Inventory, this);
