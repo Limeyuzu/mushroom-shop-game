@@ -26,12 +26,18 @@ modulate_color = Color(0.356863, 0.529412, 0.501961, 1)
 texture = ExtResource("4_e01r3")
 modulate_color = Color(0.529412, 0.788235, 0.764706, 1)
 
-[node name="DialogueCanvas" type="CanvasLayer" node_paths=PackedStringArray("DialogueRunner")]
+[node name="DialogueCanvas" type="Control" node_paths=PackedStringArray("DialogueRunner")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_5r7vc")
 DialogueRunner = NodePath("DialogueRunner")
 
 [node name="DialogueRunner" type="Control" parent="." node_paths=PackedStringArray("variableStorage", "dialogueViews", "lineProvider")]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,7 +55,7 @@ lineProvider = NodePath("../TextLineProvider")
 [node name="VariableDebugText" type="RichTextLabel" parent="."]
 
 [node name="LineView" type="Control" parent="." node_paths=PackedStringArray("characterNameText", "continueButton")]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -177,7 +183,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("4_utoye")
 
 [node name="OptionsListView" type="Control" parent="." node_paths=PackedStringArray("lastLineCharacterNameText", "lastLineText", "viewControl", "boxContainer")]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -307,4 +313,3 @@ script = ExtResource("5_88l4y")
 script = ExtResource("6_5v3f4")
 
 [connection signal="onDialogueComplete" from="DialogueRunner" to="." method="OnDialogueComplete"]
-[connection signal="onDialogueStart" from="DialogueRunner" to="." method="OnDialogueStart"]

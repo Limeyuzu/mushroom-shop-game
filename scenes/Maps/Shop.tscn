@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dd3s4nq4pwmvf"]
+[gd_scene load_steps=14 format=4 uid="uid://dd3s4nq4pwmvf"]
 
 [ext_resource type="Script" uid="uid://bft50ergnbc1y" path="res://scripts/GlobalState.cs" id="1_skkvx"]
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/DialogueRunnerCanvas.tscn" id="2_eo1la"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://crm01wmd8iytl" path="res://scenes/CraftingTable.tscn" id="5_hd80v"]
 [ext_resource type="PackedScene" uid="uid://ci8crkaf4md6q" path="res://scenes/ElementalCraftingCanvas.tscn" id="5_toxd1"]
 [ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Player.tscn" id="6_abjrc"]
+[ext_resource type="PackedScene" uid="uid://b6tq2ydjfhwgo" path="res://scenes/ShopStartChair.tscn" id="6_j4pho"]
 [ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/Cauldron.tscn" id="7_eo1la"]
 [ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="7_jccym"]
 [ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Npc.tscn" id="9_a6yfk"]
@@ -33,7 +34,11 @@ tile_map_data = PackedByteArray("AAACAAQAAAACAAsAAAADAAQAAAACAAsAAAAEAAQAAAACAAs
 tile_set = ExtResource("4_47hci")
 
 [node name="Objects" type="TileMapLayer" parent="Map"]
-tile_map_data = PackedByteArray("AAAIAAoAAAAMAAQAAAAIAAsAAAAMAAUAAAAIAAwAAAAMAAYAAAAJAAoAAAANAAQAAAAJAAsAAAANAAUAAAAJAAwAAAANAAYAAAAKAAoAAAAOAAQAAAAKAAsAAAAOAAUAAAAKAAwAAAAOAAYAAAADAAgAAAAMAAQAAAADAAkAAAAMAAUAAAADAAoAAAAMAAYAAAAEAAgAAAANAAQAAAAEAAkAAAANAAUAAAAEAAoAAAANAAYAAAAFAAgAAAAOAAQAAAAFAAkAAAAOAAUAAAAFAAoAAAAOAAYAAAAYAAcAAAAbAAMAAAAYAAgAAAAbAAQAAAAYAAkAAAAbAAUAAAAZAAcAAAAcAAMAAAAZAAgAAAAcAAQAAAAZAAkAAAAcAAUAAAAaAAcAAAAdAAMAAAAaAAgAAAAdAAQAAAAaAAkAAAAdAAUAAAAaAAsAAAANAAwAAAAaAAwAAAANAA0AAAAbAAsAAAAUAAIAAAAbAAwAAAAUAAIAAAAbAAcAAAANAAoAAAANAAMAAAAPAAoAAAAMAAMAAAAPAAoAAAARAAMAAAANAAoAAAAOAAMAAAAMAAoAAAATAAgAAAAZAA8AAAASAAgAAAAZAA4AAAARAAgAAAAZAA4AAAAQAAgAAAAZAA4AAAAPAAgAAAAZAA4AAAAOAAgAAAAZAA4AAAANAAgAAAAZAA4AAAAMAAgAAAAaAA8AAAAMAAYAAAAbAA4AAAAMAAUAAAAYAA4AAAAKAAYAAAAQAAsAAAAKAAcAAAAQAAwAAAATAAcAAAARAA4AAAATAAYAAAARAA0AAAACAAkAAAAPAAYAAAALAAsAAAAPAAgAAAAHAAsAAAAPAAYAAAAEAAsAAAAIAAcAAAADAAsAAAAIAAcAAAAVAAcAAAALAAoAAAAVAAgAAAALAAsAAAAIAAYAAAAVAAcAAAAIAAcAAAAVAAgAAAAJAAYAAAAWAAcAAAAJAAcAAAAWAAgAAAA=")
+tile_map_data = PackedByteArray("AAAIAAoAAAAMAAQAAAAIAAsAAAAMAAUAAAAIAAwAAAAMAAYAAAAJAAoAAAANAAQAAAAJAAsAAAANAAUAAAAJAAwAAAANAAYAAAAKAAoAAAAOAAQAAAAKAAsAAAAOAAUAAAAKAAwAAAAOAAYAAAADAAgAAAAMAAQAAAADAAkAAAAMAAUAAAADAAoAAAAMAAYAAAAEAAgAAAANAAQAAAAEAAkAAAANAAUAAAAEAAoAAAANAAYAAAAFAAgAAAAOAAQAAAAFAAkAAAAOAAUAAAAFAAoAAAAOAAYAAAAYAAcAAAAbAAMAAAAYAAgAAAAbAAQAAAAYAAkAAAAbAAUAAAAZAAcAAAAcAAMAAAAZAAgAAAAcAAQAAAAZAAkAAAAcAAUAAAAaAAcAAAAdAAMAAAAaAAgAAAAdAAQAAAAaAAkAAAAdAAUAAAAaAAsAAAANAAwAAAAaAAwAAAANAA0AAAAbAAsAAAAUAAIAAAAbAAwAAAAUAAIAAAAbAAcAAAANAAoAAAANAAMAAAAPAAoAAAAMAAMAAAAPAAoAAAARAAMAAAANAAoAAAAOAAMAAAAMAAoAAAATAAgAAAAZAA8AAAASAAgAAAAaAA8AAAAPAAgAAAAZAA4AAAAOAAgAAAAZAA4AAAANAAgAAAAZAA4AAAAMAAgAAAAYAA8AAAAMAAYAAAAaAA4AAAAMAAUAAAAYAA4AAAAKAAYAAAAQAAsAAAAKAAcAAAAQAAwAAAATAAcAAAARAA4AAAATAAYAAAARAA0AAAACAAkAAAAPAAYAAAALAAsAAAAPAAgAAAAHAAsAAAAPAAYAAAAEAAsAAAAIAAcAAAADAAsAAAAIAAcAAAAVAAcAAAALAAoAAAAVAAgAAAALAAsAAAAIAAYAAAAVAAcAAAAIAAcAAAAVAAgAAAAJAAYAAAAWAAcAAAAJAAcAAAAWAAgAAAAQAAgAAAAZAA8AAAAMAAcAAAAaAA4AAAA=")
+tile_set = ExtResource("4_47hci")
+
+[node name="Tabletop" type="TileMapLayer" parent="Map/Objects"]
+tile_map_data = PackedByteArray("AAAMAAcAAQALAA0AAAA=")
 tile_set = ExtResource("4_47hci")
 
 [node name="ZonePoint" parent="Map" instance=ExtResource("3_47hci")]
@@ -46,6 +51,9 @@ position = Vector2(443.5, 176)
 [node name="Cauldron" parent="Map" instance=ExtResource("7_eo1la")]
 position = Vector2(483.5, 169)
 scale = Vector2(0.9, 0.9)
+
+[node name="ShopStartChair" parent="Map" instance=ExtResource("6_j4pho")]
+position = Vector2(430.5, 223)
 
 [node name="Player" parent="." node_paths=PackedStringArray("Inventory") instance=ExtResource("6_abjrc")]
 position = Vector2(832, 841)
@@ -72,33 +80,33 @@ scale = Vector2(3.5, 3.5)
 DialogueNode = "Start"
 DesiredItemTypesOrNames = Array[String]([])
 
-[node name="DialogueRunnerCanvas" parent="." instance=ExtResource("2_eo1la")]
+[node name="UICanvas" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="DialogueRunnerCanvas" parent="UICanvas" instance=ExtResource("2_eo1la")]
 
-[node name="ElementalCraftingCanvas" parent="CanvasLayer" instance=ExtResource("5_toxd1")]
+[node name="ElementalCraftingCanvas" parent="UICanvas" instance=ExtResource("5_toxd1")]
 InitiallyVisible = false
 
-[node name="InventoryCanvas" parent="CanvasLayer" instance=ExtResource("3_toxd1")]
+[node name="InventoryCanvas" parent="UICanvas" instance=ExtResource("3_toxd1")]
 InitiallyVisible = false
 
-[node name="CraftingCanvas" parent="CanvasLayer" instance=ExtResource("11_toxd1")]
+[node name="CraftingCanvas" parent="UICanvas" instance=ExtResource("11_toxd1")]
 InitiallyVisible = false
 
-[connection signal="OpenCraftingRequested" from="Map/CraftingTable" to="CanvasLayer/CraftingCanvas" method="OpenCrafting"]
-[connection signal="OpenInventoryRequested" from="Map/Cauldron" to="CanvasLayer/ElementalCraftingCanvas" method="OpenInventory"]
-[connection signal="OpenInventoryRequested" from="Player" to="CanvasLayer/InventoryCanvas" method="OpenInventory"]
-[connection signal="StartDialogueAttempt" from="Npcs/Dude" to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
-[connection signal="StartDialogueAttempt" from="Npcs/Dude2" to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
-[connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
-[connection signal="DialogueStarted" from="DialogueRunnerCanvas" to="." method="OnDialogueStarted"]
-[connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="CanvasLayer/InventoryCanvas" method="OpenInventory"]
-[connection signal="InventoryClosed" from="CanvasLayer/ElementalCraftingCanvas" to="." method="OnMenuClosed"]
-[connection signal="InventoryOpened" from="CanvasLayer/ElementalCraftingCanvas" to="." method="OnMenuOpened"]
-[connection signal="InventoryClosed" from="CanvasLayer/InventoryCanvas" to="." method="OnMenuClosed"]
-[connection signal="InventoryOpened" from="CanvasLayer/InventoryCanvas" to="." method="OnMenuOpened"]
-[connection signal="ItemSelected" from="CanvasLayer/InventoryCanvas" to="Map/CraftingTable" method="OnItemSelected"]
-[connection signal="ItemSelected" from="CanvasLayer/InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]
-[connection signal="CraftingCanvasClosed" from="CanvasLayer/CraftingCanvas" to="." method="OnMenuClosed"]
-[connection signal="CraftingCanvasOpened" from="CanvasLayer/CraftingCanvas" to="." method="OnMenuOpened"]
-[connection signal="RecipeSelected" from="CanvasLayer/CraftingCanvas" to="Map/CraftingTable" method="OnRecipeSelected"]
+[connection signal="OpenCraftingRequested" from="Map/CraftingTable" to="UICanvas/CraftingCanvas" method="OpenCrafting"]
+[connection signal="OpenInventoryRequested" from="Map/Cauldron" to="UICanvas/ElementalCraftingCanvas" method="OpenInventory"]
+[connection signal="OpenInventoryRequested" from="Player" to="UICanvas/InventoryCanvas" method="OpenInventory"]
+[connection signal="StartDialogueAttempt" from="Npcs/Dude" to="UICanvas/DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
+[connection signal="StartDialogueAttempt" from="Npcs/Dude2" to="UICanvas/DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
+[connection signal="DialogueCompleted" from="UICanvas/DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
+[connection signal="DialogueStarted" from="UICanvas/DialogueRunnerCanvas" to="." method="OnDialogueStarted"]
+[connection signal="OpenInventoryRequested" from="UICanvas/DialogueRunnerCanvas" to="UICanvas/InventoryCanvas" method="OpenInventory"]
+[connection signal="InventoryClosed" from="UICanvas/ElementalCraftingCanvas" to="." method="OnMenuClosed"]
+[connection signal="InventoryOpened" from="UICanvas/ElementalCraftingCanvas" to="." method="OnMenuOpened"]
+[connection signal="InventoryClosed" from="UICanvas/InventoryCanvas" to="." method="OnMenuClosed"]
+[connection signal="InventoryOpened" from="UICanvas/InventoryCanvas" to="." method="OnMenuOpened"]
+[connection signal="ItemSelected" from="UICanvas/InventoryCanvas" to="Map/CraftingTable" method="OnItemSelected"]
+[connection signal="ItemSelected" from="UICanvas/InventoryCanvas" to="UICanvas/DialogueRunnerCanvas" method="OnItemSelected"]
+[connection signal="CraftingCanvasClosed" from="UICanvas/CraftingCanvas" to="." method="OnMenuClosed"]
+[connection signal="CraftingCanvasOpened" from="UICanvas/CraftingCanvas" to="." method="OnMenuOpened"]
+[connection signal="RecipeSelected" from="UICanvas/CraftingCanvas" to="Map/CraftingTable" method="OnRecipeSelected"]

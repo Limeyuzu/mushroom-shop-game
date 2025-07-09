@@ -5,7 +5,13 @@ public partial class PlayerPointer : Area2D
     [Export] public Player Player;
     [Export] public float DistanceFromPlayer = 10;
 
-    public override void _Process(double delta) => UpdateFacing();
+    public override void _Process(double delta)
+    {
+        if (Player.CanMove())
+        {
+            UpdateFacing();
+        }
+    }
 
     private void UpdateFacing()
     {

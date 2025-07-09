@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6tq2ydjfhwgo"]
+
+[ext_resource type="Texture2D" uid="uid://dnix7wjv7t7w8" path="res://sprites/tilemap/shop_tileset.png" id="1_514ax"]
+[ext_resource type="Script" uid="uid://dbx0sgk13c501" path="res://scripts/Interactable/ShopStartChair.cs" id="1_txtif"]
+[ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="3_j58m5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yupu2"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v72l3"]
+size = Vector2(24, 29)
+
+[node name="ShopStartChair" type="StaticBody2D"]
+script = ExtResource("1_txtif")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_514ax")
+centered = false
+region_enabled = true
+region_rect = Rect2(480, 224, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_yupu2")
+
+[node name="InteractionArea" type="Area2D" parent="." node_paths=PackedStringArray("_subject")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_j58m5")
+_subject = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(16, 14.5)
+shape = SubResource("RectangleShape2D_v72l3")
+debug_color = Color(0.323463, 0.605189, 0.441858, 0.42)
+
+[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="OnAreaEntered"]
+[connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="OnAreaExited"]
