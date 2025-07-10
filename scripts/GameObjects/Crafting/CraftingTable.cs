@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 public partial class CraftingTable : StaticBody2D, ICharacterInteractable
 {
-    [Export] private CanvasItem _offSprite;
-    [Export] private CanvasItem _onSprite;
-    [Export] public float CraftingTimeSeconds = 1f;
+    [Export] private Sprite2D _offSprite;
+    [Export] private Sprite2D _onSprite;
+    [Export] public float CraftingTimeSeconds = 5f;
 
     private bool _craftComplete;
     private InventoryItem _itemToCraft;

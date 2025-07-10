@@ -8,50 +8,39 @@ public partial class ElementalCraftingCanvas : Control
     [Export] private CauldronItemList _cauldronItemList;
     [Signal] public delegate void ElementalCraftingOpenedEventHandler();
     [Signal] public delegate void ElementalCraftingClosedEventHandler();
-    [Signal] public delegate void ItemSelectedEventHandler(InventoryItem item, Node requestingNode);
 
-    private Node _openInventoryActionRequester;
-    private Inventory _inventory;
+    private Cauldron _requestingNode;
     private readonly Predicate<InventoryItem> _viewFilter = i => i.IsTypeOf("ingredient");
 
     public override void _Ready() => Visible = InitiallyVisible;
 
-    public void OpenInventory(Inventory inventory, Node openInventoryActionRequester)
+    public void OpenInventory(Inventory inventory, Cauldron requestingNode)
     {
         SetCtrlInventory(inventory);
-        _openInventoryActionRequester = openInventoryActionRequester;
+        _requestingNode = requestingNode;
         Visible = true;
         EmitSignal(SignalName.ElementalCraftingOpened);
-        GD.Print($"{nameof(ElementalCraftingCanvas)}: opened by {openInventoryActionRequester.GetName()}");
     }
 
     public void OnNoneSelected()
     {
         EmitSignal(SignalName.ElementalCraftingClosed);
         _cauldronItemList.RemoveAll();
-        _ctrlInventory.Revert();
         Visible = false;
     }
 
-    // todo: move to Cauldron.cs
-    public void OnBrew()
+    public void OnBrewSelected()
     {
         var brewedItemProto = _cauldronItemList.GetResultPrototype();
         if (brewedItemProto == null) return;
 
-        var consumedItems = _cauldronItemList.GetItems();
-        var brewedItem = ItemDB.GetItem(brewedItemProto);
-
         EmitSignal(SignalName.ElementalCraftingClosed);
-        EmitSignal(SignalName.ItemSelected, brewedItem, _openInventoryActionRequester);
 
-        _inventory.RemoveAll(consumedItems.Contains);
+        _requestingNode.OnBrewSelected(_cauldronItemList.GetItems());
+
         _cauldronItemList.RemoveAll();
-        _inventory.Add(brewedItem);
-
-        _openInventoryActionRequester = null;
+        _requestingNode = null;
         Visible = false;
-        GD.Print($"{nameof(ElementalCraftingCanvas)}: brewing {brewedItem.GetName()}");
     }
 
     private void SetCtrlInventory(Inventory inventory)
@@ -60,6 +49,5 @@ public partial class ElementalCraftingCanvas : Control
         {
             _ctrlInventory.SetInventory(inventory, _viewFilter);
         }
-        _inventory = inventory;
     }
 }

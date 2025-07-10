@@ -29,7 +29,6 @@ InitiallyVisible = false
 [connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="InventoryCanvas" method="OpenInventory"]
 [connection signal="ElementalCraftingClosed" from="ElementalCraftingCanvas" to="." method="OnElementalCraftingClosed"]
 [connection signal="ElementalCraftingOpened" from="ElementalCraftingCanvas" to="." method="OnElementalCraftingOpened"]
-[connection signal="ItemSelected" from="ElementalCraftingCanvas" to="." method="OnElementalCraftSelected"]
 [connection signal="InventoryClosed" from="InventoryCanvas" to="." method="OnInventoryClosed"]
 [connection signal="InventoryOpened" from="InventoryCanvas" to="." method="OnInventoryOpened"]
 [connection signal="ItemSelected" from="InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]

@@ -8,10 +8,6 @@
 atlas = ExtResource("4_wamsx")
 region = Rect2(288, 192, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k1lyg"]
-atlas = ExtResource("4_wamsx")
-region = Rect2(0, 192, 48, 48)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_oe12o"]
 atlas = ExtResource("4_wamsx")
 region = Rect2(48, 192, 48, 48)
@@ -56,13 +52,14 @@ region = Rect2(48, 336, 48, 48)
 atlas = ExtResource("4_wamsx")
 region = Rect2(96, 336, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1lyg"]
+atlas = ExtResource("4_wamsx")
+region = Rect2(0, 192, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_503sp"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k1lyg")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oe12o")
 }, {
@@ -95,6 +92,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_iexsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1lyg")
 }],
 "loop": true,
 "name": &"default",
@@ -107,8 +107,10 @@ size = Vector2(21.1111, 20.6667)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ofvbw"]
 size = Vector2(31.1111, 28.8889)
 
-[node name="Cauldron" type="StaticBody2D"]
+[node name="Cauldron" type="StaticBody2D" node_paths=PackedStringArray("_offSprite", "_onSprite")]
 script = ExtResource("1_quaa6")
+_offSprite = NodePath("OffSprite")
+_onSprite = NodePath("OnSprite")
 
 [node name="OffSprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_x74j4")
@@ -117,6 +119,8 @@ texture = SubResource("AtlasTexture_x74j4")
 visible = false
 sprite_frames = SubResource("SpriteFrames_503sp")
 autoplay = "default"
+frame = 7
+frame_progress = 0.727551
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.555556, 6.33333)

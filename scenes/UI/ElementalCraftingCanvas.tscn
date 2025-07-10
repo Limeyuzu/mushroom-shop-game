@@ -143,7 +143,7 @@ _cauldronItemList = NodePath("../CauldronItem")
 
 [connection signal="OnItemSelected" from="Control/CtrlInventory" to="Control/CauldronPanel/CauldronItem" method="AddItem"]
 [connection signal="item_activated" from="Control/CtrlInventory" to="Control/CtrlInventory" method="EmitSelectedInventoryItem"]
-[connection signal="pressed" from="Control/Buttons/SelectButton" to="." method="OnBrew"]
+[connection signal="pressed" from="Control/Buttons/SelectButton" to="." method="OnBrewSelected"]
 [connection signal="pressed" from="Control/Buttons/CancelButton" to="." method="OnNoneSelected"]
 [connection signal="IsUnstableUpdated" from="Control/CauldronPanel/CauldronItem" to="Control/Buttons/SelectButton" method="set_disabled"]
 [connection signal="ItemAdded" from="Control/CauldronPanel/CauldronItem" to="Control/CtrlInventory" method="RemoveItemFromDisplay"]
