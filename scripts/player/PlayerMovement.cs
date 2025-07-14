@@ -7,7 +7,7 @@ public partial class PlayerMovement : CharacterBody2D
 
     private float _runSpeedInitial = 100;
     private float _runSpeed = 100;
-    private float _runSpeedCap = 400;
+    private float _runSpeedCap = 350;
     private float _friction = 0.85f;
 
     public void OnResetVelocity() => Velocity = Vector2.Zero;

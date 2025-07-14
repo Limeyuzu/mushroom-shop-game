@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7i7naijq8d1a"
-path="res://.godot/imported/Shadow.png-5d07e44f2c6a1f4fa79c824918a5e2b3.ctex"
+uid="uid://dby6fs8n45gk2"
+path="res://.godot/imported/Female 08-1.png-763245959709cd8a73f12485896dffa5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player/Shadow.png"
-dest_files=["res://.godot/imported/Shadow.png-5d07e44f2c6a1f4fa79c824918a5e2b3.ctex"]
+source_file="res://sprites/characters/Female/Female 08-1.png"
+dest_files=["res://.godot/imported/Female 08-1.png-763245959709cd8a73f12485896dffa5.ctex"]
 
 [params]
 

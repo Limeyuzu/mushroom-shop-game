@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwe2ea0cyoiay"
-path="res://.godot/imported/free_character_1-3.png-df138f6a11c1510926a5aed11e6d1d1b.ctex"
+uid="uid://msnps5kyygpq"
+path="res://.godot/imported/Female 18-4.png-60fe97303cef3a5e1ea95c535c04838f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player/free_character_1-3.png"
-dest_files=["res://.godot/imported/free_character_1-3.png-df138f6a11c1510926a5aed11e6d1d1b.ctex"]
+source_file="res://sprites/characters/Female/Female 18-4.png"
+dest_files=["res://.godot/imported/Female 18-4.png-60fe97303cef3a5e1ea95c535c04838f.ctex"]
 
 [params]
 

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c7equtv3u3uhr" path="res://scripts/Player/Player.cs" id="1_3tyk6"]
 [ext_resource type="Script" uid="uid://doooffy2e14ms" path="res://scripts/Player/PlayerMovement.cs" id="2_le2lq"]
-[ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/player/free_character_1-3.png" id="2_x1oss"]
-[ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/player/Shadow.png" id="3_tecgu"]
+[ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/characters/free_character_1-3.png" id="2_x1oss"]
+[ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/characters/Shadow.png" id="3_tecgu"]
 [ext_resource type="Script" uid="uid://cwgwhhj2hodyd" path="res://scripts/Player/PlayerInteractionPointer.cs" id="4_ykpjy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x770g"]
@@ -107,7 +107,7 @@ hframes = 3
 vframes = 4
 frame = 1
 region_enabled = true
-region_rect = Rect2(48.1, 1, 48, 80)
+region_rect = Rect2(48, 1, 48, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, 1)
