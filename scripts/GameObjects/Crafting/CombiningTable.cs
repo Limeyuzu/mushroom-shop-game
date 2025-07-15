@@ -1,14 +1,13 @@
-using System.Collections.Generic;
 using Godot;
 
-public partial class Cauldron : CraftingTableBase
+public partial class CombiningTable : CraftingTableBase
 {
     [Export] private Sprite2D _offSprite;
-    [Export] private AnimatedSprite2D _onSprite;
+    [Export] private Sprite2D _onSprite;
     [Export] public float CraftingTimeSeconds = 5f;
 
     public override void OpenCraftingMenu(Inventory playerInventory)
-        => UICanvas.Instance.OpenElementalCrafting(playerInventory, this);
+        => UICanvas.Instance.OpenCrafting(playerInventory, this);
 
     public override void ToggleCraftingTableSprite()
     {
@@ -18,9 +17,9 @@ public partial class Cauldron : CraftingTableBase
 
     public override float GetCraftingTime() => CraftingTimeSeconds;
 
-    public async void OnBrewSelected(List<InventoryItem> ingredients)
+    public async void OnRecipeSelected(Recipe recipe)
     {
-        SetItemToCraft(ingredients, ItemDB.GetItem(PotionBrewing.GetClosestPotion(ingredients)));
+        SetItemToCraft(recipe.Ingredients, recipe.CompletedItem);
         await StartCrafting();
     }
 }

@@ -24,7 +24,7 @@ InitialFacing = Vector2(0, -1)
 
 [node name="Inventory" type="Node" parent="Player"]
 script = ExtResource("3_c01mt")
-_itemNames = Array[String](["broken_sword", "health_potion", "earth_stone", "water_stone", "air_stone", "fire_stone", "dark_stone"])
+_itemNames = Array[String](["broken_sword", "earth_stone", "earth_stone", "fire_stone", "fire_stone", "water_stone", "water_stone"])
 metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
 [connection signal="OpenInventoryRequested" from="Player" to="UICanvas" method="OpenInventory"]

@@ -105,7 +105,7 @@ animations = [{
 size = Vector2(21.1111, 20.6667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ofvbw"]
-size = Vector2(31.1111, 28.8889)
+size = Vector2(31, 26)
 
 [node name="Cauldron" type="StaticBody2D" node_paths=PackedStringArray("_offSprite", "_onSprite")]
 script = ExtResource("1_quaa6")
@@ -133,7 +133,7 @@ script = ExtResource("5_ir52o")
 _subject = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(0, 7.77778)
+position = Vector2(0.5, 8)
 shape = SubResource("RectangleShape2D_ofvbw")
 debug_color = Color(0.323463, 0.605189, 0.441858, 0.42)
 

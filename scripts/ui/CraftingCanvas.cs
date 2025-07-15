@@ -10,12 +10,12 @@ public partial class CraftingCanvas : Control
     [Signal] public delegate void CraftingCanvasOpenedEventHandler();
     [Signal] public delegate void CraftingCanvasClosedEventHandler();
 
-    private CraftingTable _craftingTableInstance;
+    private CombiningTable _craftingTableInstance;
     private List<Recipe> _recipes;
 
     public override void _Ready() => Visible = InitiallyVisible;
 
-    public void OpenCrafting(Inventory inventory, CraftingTable openInventoryActionRequester)
+    public void OpenCrafting(Inventory inventory, CombiningTable openInventoryActionRequester)
     {
         _craftingTableInstance = openInventoryActionRequester;
 

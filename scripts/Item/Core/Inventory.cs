@@ -58,7 +58,7 @@ public partial class Inventory : Node
 
     public void Add(InventoryItem item) => Items.Add(item);
     public void Remove(InventoryItem item) => Items.Remove(item);
-    public void RemoveAll(List<InventoryItem> items) => Items = [.. Items.Except(items)];
+    public void Remove(List<InventoryItem> removeList) => removeList.ForEach(r => Items.Remove(r));
     public void RemoveAll(Predicate<InventoryItem> condition) => Items.RemoveAll(condition);
     public bool Contains(InventoryItem item) => Items.Contains(item);
     public bool Contains(List<string> itemIds) => !itemIds.Except(Items.Select(i => i.GetID())).Any();

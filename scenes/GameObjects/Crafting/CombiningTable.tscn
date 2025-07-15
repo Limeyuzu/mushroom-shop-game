@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://crm01wmd8iytl"]
 
-[ext_resource type="Script" uid="uid://cv6uw3ucx7nku" path="res://scripts/GameObjects/Crafting/CraftingTable.cs" id="1_51x1i"]
+[ext_resource type="Script" uid="uid://cv6uw3ucx7nku" path="res://scripts/GameObjects/Crafting/CombiningTable.cs" id="1_51x1i"]
 [ext_resource type="Texture2D" uid="uid://dnix7wjv7t7w8" path="res://sprites/tilemap/shop_tileset.png" id="1_nywqb"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="3_kxfph"]
 
@@ -16,14 +16,15 @@ region = Rect2(160, 416, 32, 32)
 size = Vector2(12, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ofvbw"]
-size = Vector2(16, 20)
+size = Vector2(24, 26)
 
-[node name="CraftingTable" type="StaticBody2D" node_paths=PackedStringArray("_offSprite", "_onSprite")]
+[node name="CombiningTable" type="StaticBody2D" node_paths=PackedStringArray("_offSprite", "_onSprite")]
 script = ExtResource("1_51x1i")
 _offSprite = NodePath("Sprite2DOff")
 _onSprite = NodePath("Sprite2DOn")
 
 [node name="Sprite2DOn" type="Sprite2D" parent="."]
+visible = false
 texture = SubResource("AtlasTexture_51x1i")
 
 [node name="Sprite2DOff" type="Sprite2D" parent="."]
@@ -40,7 +41,7 @@ script = ExtResource("3_kxfph")
 _subject = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(0, 1)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_ofvbw")
 debug_color = Color(0.323463, 0.605189, 0.441858, 0.42)
 
