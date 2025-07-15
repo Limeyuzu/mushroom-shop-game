@@ -1,153 +1,162 @@
-[gd_scene load_steps=7 format=3 uid="uid://ci8crkaf4md6q"]
+[gd_scene load_steps=8 format=3 uid="uid://ci8crkaf4md6q"]
 
 [ext_resource type="Script" uid="uid://bwomtccjybo1i" path="res://scripts/UI/ElementalCraftingCanvas.cs" id="1_n7b2y"]
 [ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_n7b2y"]
+[ext_resource type="Texture2D" uid="uid://dyhmawls3l4n" path="res://sprites/item/potions/fa265.png" id="2_qo23w"]
 [ext_resource type="Script" uid="uid://cvolvwegxwcod" path="res://scripts/UI/Cauldron/CauldronItemList.cs" id="3_0gwlk"]
 [ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="3_12fbo"]
 [ext_resource type="Script" uid="uid://bc7sxsv2okpjx" path="res://scripts/UI/Cauldron/CauldronAttributesText.cs" id="4_ne1n5"]
 [ext_resource type="Script" uid="uid://2l7lenprops1" path="res://scripts/UI/Cauldron/CauldronStabilityText.cs" id="5_0n5oa"]
 
-[node name="ElementalCraftingCanvas" type="Control" node_paths=PackedStringArray("_ctrlInventory", "_cauldronItemList")]
-layout_mode = 3
+[node name="ElementalCraftingCanvas" type="CenterContainer" node_paths=PackedStringArray("_ctrlInventory", "_cauldronItemList")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n7b2y")
-_ctrlInventory = NodePath("Control/CtrlInventory")
-_cauldronItemList = NodePath("Control/CauldronPanel/CauldronItem")
+_ctrlInventory = NodePath("Control/Control/CtrlInventory")
+_cauldronItemList = NodePath("Control/Control/CauldronPanel/CauldronItem")
 
 [node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2.5, 2.5)
+layout_mode = 2
 
-[node name="CtrlInventory" type="ItemList" parent="Control" node_paths=PackedStringArray("_originalInventory")]
+[node name="Control" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -244.0
-offset_top = -69.0
-offset_right = 61.0
-offset_bottom = 83.0
+offset_left = -600.0
+offset_top = -300.0
+offset_right = 600.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CtrlInventory" type="ItemList" parent="Control/Control" node_paths=PackedStringArray("_originalInventory")]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 1
+offset_right = 600.0
+offset_bottom = 500.0
+theme_override_font_sizes/font_size = 36
+item_count = 1
+icon_scale = 4.0
+item_0/text = "Item Name"
+item_0/icon = ExtResource("2_qo23w")
 script = ExtResource("2_n7b2y")
 _originalInventory = NodePath("TestInventory")
 metadata/_custom_type_script = "uid://ixvd2uv580t8"
 
-[node name="TestInventory" type="Node" parent="Control/CtrlInventory"]
+[node name="TestInventory" type="Node" parent="Control/Control/CtrlInventory"]
 script = ExtResource("3_12fbo")
 _itemNames = Array[String](["earth_stone", "water_stone", "air_stone", "fire_stone"])
 metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
-[node name="Buttons" type="Panel" parent="Control"]
+[node name="CauldronPanel" type="Panel" parent="Control/Control"]
+custom_minimum_size = Vector2(600, 500)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -244.0
-offset_top = 83.0
-offset_right = 252.0
-offset_bottom = 119.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 600.0
+offset_right = 1200.0
+offset_bottom = 500.0
 
-[node name="SelectButton" type="Button" parent="Control/Buttons"]
+[node name="CauldronItem" type="ItemList" parent="Control/Control/CauldronPanel"]
+custom_minimum_size = Vector2(420, 380)
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -62.0
-offset_top = -34.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 0
-grow_vertical = 0
-disabled = true
-text = "Brew"
-
-[node name="CancelButton" type="Button" parent="Control/Buttons"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -123.0
-offset_top = -34.0
-offset_right = -63.0
-offset_bottom = -2.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Cancel"
-
-[node name="CauldronPanel" type="Panel" parent="Control"]
-layout_mode = 0
-offset_left = 61.0
-offset_top = -69.0
-offset_right = 252.0
-offset_bottom = 83.0
-
-[node name="CauldronItem" type="ItemList" parent="Control/CauldronPanel"]
-layout_mode = 1
-offset_right = 120.0
-offset_bottom = 116.0
+offset_right = 420.0
+offset_bottom = 380.0
+theme_override_font_sizes/font_size = 36
 allow_search = false
-max_columns = 3
+max_columns = 0
 same_column_width = true
-icon_scale = 2.0
+icon_scale = 6.0
 script = ExtResource("3_0gwlk")
 
-[node name="CauldronAttributesText" type="RichTextLabel" parent="Control/CauldronPanel" node_paths=PackedStringArray("_cauldronItemList")]
+[node name="CauldronAttributesText" type="RichTextLabel" parent="Control/Control/CauldronPanel" node_paths=PackedStringArray("_cauldronItemList")]
+custom_minimum_size = Vector2(180, 380)
 layout_mode = 0
-offset_left = 120.0
-offset_right = 207.0
-offset_bottom = 144.0
-scale = Vector2(0.8, 0.8)
+offset_left = 420.0
+offset_right = 601.0
+offset_bottom = 380.0
+theme_override_font_sizes/normal_font_size = 36
 text = "E: 0
 W: 0
 A: 0
 F: 0
 D: 0"
+scroll_active = false
 horizontal_alignment = 1
-vertical_alignment = 1
 script = ExtResource("4_ne1n5")
 _cauldronItemList = NodePath("../CauldronItem")
 
-[node name="CauldronStabilityText" type="RichTextLabel" parent="Control/CauldronPanel" node_paths=PackedStringArray("_cauldronItemList")]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 121.0
-offset_right = 188.0
-offset_bottom = 149.0
+[node name="CauldronStabilityText" type="RichTextLabel" parent="Control/Control/CauldronPanel" node_paths=PackedStringArray("_cauldronItemList")]
+custom_minimum_size = Vector2(560, 120)
+layout_mode = 1
+offset_left = 20.0
+offset_top = 380.0
+offset_right = 580.0
+offset_bottom = 500.0
+theme_override_font_sizes/bold_italics_font_size = 36
+theme_override_font_sizes/italics_font_size = 36
+theme_override_font_sizes/mono_font_size = 36
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
 bbcode_enabled = true
-text = "[img]res://sprites/item/potions/fa265.png[/img] Stability: [color=#60a060]blah[/color]"
+text = "[img=64x64]res://sprites/item/potions/fa265.png[/img] Longlongitem name 	Stability: [color=#60a060]blah[/color]"
 vertical_alignment = 1
 script = ExtResource("5_0n5oa")
 _cauldronItemList = NodePath("../CauldronItem")
 
-[connection signal="OnItemSelected" from="Control/CtrlInventory" to="Control/CauldronPanel/CauldronItem" method="AddItem"]
-[connection signal="item_activated" from="Control/CtrlInventory" to="Control/CtrlInventory" method="EmitSelectedInventoryItem"]
-[connection signal="pressed" from="Control/Buttons/SelectButton" to="." method="OnBrewSelected"]
-[connection signal="pressed" from="Control/Buttons/CancelButton" to="." method="OnNoneSelected"]
-[connection signal="IsUnstableUpdated" from="Control/CauldronPanel/CauldronItem" to="Control/Buttons/SelectButton" method="set_disabled"]
-[connection signal="ItemAdded" from="Control/CauldronPanel/CauldronItem" to="Control/CtrlInventory" method="RemoveItemFromDisplay"]
-[connection signal="ItemListUpdated" from="Control/CauldronPanel/CauldronItem" to="Control/CauldronPanel/CauldronAttributesText" method="OnCauldronUpdated"]
-[connection signal="ItemListUpdated" from="Control/CauldronPanel/CauldronItem" to="Control/CauldronPanel/CauldronStabilityText" method="OnCauldronUpdated"]
-[connection signal="ItemRemoved" from="Control/CauldronPanel/CauldronItem" to="Control/CtrlInventory" method="AddItemToDisplay"]
-[connection signal="item_activated" from="Control/CauldronPanel/CauldronItem" to="Control/CauldronPanel/CauldronItem" method="Remove"]
+[node name="Buttons" type="Panel" parent="Control/Control"]
+custom_minimum_size = Vector2(1200, 100)
+layout_mode = 1
+offset_top = 500.0
+offset_right = 1200.0
+offset_bottom = 600.0
+
+[node name="SelectButton" type="Button" parent="Control/Control/Buttons"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -26.0
+offset_right = -17.0
+offset_bottom = 34.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+disabled = true
+text = "Brew"
+
+[node name="CancelButton" type="Button" parent="Control/Control/Buttons"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -317.0
+offset_top = -26.0
+offset_right = -167.0
+offset_bottom = 34.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Cancel"
+
+[connection signal="OnItemSelected" from="Control/Control/CtrlInventory" to="Control/Control/CauldronPanel/CauldronItem" method="AddItem"]
+[connection signal="item_activated" from="Control/Control/CtrlInventory" to="Control/Control/CtrlInventory" method="EmitSelectedInventoryItem"]
+[connection signal="IsUnstableUpdated" from="Control/Control/CauldronPanel/CauldronItem" to="Control/Control/Buttons/SelectButton" method="set_disabled"]
+[connection signal="ItemAdded" from="Control/Control/CauldronPanel/CauldronItem" to="Control/Control/CtrlInventory" method="RemoveItemFromDisplay"]
+[connection signal="ItemListUpdated" from="Control/Control/CauldronPanel/CauldronItem" to="Control/Control/CauldronPanel/CauldronAttributesText" method="OnCauldronUpdated"]
+[connection signal="ItemListUpdated" from="Control/Control/CauldronPanel/CauldronItem" to="Control/Control/CauldronPanel/CauldronStabilityText" method="OnCauldronUpdated"]
+[connection signal="ItemRemoved" from="Control/Control/CauldronPanel/CauldronItem" to="Control/Control/CtrlInventory" method="AddItemToDisplay"]
+[connection signal="item_activated" from="Control/Control/CauldronPanel/CauldronItem" to="Control/Control/CauldronPanel/CauldronItem" method="Remove"]
+[connection signal="pressed" from="Control/Control/Buttons/SelectButton" to="." method="OnBrewSelected"]
+[connection signal="pressed" from="Control/Control/Buttons/CancelButton" to="." method="OnNoneSelected"]

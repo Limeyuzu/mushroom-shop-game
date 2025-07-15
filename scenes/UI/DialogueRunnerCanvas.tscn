@@ -53,6 +53,7 @@ startAutomatically = false
 lineProvider = NodePath("../TextLineProvider")
 
 [node name="VariableDebugText" type="RichTextLabel" parent="."]
+layout_mode = 0
 
 [node name="LineView" type="Control" parent="." node_paths=PackedStringArray("characterNameText", "continueButton")]
 layout_mode = 1

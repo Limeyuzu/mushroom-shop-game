@@ -27,20 +27,21 @@ public partial class CraftingRecipes : Node
         Instance = this;
     }
 
-    public List<Recipe> GetAvailableCrafts(Inventory playerInventory)
+    public List<Recipe> GetAvailableCrafts(List<InventoryItem> ingredients)
     {
         var craftables = new List<Recipe>();
         foreach (var item in _recipes)
         {
             var recipes = item.Value;
-            foreach (var recipeItems in recipes)
+            foreach (var recipeItemKeys in recipes)
             {
-                if (playerInventory.Contains(recipeItems))
+                var recipeItems = recipeItemKeys.Select(ItemDB.GetItem).ToList();
+                if (!recipeItems.Except(ingredients).Any()) // are all items in recipe in ingredients 
                 {
                     var recipeModel = new Recipe
                     {
                         CompletedItem = ItemDB.GetItem(item.Key),
-                        Ingredients = [.. recipeItems.Select(ItemDB.GetItem)]
+                        Ingredients = recipeItems
                     };
                     craftables.Add(recipeModel);
                 }
