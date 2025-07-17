@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ck5f6f0halm2g" path="res://scenes/UI/UICanvas.tscn" id="1_0bbpv"]
 [ext_resource type="Script" uid="uid://nvhb140d4id6" path="res://scripts/Zoning/MapLoader.cs" id="2_rarhs"]
-[ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Player.tscn" id="2_vcsgt"]
+[ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Characters/Player.tscn" id="2_vcsgt"]
 [ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="3_c01mt"]
 
 [node name="Main" type="Node"]
@@ -27,4 +27,4 @@ script = ExtResource("3_c01mt")
 _itemNames = Array[String](["broken_sword", "earth_stone", "earth_stone", "fire_stone", "fire_stone", "water_stone", "water_stone"])
 metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
-[connection signal="OpenInventoryRequested" from="Player" to="UICanvas" method="OpenInventory"]
+[connection signal="ToggleInventoryWindowRequested" from="Player" to="UICanvas" method="ToggleInventoryWindow"]

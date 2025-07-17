@@ -7,7 +7,7 @@ public partial class Player : Node2D
     [Export] public UICanvas UICanvas;
     [Export] public Vector2 InitialFacing = Vector2.Down;
 
-    [Signal] public delegate void OpenInventoryRequestedEventHandler(Inventory inventory, Node requester);
+    [Signal] public delegate void ToggleInventoryWindowRequestedEventHandler(Inventory inventory, Node requester);
     [Signal] public delegate void ResetVelocityEventHandler();
 
     [Export] private Sprite2D _sprite;
@@ -31,7 +31,7 @@ public partial class Player : Node2D
     {
         if (Input.IsActionJustPressed("inventory_open"))
         {
-            EmitSignal(SignalName.OpenInventoryRequested, Inventory, this);
+            EmitSignal(SignalName.ToggleInventoryWindowRequested, Inventory, this);
         }
     }
 

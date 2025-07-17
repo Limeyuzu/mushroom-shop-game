@@ -1,75 +1,107 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnxviigjbiyye"]
+[gd_scene load_steps=5 format=3 uid="uid://bnxviigjbiyye"]
 
 [ext_resource type="Script" uid="uid://c0uhihwyym5e0" path="res://scripts/UI/InventoryCanvas.cs" id="1_4d5hs"]
 [ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_4mbv4"]
+[ext_resource type="Texture2D" uid="uid://dyhmawls3l4n" path="res://sprites/item/potions/fa265.png" id="2_b402m"]
+[ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="3_tac3j"]
 
-[node name="InventoryCanvas" type="Control" node_paths=PackedStringArray("_ctrlInventory")]
-layout_mode = 3
+[node name="InventoryCanvas" type="CenterContainer" node_paths=PackedStringArray("_ctrlInventory", "_buttonPanel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4d5hs")
-_ctrlInventory = NodePath("Control/CtrlInventory")
+_ctrlInventory = NodePath("Control/Control/CtrlInventory")
+_buttonPanel = NodePath("Control/Control/ButtonPanel")
 
 [node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2.5, 2.5)
+layout_mode = 2
 
-[node name="CtrlInventory" type="ItemList" parent="Control"]
+[node name="Control" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -152.5
-offset_top = -58.0
-offset_right = 152.5
-offset_bottom = 58.0
+offset_left = -600.0
+offset_top = -300.0
+offset_right = 600.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CtrlInventory" type="ItemList" parent="Control/Control" node_paths=PackedStringArray("_originalInventory")]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_right = 400.0
+offset_bottom = 500.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+item_count = 1
+icon_scale = 4.0
+item_0/text = "Item Name"
+item_0/icon = ExtResource("2_b402m")
 script = ExtResource("2_4mbv4")
+_originalInventory = NodePath("TestInventory")
 metadata/_custom_type_script = "uid://ixvd2uv580t8"
 
-[node name="Panel" type="Panel" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -152.0
-offset_top = 58.0
-offset_right = 153.0
-offset_bottom = 94.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TestInventory" type="Node" parent="Control/Control/CtrlInventory"]
+script = ExtResource("3_tac3j")
+_itemNames = Array[String](["earth_stone", "water_stone", "air_stone", "fire_stone"])
+metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
-[node name="CancelButton" type="Button" parent="Control/Panel"]
-layout_mode = 0
-offset_left = 182.0
-offset_top = 2.0
-offset_right = 242.0
-offset_bottom = 34.0
+[node name="ButtonPanel" type="Panel" parent="Control/Control"]
+custom_minimum_size = Vector2(800, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 500.0
+offset_right = 400.0
+offset_bottom = 600.0
+grow_horizontal = 2
+
+[node name="CancelButton" type="Button" parent="Control/Control/ButtonPanel"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -30.0
+offset_right = -178.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
 text = "Cancel"
 
-[node name="SelectButton" type="Button" parent="Control/Panel"]
-layout_mode = 0
-offset_left = 243.0
-offset_top = 2.0
-offset_right = 303.0
-offset_bottom = 34.0
+[node name="SelectButton" type="Button" parent="Control/Control/ButtonPanel"]
+custom_minimum_size = Vector2(150, 60)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -30.0
+offset_right = -16.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
 text = "Select"
 
-[connection signal="OnItemSelected" from="Control/CtrlInventory" to="." method="OnItemSelected"]
-[connection signal="pressed" from="Control/Panel/CancelButton" to="." method="OnNoneSelected"]
-[connection signal="pressed" from="Control/Panel/SelectButton" to="Control/CtrlInventory" method="EmitSelectedInventoryItem"]
+[connection signal="OnItemSelected" from="Control/Control/CtrlInventory" to="." method="OnItemSelected"]
+[connection signal="pressed" from="Control/Control/ButtonPanel/CancelButton" to="." method="OnNoneSelected"]
+[connection signal="pressed" from="Control/Control/ButtonPanel/SelectButton" to="Control/Control/CtrlInventory" method="EmitSelectedInventoryItem"]

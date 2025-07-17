@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cverrquh2uiie" path="res://scenes/Zoning/SpawnPoint.tscn" id="5_l5adj"]
 [ext_resource type="PackedScene" uid="uid://b6tq2ydjfhwgo" path="res://scenes/GameObjects/ShopStartChair.tscn" id="6_j4pho"]
 [ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/GameObjects/Crafting/Cauldron.tscn" id="7_eo1la"]
-[ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Npcs/Npc.tscn" id="9_a6yfk"]
+[ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Characters/Npc.tscn" id="9_a6yfk"]
 
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")

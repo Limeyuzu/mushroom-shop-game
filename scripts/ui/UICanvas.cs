@@ -11,6 +11,7 @@ public partial class UICanvas : CanvasLayer
     private bool _isCraftingOpen = false;
 
     [Signal] public delegate void OpenInventoryCommandEventHandler(Inventory inventory, Node openInventoryActionRequester);
+    [Signal] public delegate void CloseInventoryCommandEventHandler(Node openInventoryActionRequester);
     [Signal] public delegate void OpenCraftingCommandEventHandler(Inventory inventory, CombiningTable openInventoryActionRequester);
     [Signal] public delegate void OpenElementalCraftingCommandEventHandler(Inventory inventory, Cauldron openInventoryActionRequester);
     [Signal] public delegate void StartDialogueAttemptEventHandler(Npc npc, Player interactedBy);
@@ -27,6 +28,17 @@ public partial class UICanvas : CanvasLayer
 
     public void OpenInventory(Inventory inventory, Node openInventoryActionRequester)
         => EmitSignal(SignalName.OpenInventoryCommand, inventory, openInventoryActionRequester);
+    public void ToggleInventoryWindow(Inventory inventory, Node openInventoryActionRequester)
+    {
+        if (_isInventoryOpen)
+        {
+            EmitSignal(SignalName.CloseInventoryCommand, openInventoryActionRequester);
+        }
+        else
+        {
+            EmitSignal(SignalName.OpenInventoryCommand, inventory, openInventoryActionRequester);
+        }
+    }
 
     public void OpenCrafting(Inventory inventory, CombiningTable requester)
         => EmitSignal(SignalName.OpenCraftingCommand, inventory, requester);

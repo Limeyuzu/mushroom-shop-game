@@ -26,6 +26,8 @@ public partial class CauldronStabilityText : RichTextLabel
         };
 
         var potion = ItemDB.GetItem(potionName);
-        Text = $"[img=64x64]{potion.GetImagePath()}[/img] {potion.GetName()} \nStability: [color={colours[stability]}]{stability}[/color]";
+        var itemText = $"[img=64x64]{potion.GetImagePath()}[/img] {potion.GetName()} ";
+        var firstLine = stability == Stability.Uncraftable ? string.Empty : itemText;
+        Text = $"{firstLine}\nStability: [color={colours[stability]}]{stability}[/color]";
     }
 }

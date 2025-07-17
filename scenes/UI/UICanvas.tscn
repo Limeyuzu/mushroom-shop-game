@@ -20,6 +20,7 @@ InitiallyVisible = false
 [node name="CraftingCanvas" parent="." instance=ExtResource("5_jbqu7")]
 InitiallyVisible = false
 
+[connection signal="CloseInventoryCommand" from="." to="InventoryCanvas" method="CloseInventory"]
 [connection signal="OpenCraftingCommand" from="." to="CraftingCanvas" method="OpenCrafting"]
 [connection signal="OpenElementalCraftingCommand" from="." to="ElementalCraftingCanvas" method="OpenInventory"]
 [connection signal="OpenInventoryCommand" from="." to="InventoryCanvas" method="OpenInventory"]

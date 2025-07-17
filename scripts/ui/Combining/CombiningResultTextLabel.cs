@@ -5,6 +5,8 @@ public partial class CombiningResultTextLabel : RichTextLabel
 {
     [Export] private CombiningTableItemList _tableInventory;
 
+    public override void _Ready() => Clear();
+
     public void OnTableInventoryUpdated()
     {
         var result = CraftingRecipes.Instance.GetAvailableCrafts(_tableInventory.GetItems());
