@@ -56,5 +56,29 @@
 		"name": "Dark Stone",
 		"image": "res://sprites/item/ingredients/fa2121.png",
 		"elements": [0,0,0,0,10]
-	}
+	},
+	"chanterelle": {
+		"types": ["ingredient"],
+		"name": "Chanterelle",
+		"image": "res://sprites/item/ingredients/mushrooms/Chanterelle.png",
+		"elements": [6,0,0,0,0]
+	},
+	"penny_bun": {
+		"types": ["ingredient"],
+		"name": "Penny Bun",
+		"image": "res://sprites/item/ingredients/mushrooms/Penny_Bun.png",
+		"elements": [0,6,0,0,0]
+	},
+	"enoki": {
+		"types": ["ingredient"],
+		"name": "Enoki",
+		"image": "res://sprites/item/ingredients/mushrooms/Enoki.png",
+		"elements": [0,0,6,0,0]
+	},
+	"aspen": {
+		"types": ["ingredient"],
+		"name": "Aspen",
+		"image": "res://sprites/item/ingredients/mushrooms/Aspen.png",
+		"elements": [0,0,0,6,0]
+	},
 }
