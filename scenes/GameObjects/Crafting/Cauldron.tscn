@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwcmiy8lxu53n"]
+[gd_scene load_steps=21 format=3 uid="uid://cwcmiy8lxu53n"]
 
 [ext_resource type="Script" uid="uid://crqu3gbmt1xha" path="res://scripts/GameObjects/Crafting/Cauldron.cs" id="1_quaa6"]
+[ext_resource type="Texture2D" uid="uid://b0osa4utl8dms" path="res://textures/PointLight.tres" id="4_a53xq"]
 [ext_resource type="Texture2D" uid="uid://dlwfwahlbrvfq" path="res://sprites/shop/cauldron.png" id="4_wamsx"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="5_ir52o"]
 
@@ -115,12 +116,25 @@ _onSprite = NodePath("OnSprite")
 [node name="OffSprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_x74j4")
 
+[node name="PointLight2D" type="PointLight2D" parent="OffSprite"]
+position = Vector2(0, -3)
+color = Color(0.621886, 0.41704, 0.660184, 1)
+texture = ExtResource("4_a53xq")
+texture_scale = 0.8
+
 [node name="OnSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_503sp")
 autoplay = "default"
 frame = 7
 frame_progress = 0.727551
+
+[node name="PointLight2D" type="PointLight2D" parent="OnSprite"]
+position = Vector2(0, -3)
+color = Color(0.808113, 0.65503, 0.836119, 1)
+energy = 1.38
+texture = ExtResource("4_a53xq")
+texture_scale = 0.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.555556, 6.33333)

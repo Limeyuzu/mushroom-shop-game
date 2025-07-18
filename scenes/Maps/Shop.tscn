@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://dd3s4nq4pwmvf"]
+[gd_scene load_steps=11 format=4 uid="uid://dd3s4nq4pwmvf"]
 
 [ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_5q7qh"]
 [ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/Zoning/ZonePoint.tscn" id="3_47hci"]
+[ext_resource type="PackedScene" uid="uid://dnpkbis33qmq2" path="res://scenes/GameObjects/Furnishings/Candle.tscn" id="3_l5adj"]
 [ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://gamedata/tilemap/Shop32x32.tres" id="4_47hci"]
+[ext_resource type="PackedScene" uid="uid://dsijau3uojra5" path="res://scenes/GameObjects/Furnishings/Window.tscn" id="4_pfjd0"]
 [ext_resource type="PackedScene" uid="uid://crm01wmd8iytl" path="res://scenes/GameObjects/Crafting/CombiningTable.tscn" id="5_hd80v"]
 [ext_resource type="PackedScene" uid="uid://cverrquh2uiie" path="res://scenes/Zoning/SpawnPoint.tscn" id="5_l5adj"]
 [ext_resource type="PackedScene" uid="uid://b6tq2ydjfhwgo" path="res://scenes/GameObjects/ShopStartChair.tscn" id="6_j4pho"]
@@ -12,6 +14,9 @@
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")
 SpawnPoints = [NodePath("Map/Zoning/SpawnPoint")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.88, 0.88, 0.88, 1)
 
 [node name="Map" type="Node2D" parent="."]
 scale = Vector2(2, 2)
@@ -30,12 +35,30 @@ tile_map_data = PackedByteArray("AAACAAQAAAACAAsAAAADAAQAAAACAAsAAAAEAAQAAAACAAs
 tile_set = ExtResource("4_47hci")
 
 [node name="Objects" type="TileMapLayer" parent="Map"]
-tile_map_data = PackedByteArray("AAAIAAoAAAAMAAQAAAAIAAsAAAAMAAUAAAAIAAwAAAAMAAYAAAAJAAoAAAANAAQAAAAJAAsAAAANAAUAAAAJAAwAAAANAAYAAAAKAAoAAAAOAAQAAAAKAAsAAAAOAAUAAAAKAAwAAAAOAAYAAAADAAgAAAAMAAQAAAADAAkAAAAMAAUAAAADAAoAAAAMAAYAAAAEAAgAAAANAAQAAAAEAAkAAAANAAUAAAAEAAoAAAANAAYAAAAFAAgAAAAOAAQAAAAFAAkAAAAOAAUAAAAFAAoAAAAOAAYAAAANAAMAAAAPAAoAAAAMAAMAAAAPAAoAAAARAAMAAAANAAoAAAAOAAMAAAAMAAoAAAAMAAYAAAAaAA4AAAAMAAUAAAAYAA4AAAAKAAYAAAAQAAsAAAAKAAcAAAAQAAwAAAACAAkAAAAPAAYAAAALAAsAAAAPAAgAAAAHAAsAAAAPAAYAAAAEAAsAAAAIAAcAAAADAAsAAAAIAAcAAAAIAAYAAAAVAAcAAAAIAAcAAAAVAAgAAAAJAAYAAAAWAAcAAAAJAAcAAAAWAAgAAAAMAAcAAAAYAA8AAAANAAcAAAAZAA4AAAAOAAcAAAAZAA4AAAAPAAcAAAAZAA4AAAAQAAcAAAAZAA8AAAATAAYAAAALAAoAAAATAAcAAAALAAsAAAAWAAcAAAAdAAQAAAAWAAgAAAAdAAUAAAAXAAYAAAANAAoAAAAUAAcAAAAbAAQAAAAUAAgAAAAbAAUAAAAVAAYAAAAcAAMAAAAVAAcAAAAcAAQAAAAVAAgAAAAcAAUAAAAWAAoAAAANAA0AAAAXAAoAAAAUAAIAAAAWAAkAAAANAAwAAAAXAAkAAAAUAAIAAAASAAcAAAARAA0AAAASAAgAAAARAA4AAAA=")
+tile_map_data = PackedByteArray("AAAIAAoAAAAMAAQAAAAIAAsAAAAMAAUAAAAIAAwAAAAMAAYAAAAJAAoAAAANAAQAAAAJAAsAAAANAAUAAAAJAAwAAAANAAYAAAAKAAoAAAAOAAQAAAAKAAsAAAAOAAUAAAAKAAwAAAAOAAYAAAADAAgAAAAMAAQAAAADAAkAAAAMAAUAAAADAAoAAAAMAAYAAAAEAAgAAAANAAQAAAAEAAkAAAANAAUAAAAEAAoAAAANAAYAAAAFAAgAAAAOAAQAAAAFAAkAAAAOAAUAAAAFAAoAAAAOAAYAAAANAAMAAAAPAAoAAAAMAAMAAAAPAAoAAAARAAMAAAANAAoAAAAOAAMAAAAMAAoAAAAMAAYAAAAaAA4AAAAMAAUAAAAYAA4AAAACAAkAAAAPAAYAAAALAAsAAAAPAAgAAAAHAAsAAAAPAAYAAAAEAAsAAAAIAAcAAAADAAsAAAAIAAcAAAAMAAcAAAAYAA8AAAANAAcAAAAZAA4AAAAOAAcAAAAZAA4AAAAPAAcAAAAZAA4AAAAQAAcAAAAZAA8AAAAWAAcAAAAdAAQAAAAWAAgAAAAdAAUAAAAXAAYAAAANAAoAAAAUAAcAAAAbAAQAAAAUAAgAAAAbAAUAAAAVAAYAAAAcAAMAAAAVAAcAAAAcAAQAAAAVAAgAAAAcAAUAAAAWAAoAAAANAA0AAAAXAAoAAAAUAAIAAAAWAAkAAAANAAwAAAAXAAkAAAAUAAIAAAASAAcAAAARAA0AAAASAAgAAAARAA4AAAAGAAYAAAAVAAcAAAAGAAcAAAAVAAgAAAAHAAYAAAAWAAcAAAAHAAcAAAAWAAgAAAAIAAYAAAAQAAsAAAAIAAcAAAAQAAwAAAALAAUAAAALAAoAAAALAAYAAAALAAsAAAA=")
 tile_set = ExtResource("4_47hci")
 
 [node name="Tabletop" type="TileMapLayer" parent="Map/Objects"]
-tile_map_data = PackedByteArray("AAAMAAYAAAAEAAsAAAAMAAUAAQALAA0AAAA=")
+tile_map_data = PackedByteArray("AAAMAAUAAQALAA0AAAA=")
 tile_set = ExtResource("4_47hci")
+
+[node name="Candle" parent="Map/Objects/Tabletop" instance=ExtResource("3_l5adj")]
+position = Vector2(398.5, 206)
+
+[node name="Candle2" parent="Map/Objects/Tabletop" instance=ExtResource("3_l5adj")]
+position = Vector2(142.5, 295.5)
+
+[node name="Candle3" parent="Map/Objects/Tabletop" instance=ExtResource("3_l5adj")]
+position = Vector2(301, 359.5)
+
+[node name="Window" parent="Map/Objects" instance=ExtResource("4_pfjd0")]
+position = Vector2(311, 192)
+
+[node name="Window2" parent="Map/Objects" instance=ExtResource("4_pfjd0")]
+position = Vector2(164.5, 192)
+
+[node name="Window3" parent="Map/Objects" instance=ExtResource("4_pfjd0")]
+position = Vector2(626.5, 222.5)
 
 [node name="CraftingTable" parent="Map" instance=ExtResource("5_hd80v")]
 position = Vector2(493, 173)

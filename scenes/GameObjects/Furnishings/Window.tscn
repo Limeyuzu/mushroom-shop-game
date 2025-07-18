@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsijau3uojra5"]
+
+[ext_resource type="Texture2D" uid="uid://dnix7wjv7t7w8" path="res://sprites/tilemap/shop_tileset.png" id="1_vkphb"]
+[ext_resource type="Texture2D" uid="uid://byyx61dbyutbn" path="res://textures/cone-light.jpg" id="2_iwune"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thlvv"]
+atlas = ExtResource("1_vkphb")
+region = Rect2(320, 0, 32, 64)
+
+[node name="Window" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_thlvv")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-1, 68)
+color = Color(0.7176, 0.76752, 0.78, 1)
+energy = 0.5
+texture = ExtResource("2_iwune")
+texture_scale = 0.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ci8crkaf4md6q"]
+[gd_scene load_steps=13 format=3 uid="uid://ci8crkaf4md6q"]
 
 [ext_resource type="Script" uid="uid://bwomtccjybo1i" path="res://scripts/UI/ElementalCraftingCanvas.cs" id="1_n7b2y"]
 [ext_resource type="Script" uid="uid://ixvd2uv580t8" path="res://scripts/Item/UI/CtrlInventory.cs" id="2_n7b2y"]
@@ -7,6 +7,11 @@
 [ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="3_12fbo"]
 [ext_resource type="Script" uid="uid://bc7sxsv2okpjx" path="res://scripts/UI/Cauldron/CauldronAttributesText.cs" id="4_ne1n5"]
 [ext_resource type="Script" uid="uid://2l7lenprops1" path="res://scripts/UI/Cauldron/CauldronStabilityText.cs" id="5_0n5oa"]
+[ext_resource type="Texture2D" uid="uid://d2rnpus8c7t1h" path="res://sprites/item/ingredients/fa2118.png" id="7_4b1bd"]
+[ext_resource type="Texture2D" uid="uid://sqo2y5wt0di0" path="res://sprites/item/ingredients/fa2119.png" id="8_qnfyn"]
+[ext_resource type="Texture2D" uid="uid://xcl7efobdor2" path="res://sprites/item/ingredients/fa2120.png" id="9_ai8pt"]
+[ext_resource type="Texture2D" uid="uid://dtw37dyaxi7vt" path="res://sprites/item/ingredients/fa2117.png" id="10_sejv6"]
+[ext_resource type="Texture2D" uid="uid://cjxcnwb1r18g" path="res://sprites/item/ingredients/fa2121.png" id="11_e46ec"]
 
 [node name="ElementalCraftingCanvas" type="CenterContainer" node_paths=PackedStringArray("_ctrlInventory", "_cauldronItemList")]
 anchors_preset = 15
@@ -80,15 +85,22 @@ offset_left = 420.0
 offset_right = 601.0
 offset_bottom = 380.0
 theme_override_font_sizes/normal_font_size = 36
-text = "E: 0
-W: 0
-A: 0
-F: 0
-D: 0"
+bbcode_enabled = true
+text = "[img=48x48]res://sprites/item/ingredients/fa2118.png[/img]: 0
+[img=48x48]res://sprites/item/ingredients/fa2119.png[/img]: 0
+[img=48x48]res://sprites/item/ingredients/fa2120.png[/img]: 0
+[img=48x48]res://sprites/item/ingredients/fa2117.png[/img]: 0
+[img=48x48]res://sprites/item/ingredients/fa2121.png[/img]: 0"
 scroll_active = false
 horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("4_ne1n5")
 _cauldronItemList = NodePath("../CauldronItem")
+_earthIcon = ExtResource("7_4b1bd")
+_waterIcon = ExtResource("8_qnfyn")
+_airIcon = ExtResource("9_ai8pt")
+_fireIcon = ExtResource("10_sejv6")
+_darkIcon = ExtResource("11_e46ec")
 
 [node name="CauldronStabilityText" type="RichTextLabel" parent="Control/Control/CauldronPanel" node_paths=PackedStringArray("_cauldronItemList")]
 custom_minimum_size = Vector2(560, 115)
