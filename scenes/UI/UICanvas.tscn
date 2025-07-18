@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/UI/DialogueRunnerCanvas.tscn" id="2_biu0c"]
 [ext_resource type="PackedScene" uid="uid://ci8crkaf4md6q" path="res://scenes/UI/ElementalCraftingCanvas.tscn" id="3_crwjp"]
 [ext_resource type="PackedScene" uid="uid://bnxviigjbiyye" path="res://scenes/UI/InventoryCanvas.tscn" id="4_848ib"]
-[ext_resource type="PackedScene" uid="uid://b1m2tbaljawp1" path="res://scenes/UI/CraftingCanvas.tscn" id="5_jbqu7"]
+[ext_resource type="PackedScene" uid="uid://b1m2tbaljawp1" path="res://scenes/UI/CombiningCanvas.tscn" id="5_jbqu7"]
 
 [node name="UICanvas" type="CanvasLayer"]
 script = ExtResource("1_mmoom")

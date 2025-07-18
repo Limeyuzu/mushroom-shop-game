@@ -34,17 +34,31 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -600.0
-offset_top = -300.0
+offset_top = -345.0
 offset_right = 600.0
-offset_bottom = 300.0
+offset_bottom = 345.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TitlePanel" type="Panel" parent="Control/Control"]
+offset_right = 1200.0
+offset_bottom = 80.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Control/TitlePanel"]
+layout_mode = 0
+offset_right = 1200.0
+offset_bottom = 80.0
+theme_override_font_sizes/normal_font_size = 48
+text = "Cauldron"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CtrlInventory" type="ItemList" parent="Control/Control" node_paths=PackedStringArray("_originalInventory")]
 custom_minimum_size = Vector2(600, 500)
 layout_mode = 1
+offset_top = 88.0
 offset_right = 600.0
-offset_bottom = 500.0
+offset_bottom = 588.0
 theme_override_font_sizes/font_size = 36
 item_count = 1
 icon_scale = 4.0
@@ -63,8 +77,9 @@ metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 custom_minimum_size = Vector2(600, 500)
 layout_mode = 1
 offset_left = 600.0
+offset_top = 88.0
 offset_right = 1200.0
-offset_bottom = 500.0
+offset_bottom = 588.0
 
 [node name="CauldronItem" type="ItemList" parent="Control/Control/CauldronPanel"]
 custom_minimum_size = Vector2(420, 380)
@@ -123,9 +138,9 @@ _cauldronItemList = NodePath("../CauldronItem")
 [node name="Buttons" type="Panel" parent="Control/Control"]
 custom_minimum_size = Vector2(1200, 100)
 layout_mode = 1
-offset_top = 500.0
+offset_top = 588.0
 offset_right = 1200.0
-offset_bottom = 600.0
+offset_bottom = 688.0
 
 [node name="SelectButton" type="Button" parent="Control/Control/Buttons"]
 custom_minimum_size = Vector2(150, 60)

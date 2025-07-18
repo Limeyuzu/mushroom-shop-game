@@ -12,6 +12,7 @@ public abstract partial class CraftingTableBase : StaticBody2D, ICharacterIntera
 
     public abstract void OpenCraftingMenu(Inventory playerInventory);
     public abstract void ToggleCraftingTableSprite();
+    public abstract void ToggleDoneSprite();
     public abstract float GetCraftingTime();
 
     public void Interact(Node2D interactedBy)
@@ -53,6 +54,7 @@ public abstract partial class CraftingTableBase : StaticBody2D, ICharacterIntera
     public void StopCrafting()
     {
         ToggleCraftingTableSprite();
+        ToggleDoneSprite();
         _isCrafting = false;
 
         GD.Print($"{this.GetType()}: crafted: " + _itemToCraft);
@@ -60,6 +62,7 @@ public abstract partial class CraftingTableBase : StaticBody2D, ICharacterIntera
 
     public void PickUpFinishedItem()
     {
+        ToggleDoneSprite();
         _playerInventory.Add(_itemToCraft);
         GD.Print($"{this.GetType()}: picked up: " + _itemToCraft);
 
