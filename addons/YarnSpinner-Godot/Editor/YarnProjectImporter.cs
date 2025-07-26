@@ -1,11 +1,17 @@
 #nullable disable
 #if TOOLS
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using Godot;
 using Godot.Collections;
+using Yarn;
+using Yarn.Compiler;
+using Yarn.Utility;
 
-namespace YarnSpinnerGodot.Editor;
+namespace YarnSpinnerGodot;
 
 /// <summary>
 /// A <see cref="EditorImportPlugin"/> for YarnSpinner JSON project files (.yarnproject files)
@@ -52,8 +58,33 @@ public partial class YarnProjectImporter : EditorImportPlugin
 
     public override Array<Dictionary> _GetImportOptions(string path, int presetIndex)
     {
-        return new Array<Dictionary>();
+        return
+        [
+            new Dictionary
+            {
+                ["name"] = nameof(YarnProject.generateVariablesSourceFile),
+                ["default_value"] = false,
+            },
+            new Dictionary
+            {
+                ["name"] = nameof(YarnProject.variablesClassName),
+                ["default_value"] = "YarnVariables",
+            },
+            new Dictionary
+            {
+                ["name"] = nameof(YarnProject.variablesClassNamespace),
+                ["default_value"] = "",
+            },
+            new Dictionary
+            {
+                ["name"] = nameof(YarnProject.variablesClassParent),
+                ["default_value"] = typeof(InMemoryVariableStorage).FullName,
+            },
+        ];
     }
+
+    public override bool _GetOptionVisibility(string path, StringName optionName, Dictionary options)
+        => true;
 
     public override Error _Import(
         string assetPath,
@@ -80,6 +111,15 @@ public partial class YarnProjectImporter : EditorImportPlugin
         godotProject.JSONProjectPath = assetPath;
         godotProject.ImportPath = fullSavePath;
         godotProject.ResourceName = Path.GetFileName(assetPath);
+        godotProject.generateVariablesSourceFile =
+            options.GetValueOrDefault(nameof(YarnProject.generateVariablesSourceFile), false).AsBool();
+        godotProject.variablesClassName =
+            options.GetValueOrDefault(nameof(YarnProject.variablesClassName), "").AsString();
+        godotProject.variablesClassNamespace =
+            options.GetValueOrDefault(nameof(YarnProject.variablesClassNamespace), "").AsString();
+        godotProject.variablesClassParent =
+            options.GetValueOrDefault(nameof(YarnProject.variablesClassParent), nameof(InMemoryVariableStorage))
+                .AsString();
         var saveErr = ResourceSaver.Save(godotProject, godotProject.ImportPath);
         if (saveErr != Error.Ok)
         {
@@ -87,7 +127,8 @@ public partial class YarnProjectImporter : EditorImportPlugin
         }
 
         YarnProjectEditorUtility.UpdateYarnProject(godotProject);
-        return (int) Error.Ok;
+
+        return (int)Error.Ok;
     }
 }
 #endif

@@ -8,9 +8,8 @@ using Godot;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Yarn;
 using Yarn.Compiler;
-using YarnSpinnerGodot.Editor.UI;
 
-namespace YarnSpinnerGodot.Editor;
+namespace YarnSpinnerGodot;
 
 [Tool]
 public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
@@ -70,6 +69,9 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
                 nameof(YarnProject.baseLocalization),
                 nameof(YarnProject.ImportPath),
                 nameof(YarnProject.JSONProjectPath),
+                nameof(YarnProject.variablesClassName),
+                nameof(YarnProject.variablesClassNamespace),
+                nameof(YarnProject.variablesClassParent),
                 // can't use nameof for private fields here
                 "_baseLocalizationJSON",
                 "_lineMetadataJSON",
@@ -92,8 +94,7 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
                     SizeFlagsVertical = Control.SizeFlags.ExpandFill,
                 };
                 var errorAreaHeight = 40;
-                if (_project.ProjectErrors != null &&
-                    _project.ProjectErrors.Length > 0)
+                if (_project.ProjectErrors is { Length: > 0 })
                 {
                     errorAreaHeight = 200;
                 }
@@ -133,58 +134,169 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
                     SizeFlagsVertical = Control.SizeFlags.ExpandFill,
                 });
                 AddCustomControl(header);
-                if (_project.SerializedDeclarations is {Length: >= 1})
+                if (_project.SerializedDeclarations is { Length: >= 1 })
                 {
                     var scrollContainer = new ScrollContainer
                     {
                         SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
                         SizeFlagsVertical = Control.SizeFlags.ExpandFill,
                     };
-
-                    var vbox = new VBoxContainer
+                    var marginContainer = new MarginContainer
                     {
                         SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
-                        SizeFlagsVertical = Control.SizeFlags.ShrinkBegin,
+                        SizeFlagsVertical = Control.SizeFlags.ExpandFill,
                     };
-                    scrollContainer.AddChild(vbox);
-                    foreach (var declaration in _project.SerializedDeclarations)
+                    marginContainer.AddThemeConstantOverride("margin_left", 15);
+                    marginContainer.AddThemeConstantOverride("margin_right", 15);
+                    marginContainer.AddThemeConstantOverride("margin_top", 15);
+                    marginContainer.AddThemeConstantOverride("margin_bottom", 15);
+                    var tree = new Tree();
+                    var root = tree.CreateItem();
+                    tree.HideRoot = true;
+                    tree.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+                    tree.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+
+                    scrollContainer.AddChild(marginContainer);
+
+                    foreach (var declaration in _project.SerializedDeclarations.OrderBy(d => d.name))
                     {
-                        var labelText = $"{declaration.name} ({declaration.typeName})\n";
-                        if (declaration.isImplicit)
-                        {
-                            labelText += "Implicitly declared.";
-                        }
-                        else
-                        {
-                            labelText += $"Declared in {declaration.sourceYarnAssetPath}\n";
-                        }
+                        var variableTreeNode = tree.CreateItem(root);
+                        variableTreeNode.SetText(0, declaration.name);
 
                         var typeName = declaration.typeName;
                         var defaultValue = "";
-                        if (typeName == BuiltinTypes.String.Name)
+                        if (typeName == Types.String.Name || typeName.Contains($"Enum ({Types.String.Name})"))
                         {
-                            defaultValue = declaration.defaultValueString;
+                            defaultValue = $"\"{declaration.defaultValueString}\"";
                         }
-                        else if (typeName == BuiltinTypes.Boolean.Name)
+                        else if (typeName == Types.Boolean.Name || typeName.Contains($"Enum ({Types.Boolean.Name})"))
                         {
                             defaultValue = declaration.defaultValueBool.ToString();
                         }
-                        else if (typeName == BuiltinTypes.Number.Name)
+                        else if (typeName == Types.Number.Name || typeName.Contains($"Enum ({Types.Number.Name})"))
                         {
                             defaultValue = declaration.defaultValueNumber.ToString(CultureInfo.InvariantCulture);
                         }
 
-                        labelText += $"Default value: {defaultValue}\n";
-                        var label = _fileNameLabelScene.Instantiate<Label>();
-                        label.Text = labelText;
-                        vbox.AddChild(label);
+
+                        var locationNode = tree.CreateItem(variableTreeNode);
+                        locationNode.SetText(0,
+                            declaration.isImplicit
+                                ? "Implicitly declared."
+                                : $"Declared in {declaration.sourceYarnAssetPath}\n");
+
+                        var variableTypeNode = tree.CreateItem(variableTreeNode);
+                        variableTypeNode.SetText(0, $"Type: {declaration.typeName}");
+                        var defaultValueNode = tree.CreateItem(variableTreeNode);
+                        defaultValueNode.SetText(0, $"Default value: {defaultValue}");
+                        if (!string.IsNullOrWhiteSpace(declaration.description))
+                        {
+                            var descriptionNode = tree.CreateItem(variableTreeNode);
+                            descriptionNode.SetText(0, $"Description: {declaration.description}");
+                        }
+
+
+                        variableTreeNode.Collapsed = true;
                     }
 
+                    marginContainer.AddChild(tree);
                     scrollContainer.CustomMinimumSize =
-                        new Vector2(0, 150);
+                        new Vector2(0, 250);
                     AddCustomControl(scrollContainer);
                 }
 
+                return true;
+            }
+
+            if (path == nameof(YarnProject.generateVariablesSourceFile))
+            {
+                const string editInstructions =
+                    "\nEdit settings related to variable storage source generation in " +
+                    "the Import panel for this Yarn project.";
+                var generationEnabledCheckbox = new CheckBox
+                {
+                    Text = "Generate variables source file",
+                    ButtonPressed = _project.generateVariablesSourceFile,
+                    Disabled = true,
+                    TooltipText =
+                        "Automatically generate a C# script with getters and setters for each variable declared " +
+                        $"in this project. {editInstructions}"
+                };
+                generationEnabledCheckbox.Toggled += OnGenerateVariablesSourceToggled;
+                AddCustomControl(generationEnabledCheckbox);
+
+                if (_project.generateVariablesSourceFile)
+                {
+                    var classNameHbox = new HBoxContainer
+                    {
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+                        TooltipText = $"The name of the generated variables storage class. {editInstructions}"
+                    };
+
+                    var classNameLabel = new Label
+                    {
+                        Text = "Variables class name",
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
+                    };
+                    var classNameValue = new Label
+                    {
+                        Text = _project.variablesClassName,
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
+                    };
+                    classNameHbox.AddChild(classNameLabel);
+                    classNameHbox.AddChild(classNameValue);
+                    AddCustomControl(classNameHbox);
+
+                    var classNamespaceHbox = new HBoxContainer
+                    {
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+                        TooltipText = $"The namespace of the generated variables storage class. {editInstructions}"
+                    };
+
+                    var classNamespaceLabel = new Label
+                    {
+                        Text = "Variables class namepace",
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
+                    };
+                    var classNamespaceValue = new Label
+                    {
+                        Text = _project.variablesClassNamespace,
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
+                    };
+                    classNamespaceHbox.AddChild(classNamespaceLabel);
+                    classNamespaceHbox.AddChild(classNamespaceValue);
+                    AddCustomControl(classNamespaceHbox);
+
+                    var parentHbox = new HBoxContainer
+                    {
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+                        TooltipText =
+                            $"The parent class the generated variables storage class will inherit from. {editInstructions}"
+                    };
+
+                    var parentLabel = new Label
+                    {
+                        Text = "Variables class parent",
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
+                    };
+                    var parentValue = new Label
+                    {
+                        Text = _project.variablesClassParent,
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
+                    };
+                    parentHbox.AddChild(parentLabel);
+                    parentHbox.AddChild(parentValue);
+                    AddCustomControl(parentHbox);
+                    AddCustomControl(new Label
+                    {
+                        Text = "The file will be generated each time the project is reimported, " +
+                               "or if you press the \"Re-compile Scripts in Project\" button above.",
+                        SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
+                        AutowrapMode = TextServer.AutowrapMode.WordSmart,
+                    });
+                }
+
+                AddCustomControl(new HSeparator { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill });
                 return true;
             }
 
@@ -196,6 +308,17 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
                 $"Error in {nameof(YarnProjectInspectorPlugin)}: {e.Message}\n{e.StackTrace}");
             return false;
         }
+    }
+
+    private void OnGenerateVariablesSourceToggled(bool on)
+    {
+        if (!IsInstanceValid(_project))
+        {
+            return;
+        }
+
+        _project.generateVariablesSourceFile = on;
+        _project.NotifyPropertyListChanged();
     }
 
     /// <summary>
@@ -282,7 +405,7 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
     {
         try
         {
-            _project = (YarnProject) @object;
+            _project = (YarnProject)@object;
             if (IsTresYarnProject(_project))
             {
                 AddCustomControl(new Label
@@ -303,8 +426,14 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
                 Yarn.Compiler.Project.LoadFromFile(
                     ProjectSettings.GlobalizePath(_project.JSONProjectPath));
 
-            var recompileButton = new Button();
-            recompileButton.Text = "Re-compile Scripts in Project";
+            var yarnProjectVersionLabel = new Label { Text = $"Language Version: {_project.JSONProject.FileVersion}" };
+            AddCustomControl(yarnProjectVersionLabel);
+            var recompileButton = new Button
+            {
+                Text = "Re-compile Scripts in Project",
+                TooltipText =
+                    "Compile all scripts that appear in source scripts below. Also generates the variable storage class file if enabled."
+            };
             recompileButton.Connect(BaseButton.SignalName.Pressed,
                 Callable.From(OnRecompileClicked));
             AddCustomControl(recompileButton);
@@ -342,9 +471,9 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
             foreach (var pattern in _project.JSONProject.SourceFilePatterns)
             {
                 scriptPatternsGrid.AddChild(new Label()); // spacer
-                scriptPatternsGrid.AddChild(new Label {Text = pattern});
+                scriptPatternsGrid.AddChild(new Label { Text = pattern });
                 var patternDeleteButton = new SourcePatternDeleteButton
-                    {Text = "x", Project = _project, Pattern = pattern};
+                    { Text = "x", Project = _project, Pattern = pattern };
 
                 scriptPatternsGrid.AddChild(patternDeleteButton);
             }
@@ -382,7 +511,7 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
                 SizeFlagsVertical = Control.SizeFlags.ExpandFill,
                 SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
             };
-            matchingScriptsHeader.AddChild(new Label {Text = "Matching Scripts"});
+            matchingScriptsHeader.AddChild(new Label { Text = "Matching Scripts" });
             matchingScriptsHeader.AddChild(new Label
             {
                 Text = numScriptsText,
@@ -407,17 +536,17 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
             AddCustomControl(_sourceScriptsListLabel);
 
             var localeGrid = new GridContainer
-                {SizeFlagsHorizontal = Control.SizeFlags.ExpandFill};
+                { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
             localeGrid.Columns = 3;
 
-            var label = new Label {Text = "Localization CSVs"};
+            var label = new Label { Text = "Localization CSVs" };
             localeGrid.AddChild(label);
 
             _localeTextEntry = new LineEditWithSubmit
             {
                 PlaceholderText = "locale code",
                 SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
-                SubmitButton = new Button {Text = "Add"},
+                SubmitButton = new Button { Text = "Add" },
             };
             localeGrid.AddChild(_localeTextEntry);
 
@@ -450,14 +579,14 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
                 pathLabel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
                 pathLabel.ClipText = true;
                 picker.AddChild(pathLabel);
-                var pickerButton = new Button {Text = "Browse"};
+                var pickerButton = new Button { Text = "Browse" };
                 _pendingCSVFileLocaleCode = locale.Key;
                 pickerButton.Connect(BaseButton.SignalName.Pressed,
                     Callable.From(SelectLocaleCSVPath));
                 picker.AddChild(pickerButton);
                 localeGrid.AddChild(picker);
                 var deleteButton = new LocaleDeleteButton
-                    {Text = "X", LocaleCode = locale.Key, Plugin = this};
+                    { Text = "X", LocaleCode = locale.Key, Plugin = this };
                 deleteButton.Connect(BaseButton.SignalName.Pressed,
                     new Callable(deleteButton,
                         nameof(LocaleDeleteButton.OnPressed)));
@@ -470,9 +599,9 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
             {
                 SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
             };
-            baseLocaleRow.AddChild(new Label {Text = "Base language"});
+            baseLocaleRow.AddChild(new Label { Text = "Base language" });
 
-            var changeBaseLocaleButton = new Button {Text = "Change"};
+            var changeBaseLocaleButton = new Button { Text = "Change" };
             _baseLocaleInput = new LineEditWithSubmit
             {
                 Text = _project.JSONProject.BaseLanguage,
@@ -512,6 +641,21 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
             GD.PushError(
                 $"Error in {nameof(YarnProjectInspectorPlugin)}.{nameof(_ParseBegin)}(): {e.Message}\n{e.StackTrace}");
         }
+    }
+
+    private void VariablesClassNameTextChanged(string newText)
+    {
+        _project.variablesClassName = newText;
+    }
+
+    private void VariablesClassNamespaceTextChanged(string newText)
+    {
+        _project.variablesClassNamespace = newText;
+    }
+
+    private void VariablesClassParentTextChanged(string newText)
+    {
+        _project.variablesClassParent = newText;
     }
 
     private void OnBaseLocaleChanged()
@@ -561,8 +705,7 @@ public partial class YarnProjectInspectorPlugin : EditorInspectorPlugin
             return;
         }
 
-        YarnProjectEditorUtility.CompileAllScripts(_project);
-        YarnProjectEditorUtility.SaveYarnProject(_project);
+        YarnProjectEditorUtility.UpdateYarnProjectImmediate(_project);
         _compileErrorsPropertyEditor.Refresh();
         _project.NotifyPropertyListChanged();
     }

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b1vomem0ut2kr"]
+[gd_scene format=3 uid="uid://b4ri2iapiiclv"]
 
 [node name="FilenameLabel" type="Label"]
 offset_right = 1024.0

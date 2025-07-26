@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqe5yshlcmpqw"]
+
+[ext_resource type="Script" uid="uid://8pnl2tmfo1ge" path="res://scripts/UI/DialogueCanvas.cs" id="1_4dwf1"]
+[ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://addons/YarnSpinner-Godot/Scenes/RoundedDialogueSystem.tscn" id="2_fdpuy"]
+[ext_resource type="Resource" uid="uid://blw63eo14n74n" path="res://gamedata/Dialogue/Yarn3.yarnproject" id="3_ecxta"]
+
+[node name="DialogueCanvas" type="Control" node_paths=PackedStringArray("DialogueRunner")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4dwf1")
+DialogueRunner = NodePath("RoundedYarnSpinnerCanvasLayer/DialogueRunner")
+
+[node name="RoundedYarnSpinnerCanvasLayer" parent="." instance=ExtResource("2_fdpuy")]
+
+[node name="DialogueRunner" parent="RoundedYarnSpinnerCanvasLayer" index="0"]
+yarnProject = ExtResource("3_ecxta")
+
+[node name="OptionsPresenter" parent="RoundedYarnSpinnerCanvasLayer" index="3"]
+showsLastLine = true
+
+[node name="LastLineText" parent="RoundedYarnSpinnerCanvasLayer/OptionsPresenter/PresenterControl" index="1"]
+bbcode_enabled = true
+
+[connection signal="onDialogueComplete" from="RoundedYarnSpinnerCanvasLayer/DialogueRunner" to="." method="OnDialogueComplete"]
+
+[editable path="RoundedYarnSpinnerCanvasLayer"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ck5f6f0halm2g"]
 
 [ext_resource type="Script" uid="uid://cxfellsuwxktx" path="res://scripts/UI/UICanvas.cs" id="1_mmoom"]
-[ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://scenes/UI/DialogueRunnerCanvas.tscn" id="2_biu0c"]
+[ext_resource type="PackedScene" uid="uid://dqe5yshlcmpqw" path="res://scenes/UI/DialogueCanvas.tscn" id="2_biu0c"]
 [ext_resource type="PackedScene" uid="uid://ci8crkaf4md6q" path="res://scenes/UI/ElementalCraftingCanvas.tscn" id="3_crwjp"]
 [ext_resource type="PackedScene" uid="uid://bnxviigjbiyye" path="res://scenes/UI/InventoryCanvas.tscn" id="4_848ib"]
 [ext_resource type="PackedScene" uid="uid://b1m2tbaljawp1" path="res://scenes/UI/CombiningCanvas.tscn" id="5_jbqu7"]

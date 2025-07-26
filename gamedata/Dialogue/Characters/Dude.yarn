@@ -1,0 +1,20 @@
+﻿title: Dude
+---
+<<declare $desiredItem = "">>
+Dude: I want a \[color=orange\]{$desiredItem}\[/color\]. Do you have it?
+    -> I have one here. (Show item)
+        <<OpenInventory DialogueRunnerCanvas>>
+    -> Sorry, don't have any.
+===
+
+title: ShowItem
+---
+<<declare $selectedItem = "">>
+<<declare $isDesired = false>>
+
+<<if $isDesired>>
+    Dude: Oooh, a {$selectedItem}. Is it for sale?
+<<else>>
+    Dude: What? I don't need that.
+<<endif>>
+===

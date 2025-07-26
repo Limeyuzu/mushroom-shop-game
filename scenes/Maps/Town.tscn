@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://cekdr32nxf4ml"]
 
 [ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_igmp0"]
-[ext_resource type="TileSet" uid="uid://bcfn7geprx6x6" path="res://gamedata/tilemap/Town16x16.tres" id="2_66q70"]
+[ext_resource type="TileSet" uid="uid://bcfn7geprx6x6" path="res://gamedata/TileMap/Town16x16.tres" id="2_66q70"]
 [ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/Zoning/ZonePoint.tscn" id="3_7q67j"]
 [ext_resource type="PackedScene" uid="uid://cverrquh2uiie" path="res://scenes/Zoning/SpawnPoint.tscn" id="4_uriv1"]
 

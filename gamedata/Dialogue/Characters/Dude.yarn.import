@@ -1,0 +1,14 @@
+[remap]
+
+importer="yarnscript"
+type="Resource"
+uid="uid://bop01kxidirvq"
+path="res://.godot/imported/Dude.yarn-e3f52a41890ed3650d4bc689bf7f463d.tres"
+
+[deps]
+
+source_file="res://gamedata/Dialogue/Characters/Dude.yarn"
+dest_files=["res://.godot/imported/Dude.yarn-e3f52a41890ed3650d4bc689bf7f463d.tres"]
+
+[params]
+
