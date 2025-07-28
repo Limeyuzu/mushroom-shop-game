@@ -19,6 +19,17 @@ DialogueRunner = NodePath("RoundedYarnSpinnerCanvasLayer/DialogueRunner")
 [node name="DialogueRunner" parent="RoundedYarnSpinnerCanvasLayer" index="0"]
 yarnProject = ExtResource("3_ecxta")
 
+[node name="VariableDebugText" parent="RoundedYarnSpinnerCanvasLayer" index="1"]
+offset_left = 4.0
+offset_top = 450.0
+offset_right = 1919.0
+offset_bottom = 1074.0
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/selection_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+
 [node name="OptionsPresenter" parent="RoundedYarnSpinnerCanvasLayer" index="3"]
 showsLastLine = true
 

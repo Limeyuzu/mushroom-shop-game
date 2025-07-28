@@ -13,3 +13,5 @@ region_rect = Rect2(0, 0, 96, 128)
 
 [node name="DialogueStarter" parent="." index="5"]
 DialogueNode = "RhydianGreeting"
+
+[connection signal="DialogueVariablesReady" from="." to="DialogueStarter" method="SetInitialDialogueVariables"]

@@ -15,15 +15,15 @@ public partial class UICanvas : CanvasLayer
     [Signal] public delegate void CloseInventoryCommandEventHandler(Node openInventoryActionRequester);
     [Signal] public delegate void OpenCraftingCommandEventHandler(Inventory inventory, CombiningTable openInventoryActionRequester);
     [Signal] public delegate void OpenElementalCraftingCommandEventHandler(Inventory inventory, Cauldron openInventoryActionRequester);
-    [Signal] public delegate void StartDialogueAttemptEventHandler(string dialogueNode, Dictionary<string, string> variables, Player interactedBy);
+    [Signal] public delegate void StartDialogueAttemptEventHandler(string dialogueNode, Player interactedBy, Dictionary<string, string> variables);
 
     public override void _Ready() => Instance = this;
 
-    public void StartDialogue(string dialogueNode, Dictionary<string, string> variables, Player interactedBy)
+    public void StartDialogue(string dialogueNode, Player interactedBy, Dictionary<string, string> variables = null)
     {
         if (!IsUIOpen)
         {
-            EmitSignal(SignalName.StartDialogueAttempt, dialogueNode, variables, interactedBy);
+            EmitSignal(SignalName.StartDialogueAttempt, dialogueNode, interactedBy, variables);
         }
     }
 

@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 using YarnSpinnerGodot;
@@ -11,11 +12,10 @@ public partial class DialogueCanvas : Control
     [Signal] public delegate void OpenInventoryRequestedEventHandler(Inventory inventory, Node requester);
 
     private Player _player;
-    private Dictionary<string, string> _currentDialogueVariables;
 
-    public void OnInteractionStartAttempt(string dialogueNode, Dictionary<string, string> variables, Player player)
+    public void OnInteractionStartAttempt(string dialogueNode, Player player, Dictionary<string, string> variables = null)
     {
-        foreach (var kvp in variables)
+        foreach (var kvp in variables ?? [])
         {
             DialogueRunner.VariableStorage.SetValue(kvp.Key, kvp.Value);
         }
@@ -24,7 +24,6 @@ public partial class DialogueCanvas : Control
         EmitSignal(SignalName.DialogueStarted);
 
         _player = player;
-        _currentDialogueVariables = variables;
         GD.Print($"{nameof(DialogueCanvas)}: interaction started by {_player.GetName()}");
     }
 
@@ -46,7 +45,7 @@ public partial class DialogueCanvas : Control
 
     private bool IsDesiredItem(InventoryItem item)
     {
-        var exists = _currentDialogueVariables.TryGetValue("$desiredItem", out var itemNameOrType);
+        var exists = DialogueRunner.VariableStorage.TryGetValue<string>("$desiredItem", out var itemNameOrType);
         if (!exists) return false;
 
         GD.Print($"{nameof(DialogueCanvas)}: desired: {itemNameOrType}");
