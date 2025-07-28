@@ -1,7 +1,7 @@
 title: setup
 ---
 // Rhydian
-<<declare $rhydianOpinion = "">>
+<<declare $rhydianOpinion = "NEUTRAL">>
 <<declare $rhydian_quest_active = false>>
 <<declare $rhydian_desired_item = "">>
 ===
