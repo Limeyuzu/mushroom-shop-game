@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cto3o6cvxsxjq"]
+
+[ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Characters/NpcBase.tscn" id="1_4oju3"]
+[ext_resource type="Script" uid="uid://dc5gp862domxt" path="res://scripts/Npcs/Rhydian.cs" id="2_c5ca3"]
+[ext_resource type="Texture2D" uid="uid://bimuwefu7pmgb" path="res://sprites/characters/Male/Male 14-2.png" id="3_x6xbf"]
+
+[node name="NpcBase" instance=ExtResource("1_4oju3")]
+script = ExtResource("2_c5ca3")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_x6xbf")
+region_rect = Rect2(0, 0, 96, 128)
+
+[node name="DialogueStarter" parent="." index="5"]
+DialogueNode = "RhydianGreeting"

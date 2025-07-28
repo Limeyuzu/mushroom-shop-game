@@ -1,0 +1,14 @@
+[remap]
+
+importer="yarnscript"
+type="Resource"
+uid="uid://b0ty2qcpc21lu"
+path="res://.godot/imported/Setup.yarn-9e3819230d0b03db1d01534db19b4559.tres"
+
+[deps]
+
+source_file="res://gamedata/Dialogue/Characters/Setup.yarn"
+dest_files=["res://.godot/imported/Setup.yarn-9e3819230d0b03db1d01534db19b4559.tres"]
+
+[params]
+

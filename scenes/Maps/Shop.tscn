@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://dd3s4nq4pwmvf"]
+[gd_scene load_steps=13 format=4 uid="uid://dd3s4nq4pwmvf"]
 
 [ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_5q7qh"]
 [ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/Zoning/ZonePoint.tscn" id="3_47hci"]
 [ext_resource type="PackedScene" uid="uid://dnpkbis33qmq2" path="res://scenes/GameObjects/Furnishings/Candle.tscn" id="3_l5adj"]
-[ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://gamedata/TileMap/Shop32x32.tres" id="4_47hci"]
+[ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://gamedata/tilemap/Shop32x32.tres" id="4_47hci"]
 [ext_resource type="PackedScene" uid="uid://dsijau3uojra5" path="res://scenes/GameObjects/Furnishings/Window.tscn" id="4_pfjd0"]
 [ext_resource type="PackedScene" uid="uid://crm01wmd8iytl" path="res://scenes/GameObjects/Crafting/CombiningTable.tscn" id="5_hd80v"]
 [ext_resource type="PackedScene" uid="uid://cverrquh2uiie" path="res://scenes/Zoning/SpawnPoint.tscn" id="5_l5adj"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/GameObjects/Crafting/Cauldron.tscn" id="7_eo1la"]
 [ext_resource type="PackedScene" uid="uid://dmk58phke3yc6" path="res://scenes/Characters/Dude.tscn" id="10_pfjd0"]
 [ext_resource type="PackedScene" uid="uid://c8jsb8ram6hi0" path="res://scenes/Characters/Ash.tscn" id="11_5q7qh"]
+[ext_resource type="PackedScene" uid="uid://cto3o6cvxsxjq" path="res://scenes/Characters/Rhydian.tscn" id="12_nwy4l"]
 
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")
@@ -91,6 +92,10 @@ scale = Vector2(3.5, 3.5)
 
 [node name="Ash" parent="Npcs" instance=ExtResource("11_5q7qh")]
 position = Vector2(287, 723)
+scale = Vector2(2, 2)
+
+[node name="NpcBase" parent="." instance=ExtResource("12_nwy4l")]
+position = Vector2(1310, 546)
 scale = Vector2(2, 2)
 
 [connection signal="MapChange" from="Map/Zoning/ZonePoint" to="." method="OnZonePointEntered"]

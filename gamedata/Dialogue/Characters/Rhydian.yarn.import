@@ -1,0 +1,14 @@
+[remap]
+
+importer="yarnscript"
+type="Resource"
+uid="uid://f0x70ej5uian"
+path="res://.godot/imported/Rhydian.yarn-fe28e092c4846db0241f6a6ca11371ab.tres"
+
+[deps]
+
+source_file="res://gamedata/Dialogue/Characters/Rhydian.yarn"
+dest_files=["res://.godot/imported/Rhydian.yarn-fe28e092c4846db0241f6a6ca11371ab.tres"]
+
+[params]
+

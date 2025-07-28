@@ -1,0 +1,61 @@
+title: RhydianGreeting
+when: once
+---
+Rhydian: So you're the mysterious new owner of this run-down old dump, huh?
+Rhydian: Nice to meet ya. The name's Rhydian, and I've heard good things about your potion brewing skills. 
+Rhydian: So here's what I'm thinking. You brew me a nice \[color=orange\]luck potion\[/color\], and I get you some rare ingredients from that dungeon that just opened up.
+Rhydian: Pretty good deal, don't ya think? Well, how about it?
+    -> Sure.
+        Rhydian: I knew you had a good head on your shoulders! I'll be waiting for that \[color=orange\]luck potion\[/color\].
+    -> Maybe if you pay me with money.
+        Rhydian: Money? Hah! Why would you want money when the ingredients I'm offering you would be so much more valuable? C'mon, pal, I'm offering you the deal of the century here.
+            -> ...Alright, fine.
+                Rhydian: That's the spirit! I'll be waiting for that \[color=orange\]luck potion\[/color\].
+            -> I'd much rather have money than some hypothetical ingredients.
+                Rhydian: *sigh* You and me both, my friend.
+                Rhydian: Look, to tell you the truth, I'm a bit strapped for cash right now. Owe some debts to some... unsavoury folk.
+                Rhydian: So far I've kept my wife out of it, but... Well, there's only so much longer before 'I'll pay the next rest week' is no longer an accepted answer...
+                Rhydian: I'm begging you here. Please? Won't you help me out? I promise I'll pay you back once I'm outta this mess.
+                    -> I feel sorry for your wife. (Accept quest)
+                        <<set $rhydian_quest_active = true>>
+                    -> Solve your own problems. (Deny quest)
+===
+title: RhydianGreeting
+when: always
+---
+<<if $rhydianOpinion == "NEUTRAL">>
+    Rhydian: Hey, innkeep. Brewed anything useful lately?
+<<elseif $rhydianOpinion == "HIGH">>
+    Rhydian: Hey! Look who it is! The best potion brewer in town!
+<<else>>
+    Rhydian: Oh, hey. If it isn't the scam artist. 
+<<endif>>
+===
+title: RhydianGreeting
+when: $rhydian_quest_active
+---
+<<if $rhydianOpinion == "NEUTRAL">>
+    Rhydian: Hey, innkeep. Got that \[color=orange\]{$rhydian_desired_item}\[/color\] I asked for? 
+    <<OpenInventory DialogueRunnerCanvas>>
+<<elseif $rhydianOpinion == "HIGH">>
+    Rhydian: Hey! Look who it is! The best potion brewer in town!
+    Rhydian: You must have my \[color=orange\]{$rhydian_desired_item}\[/color\] for me, am I right?
+    <<OpenInventory DialogueRunnerCanvas>>
+<<else>>
+    Rhydian: Yeah, look, I'm not so sure I want that \[color=orange\]{$rhydian_desired_item}\[/color\] any more.
+    Rhydian: I think I'd get better quality if I got it somewhere else.  
+    /// cancel quest function
+<<endif>>
+===
+
+// title: ShowRhydianItem
+// ---
+// <<declare $selectedItem = "">>
+// <<declare $isDesired = false>>
+
+// <<if $isDesired>>
+//     Dude: Oooh, a {$selectedItem}. Is it for sale?
+// <<else>>
+//     Dude: What? I don't need that.
+// <<endif>>
+// ===
