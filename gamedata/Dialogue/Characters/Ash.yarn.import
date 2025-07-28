@@ -1,0 +1,14 @@
+[remap]
+
+importer="yarnscript"
+type="Resource"
+uid="uid://bwc1bu02pv8wv"
+path="res://.godot/imported/Ash.yarn-dfcfb58ee176eaf37cb6e12b0ff4ff65.tres"
+
+[deps]
+
+source_file="res://gamedata/Dialogue/Characters/Ash.yarn"
+dest_files=["res://.godot/imported/Ash.yarn-dfcfb58ee176eaf37cb6e12b0ff4ff65.tres"]
+
+[params]
+

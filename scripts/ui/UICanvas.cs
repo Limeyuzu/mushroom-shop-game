@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public partial class UICanvas : CanvasLayer
 {
@@ -14,15 +15,15 @@ public partial class UICanvas : CanvasLayer
     [Signal] public delegate void CloseInventoryCommandEventHandler(Node openInventoryActionRequester);
     [Signal] public delegate void OpenCraftingCommandEventHandler(Inventory inventory, CombiningTable openInventoryActionRequester);
     [Signal] public delegate void OpenElementalCraftingCommandEventHandler(Inventory inventory, Cauldron openInventoryActionRequester);
-    [Signal] public delegate void StartDialogueAttemptEventHandler(Npc npc, Player interactedBy);
+    [Signal] public delegate void StartDialogueAttemptEventHandler(string dialogueNode, Dictionary<string, string> variables, Player interactedBy);
 
     public override void _Ready() => Instance = this;
 
-    public void StartDialogue(Npc npc, Player interactedBy)
+    public void StartDialogue(string dialogueNode, Dictionary<string, string> variables, Player interactedBy)
     {
         if (!IsUIOpen)
         {
-            EmitSignal(SignalName.StartDialogueAttempt, npc, interactedBy);
+            EmitSignal(SignalName.StartDialogueAttempt, dialogueNode, variables, interactedBy);
         }
     }
 

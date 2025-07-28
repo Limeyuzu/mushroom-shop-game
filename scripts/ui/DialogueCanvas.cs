@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using YarnSpinnerGodot;
 
 public partial class DialogueCanvas : Control
@@ -10,16 +11,20 @@ public partial class DialogueCanvas : Control
     [Signal] public delegate void OpenInventoryRequestedEventHandler(Inventory inventory, Node requester);
 
     private Player _player;
-    private Npc _currentDialogueNpc;
+    private Dictionary<string, string> _currentDialogueVariables;
 
-    public void OnInteractionStartAttempt(Npc dialogueNpc, Player player)
+    public void OnInteractionStartAttempt(string dialogueNode, Dictionary<string, string> variables, Player player)
     {
-        DialogueRunner.VariableStorage.SetValue("$desiredItem", GetNpcDesiredItem(dialogueNpc));
-        DialogueRunner.StartDialogue(dialogueNpc.DialogueNode);
+        foreach (var kvp in variables)
+        {
+            DialogueRunner.VariableStorage.SetValue(kvp.Key, kvp.Value);
+        }
 
+        DialogueRunner.StartDialogue(dialogueNode);
         EmitSignal(SignalName.DialogueStarted);
+
         _player = player;
-        _currentDialogueNpc = dialogueNpc;
+        _currentDialogueVariables = variables;
         GD.Print($"{nameof(DialogueCanvas)}: interaction started by {_player.GetName()}");
     }
 
@@ -34,20 +39,16 @@ public partial class DialogueCanvas : Control
             return;
 
         DialogueRunner.VariableStorage.SetValue("$selectedItem", item.GetName());
-        DialogueRunner.VariableStorage.SetValue("$isDesired", IsDesiredItem(_currentDialogueNpc, item));
+        DialogueRunner.VariableStorage.SetValue("$isDesired", IsDesiredItem(item));
         DialogueRunner.StartDialogue("ShowItem");
         EmitSignal(SignalName.DialogueStarted);
     }
 
-    private string GetNpcDesiredItem(Npc npc)
+    private bool IsDesiredItem(InventoryItem item)
     {
-        var firstItem = npc.DesiredItemTypesOrNames[0];
-        return firstItem;
-    }
+        var exists = _currentDialogueVariables.TryGetValue("$desiredItem", out var itemNameOrType);
+        if (!exists) return false;
 
-    private bool IsDesiredItem(Npc npc, InventoryItem item)
-    {
-        var itemNameOrType = GetNpcDesiredItem(npc);
         GD.Print($"{nameof(DialogueCanvas)}: desired: {itemNameOrType}");
         var isDesired = item.IsTypeOf(itemNameOrType);
         return isDesired;
