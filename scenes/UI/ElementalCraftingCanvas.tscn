@@ -41,6 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TitlePanel" type="Panel" parent="Control/Control"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 80.0
 

@@ -32,12 +32,13 @@ public partial class CombiningCanvas : Control
 
     public void OnCombinationChosen()
     {
-        var recipe = CraftingRecipes.Instance.GetAvailableCrafts(_tableInventory.GetItems()).First();
+        EmitSignal(SignalName.CraftingCanvasClosed);
 
+        var recipe = CraftingRecipes.Instance.GetAvailableCrafts(_tableInventory.GetItems()).First();
         _craftingTableInstance.OnRecipeSelected(recipe);
         GD.Print($"{GetType()}: selected {recipe.CompletedItem.GetName()}");
 
-        EmitSignal(SignalName.CraftingCanvasClosed);
+        _tableInventory.RemoveAll();
         _craftingTableInstance = null;
         Visible = false;
     }
