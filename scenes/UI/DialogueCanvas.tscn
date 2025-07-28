@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqe5yshlcmpqw"]
+[gd_scene load_steps=5 format=3 uid="uid://dqe5yshlcmpqw"]
 
 [ext_resource type="Script" uid="uid://8pnl2tmfo1ge" path="res://scripts/UI/DialogueCanvas.cs" id="1_4dwf1"]
+[ext_resource type="Script" uid="uid://c0v73pfpw3801" path="res://addons/YarnSpinner-Godot/Runtime/SaliencySetter.cs" id="2_7r2qw"]
 [ext_resource type="PackedScene" uid="uid://dqe5yshlcmnpg" path="res://addons/YarnSpinner-Godot/Scenes/RoundedDialogueSystem.tscn" id="2_fdpuy"]
 [ext_resource type="Resource" uid="uid://blw63eo14n74n" path="res://gamedata/Dialogue/Yarn3.yarnproject" id="3_ecxta"]
 
@@ -13,6 +14,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4dwf1")
 DialogueRunner = NodePath("RoundedYarnSpinnerCanvasLayer/DialogueRunner")
+
+[node name="SaliencySetter" type="Node" parent="." node_paths=PackedStringArray("dialogueRunner")]
+script = ExtResource("2_7r2qw")
+dialogueRunner = NodePath("../RoundedYarnSpinnerCanvasLayer/DialogueRunner")
+SaliencyStrategy = 1
+metadata/_custom_type_script = "uid://c0v73pfpw3801"
 
 [node name="RoundedYarnSpinnerCanvasLayer" parent="." instance=ExtResource("2_fdpuy")]
 
