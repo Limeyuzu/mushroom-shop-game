@@ -94,16 +94,17 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yeuv6"]
 _data = {
 &"RESET": SubResource("Animation_yeuv6"),
-&"move_down": SubResource("Animation_qok0s"),
-&"move_left": SubResource("Animation_r2ov3"),
-&"move_right": SubResource("Animation_qj77r"),
-&"move_up": SubResource("Animation_ahgi1")
+&"walk_down": SubResource("Animation_qok0s"),
+&"walk_left": SubResource("Animation_r2ov3"),
+&"walk_right": SubResource("Animation_qj77r"),
+&"walk_up": SubResource("Animation_ahgi1")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkm7j"]
 size = Vector2(20, 24)
 
 [node name="NpcBase" type="CharacterBody2D"]
+motion_mode = 1
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(-0.5, -3)
@@ -142,6 +143,9 @@ debug_color = Color(0.323463, 0.605189, 0.441858, 0.42)
 [node name="DialogueStarter" type="Node2D" parent="."]
 script = ExtResource("4_4yuql")
 DialogueNode = "Dude"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
 
 [connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="OnAreaEntered"]
 [connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="OnAreaExited"]

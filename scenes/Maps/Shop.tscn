@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dd3s4nq4pwmvf"]
+[gd_scene load_steps=14 format=4 uid="uid://dd3s4nq4pwmvf"]
 
 [ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_5q7qh"]
 [ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/Zoning/ZonePoint.tscn" id="3_47hci"]
@@ -12,6 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://dmk58phke3yc6" path="res://scenes/Characters/Dude.tscn" id="10_pfjd0"]
 [ext_resource type="PackedScene" uid="uid://c8jsb8ram6hi0" path="res://scenes/Characters/Ash.tscn" id="11_5q7qh"]
 [ext_resource type="PackedScene" uid="uid://cto3o6cvxsxjq" path="res://scenes/Characters/Rhydian.tscn" id="12_nwy4l"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_nwy4l"]
+vertices = PackedVector2Array(14, -134, 278, -134, 278, 70, 14, 70, -70, -10, -70, -126, 14, 206, -70, 206, -438, -10, -438, -126, -70, -142, 14, -142)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(3, 6, 7, 4), PackedInt32Array(4, 8, 9, 5), PackedInt32Array(0, 5, 10, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-80, -151.99994, 24, -152, 24, 216, -80, 216.00006), PackedVector2Array(288, 80.00006, 24, 80.00006, 24, -143.99994, 288, -143.99994), PackedVector2Array(-448, -135.99994, -448, 6.1035156e-05, -80, 6.1035156e-05, -80, -135.99994)])
 
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")
@@ -69,8 +74,13 @@ position = Vector2(493, 173)
 position = Vector2(526, 166)
 scale = Vector2(0.9, 0.9)
 
-[node name="ShopStartChair" parent="Map" instance=ExtResource("6_j4pho")]
+[node name="ShopStartChair" parent="Map" node_paths=PackedStringArray("NavigationDestination") instance=ExtResource("6_j4pho")]
 position = Vector2(416, 190)
+NavigationDestination = NodePath("NavigationDestination")
+
+[node name="NavigationDestination" type="Node2D" parent="Map/ShopStartChair"]
+position = Vector2(16, 74)
+scale = Vector2(0.5, 0.5)
 
 [node name="Zoning" type="Node2D" parent="Map"]
 
@@ -84,18 +94,27 @@ DestinationSpawnId = "shop"
 position = Vector2(416, 432)
 SpawnId = "main-door"
 
+[node name="Navigation" type="Node2D" parent="Map"]
+position = Vector2(3.0517578e-05, 0)
+scale = Vector2(0.49999997, 0.49999997)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Map/Navigation"]
+position = Vector2(856, 672)
+navigation_polygon = SubResource("NavigationPolygon_nwy4l")
+
 [node name="Npcs" type="Node2D" parent="."]
 
 [node name="Dude" parent="Npcs" instance=ExtResource("10_pfjd0")]
-position = Vector2(728, 725)
+position = Vector2(864, 792)
 scale = Vector2(3.5, 3.5)
+
+[node name="Rhydian" parent="Npcs" instance=ExtResource("12_nwy4l")]
+position = Vector2(1310, 546)
+scale = Vector2(2, 2)
 
 [node name="Ash" parent="Npcs" instance=ExtResource("11_5q7qh")]
 position = Vector2(287, 723)
 scale = Vector2(2, 2)
 
-[node name="NpcBase" parent="." instance=ExtResource("12_nwy4l")]
-position = Vector2(1310, 546)
-scale = Vector2(2, 2)
-
+[connection signal="ShopStart" from="Map/ShopStartChair" to="Npcs/Dude" method="SetMovementTarget"]
 [connection signal="MapChange" from="Map/Zoning/ZonePoint" to="." method="OnZonePointEntered"]

@@ -92,6 +92,7 @@ script = ExtResource("1_3tyk6")
 _sprite = NodePath("CharacterBody2D/Sprite2D")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_animationPlayer", "_player")]
+motion_mode = 1
 script = ExtResource("2_le2lq")
 _animationPlayer = NodePath("AnimationPlayer")
 _player = NodePath("..")
