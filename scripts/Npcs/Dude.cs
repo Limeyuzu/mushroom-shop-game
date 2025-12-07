@@ -1,8 +1,7 @@
-using System;
 using Godot;
 using Godot.Collections;
 
-public partial class Dude : CharacterBody2D
+public partial class Dude : CharacterBody2D, INavigator
 {
     [Export] private NavigationAgent2D _navigationAgent2D;
     [Export] private AnimationPlayer _animationPlayer;
@@ -20,9 +19,9 @@ public partial class Dude : CharacterBody2D
         _navigationAgent2D.VelocityComputed += OnVelocityComputed;
     }
 
-    public void SetMovementTarget(Vector2 movementTarget)
+    public void SetDestination(Vector2 dest)
     {
-        _navigationAgent2D.TargetPosition = movementTarget;
+        _navigationAgent2D.TargetPosition = dest;
     }
 
     public override void _PhysicsProcess(double delta)
