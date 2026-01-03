@@ -1,27 +1,34 @@
-[gd_scene load_steps=15 format=4 uid="uid://dd3s4nq4pwmvf"]
+[gd_scene load_steps=18 format=4 uid="uid://dd3s4nq4pwmvf"]
 
 [ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_5q7qh"]
+[ext_resource type="Script" uid="uid://c0lf2vut48bbq" path="res://scripts/ShopOrchestrator.cs" id="2_8tdcg"]
 [ext_resource type="PackedScene" uid="uid://b0srvjfcxmhgp" path="res://scenes/Zoning/ZonePoint.tscn" id="3_47hci"]
 [ext_resource type="PackedScene" uid="uid://dnpkbis33qmq2" path="res://scenes/GameObjects/Furnishings/Candle.tscn" id="3_l5adj"]
 [ext_resource type="TileSet" uid="uid://bjl8ooe7tgy8o" path="res://gamedata/TileMap/Shop32x32.tres" id="4_47hci"]
 [ext_resource type="PackedScene" uid="uid://dsijau3uojra5" path="res://scenes/GameObjects/Furnishings/Window.tscn" id="4_pfjd0"]
 [ext_resource type="PackedScene" uid="uid://crm01wmd8iytl" path="res://scenes/GameObjects/Crafting/CombiningTable.tscn" id="5_hd80v"]
 [ext_resource type="PackedScene" uid="uid://cverrquh2uiie" path="res://scenes/Zoning/SpawnPoint.tscn" id="5_l5adj"]
-[ext_resource type="PackedScene" uid="uid://b6tq2ydjfhwgo" path="res://scenes/GameObjects/ShopStartChair.tscn" id="6_j4pho"]
+[ext_resource type="PackedScene" uid="uid://dvtjm0c676qlv" path="res://scenes/GameObjects/ShopStartChair.tscn" id="6_j4pho"]
 [ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/GameObjects/Crafting/Cauldron.tscn" id="7_eo1la"]
+[ext_resource type="PackedScene" uid="uid://b6tq2ydjfhwgo" path="res://scenes/GameObjects/ServiceDesk.tscn" id="8_6qy1r"]
 [ext_resource type="PackedScene" uid="uid://dmk58phke3yc6" path="res://scenes/Characters/Dude.tscn" id="10_pfjd0"]
 [ext_resource type="PackedScene" uid="uid://c8jsb8ram6hi0" path="res://scenes/Characters/Ash.tscn" id="11_5q7qh"]
 [ext_resource type="PackedScene" uid="uid://b6rdx4twee0nj" path="res://scenes/NpcSpawner.tscn" id="12_j4pho"]
 [ext_resource type="PackedScene" uid="uid://cto3o6cvxsxjq" path="res://scenes/Characters/Rhydian.tscn" id="12_nwy4l"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwy4l"]
-vertices = PackedVector2Array(270, -134, 270, -34, 86, -34, -462, -134, 86, 206, -70, 206, -70, -34, -462, -34)
+vertices = PackedVector2Array(270, -150, 270, -34, 86, -34, -462, -150, 86, 206, -70, 206, -70, -34, -462, -34)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6), PackedInt32Array(3, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-80, -24, 96, -24, 96, 216, -80, 216.00006), PackedVector2Array(-80, -24, -472, -24, -472, -144, 280, -144, 280, -24)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-80, -24, 96, -24, 96, 216, -80, 216.00006), PackedVector2Array(-80, -24, -472, -24, -472, -160, 280, -160, 280, -24)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tdcg"]
 
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")
 SpawnPoints = [NodePath("Map/Zoning/SpawnPoint")]
+
+[node name="ShopOrchestrator" type="Node2D" parent="."]
+script = ExtResource("2_8tdcg")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.88, 0.88, 0.88, 1)
@@ -76,8 +83,12 @@ position = Vector2(526, 166)
 scale = Vector2(0.9, 0.9)
 
 [node name="ShopStartChair" parent="Map" node_paths=PackedStringArray("NavigationDestination") instance=ExtResource("6_j4pho")]
-position = Vector2(416, 190)
-NavigationDestination = NodePath("../Navigation/NavigationDestination")
+position = Vector2(416, 192)
+NavigationDestination = NodePath("../Navigation/CustomerWaitingArea")
+
+[node name="ServiceDesk" parent="Map" instance=ExtResource("8_6qy1r")]
+position = Vector2(416, 226)
+scale = Vector2(0.5, 0.5)
 
 [node name="Zoning" type="Node2D" parent="Map"]
 position = Vector2(433.5, 416)
@@ -99,8 +110,11 @@ scale = Vector2(0.49999997, 0.49999997)
 position = Vector2(856, 672.00006)
 navigation_polygon = SubResource("NavigationPolygon_nwy4l")
 
-[node name="NavigationDestination" type="Node2D" parent="Map/Navigation"]
+[node name="CustomerWaitingArea" type="Area2D" parent="Map/Navigation"]
 position = Vector2(863.99994, 528)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Navigation/CustomerWaitingArea"]
+shape = SubResource("RectangleShape2D_8tdcg")
 
 [node name="Npcs" type="Node2D" parent="."]
 
@@ -118,5 +132,7 @@ scale = Vector2(3.5, 3.5)
 ObjectToSpawn = ExtResource("10_pfjd0")
 NumberToSpawn = 3
 
-[connection signal="ShopStart" from="Map/ShopStartChair" to="NpcSpawner" method="SetDestination"]
+[connection signal="SpawnShopNpc" from="ShopOrchestrator" to="NpcSpawner" method="SetDestination"]
+[connection signal="ShopStartChairInteraction" from="Map/ShopStartChair" to="ShopOrchestrator" method="ShopStart"]
+[connection signal="ServiceDeskInteract" from="Map/ServiceDesk" to="ShopOrchestrator" method="ServeNextCustomer"]
 [connection signal="MapChange" from="Map/Zoning/ZonePoint" to="." method="OnZonePointEntered"]

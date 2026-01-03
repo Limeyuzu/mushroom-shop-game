@@ -8,4 +8,7 @@ script = ExtResource("2_jr8js")
 _navigationAgent2D = NodePath("NavigationAgent2D")
 _animationPlayer = NodePath("AnimationPlayer")
 
+[node name="NavigationAgent2D" parent="." index="6"]
+avoidance_enabled = false
+
 [connection signal="DialogueVariablesReady" from="." to="DialogueStarter" method="SetInitialDialogueVariables"]

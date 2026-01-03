@@ -5,18 +5,16 @@ public partial class Dude : CharacterBody2D, INavigator
 {
     [Export] private NavigationAgent2D _navigationAgent2D;
     [Export] private AnimationPlayer _animationPlayer;
+    [Export] private float _movementSpeed = 50f;
 
     [Signal] public delegate void DialogueVariablesReadyEventHandler(Dictionary<string, string> variables);
 
-    private float _movementSpeed = 25f;
     private float _movementDelta;
 
     public override void _Ready()
     {
         EmitSignal(SignalName.DialogueVariablesReady,
             new Dictionary<string, string> { { "$desiredItem", GD.Randi() % 2 == 0 ? "weapon" : "potion" } });
-
-        _navigationAgent2D.VelocityComputed += OnVelocityComputed;
     }
 
     public void SetDestination(Vector2 dest)
@@ -40,30 +38,26 @@ public partial class Dude : CharacterBody2D, INavigator
 
         if (_navigationAgent2D.IsNavigationFinished())
         {
+            _movementDelta = 0;
             return;
         }
 
         _movementDelta = _movementSpeed * (float)delta;
         var nextPathPosition = _navigationAgent2D.GetNextPathPosition();
         var newVelocity = GlobalPosition.DirectionTo(nextPathPosition) * _movementDelta;
-        if (_navigationAgent2D.AvoidanceEnabled)
-        {
-            _navigationAgent2D.Velocity = newVelocity;
-        }
-        else
-        {
-            OnVelocityComputed(newVelocity);
-        }
-    }
 
-    private void OnVelocityComputed(Vector2 safeVelocity)
-    {
-        GlobalPosition = GlobalPosition.MoveToward(GlobalPosition + safeVelocity, _movementDelta);
+        var collision = MoveAndCollide(newVelocity, testOnly: true);
+        if (collision != null)
+        {
+            _movementDelta = 0;
+            newVelocity = Vector2.Zero;
+        }
+        MoveAndCollide(newVelocity);
     }
 
     private void UpdateAnimation()
     {
-        if (_navigationAgent2D.IsNavigationFinished())
+        if (_navigationAgent2D.IsNavigationFinished() || _movementDelta < 0.01f)
         {
             _animationPlayer.Stop();
             return;
