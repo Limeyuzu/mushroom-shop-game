@@ -6,6 +6,7 @@ public partial class MapScene : Node2D
 {
     [Export] public Array<SpawnPoint> SpawnPoints;
     [Signal] public delegate void MapChangeEventHandler(string scenePath, string destinationSpawnId);
+    [Signal] public delegate void PlayerSpawnedEventHandler(Player player);
 
     public void OnZonePointEntered(string scenePath, string destinationSpawnId)
     {
@@ -16,5 +17,6 @@ public partial class MapScene : Node2D
     {
         var spawnPoint = SpawnPoints.First(s => s.SpawnId == spawnId);
         player.GlobalPosition = spawnPoint.GlobalPosition;
+        EmitSignal(SignalName.PlayerSpawned, player);
     }
 }

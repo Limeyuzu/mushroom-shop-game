@@ -16,19 +16,29 @@
 [ext_resource type="PackedScene" uid="uid://b6rdx4twee0nj" path="res://scenes/NpcSpawner.tscn" id="12_j4pho"]
 [ext_resource type="PackedScene" uid="uid://cto3o6cvxsxjq" path="res://scenes/Characters/Rhydian.tscn" id="12_nwy4l"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tdcg"]
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwy4l"]
 vertices = PackedVector2Array(270, -150, 270, -34, 86, -34, -462, -150, 86, 206, -70, 206, -70, -34, -462, -34)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6), PackedInt32Array(3, 6, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-80, -24, 96, -24, 96, 216, -80, 216.00006), PackedVector2Array(-80, -24, -472, -24, -472, -160, 280, -160, 280, -24)])
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8tdcg"]
-
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")
 SpawnPoints = [NodePath("Map/Zoning/SpawnPoint")]
 
-[node name="ShopOrchestrator" type="Node2D" parent="."]
+[node name="ShopOrchestrator" type="Node2D" parent="." node_paths=PackedStringArray("CustomerWaitingArea")]
 script = ExtResource("2_8tdcg")
+CustomerWaitingArea = NodePath("CustomerWaitingArea")
+
+[node name="CustomerWaitingArea" type="Area2D" parent="ShopOrchestrator"]
+position = Vector2(863.99994, 527.99994)
+scale = Vector2(0.99999994, 0.99999994)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopOrchestrator/CustomerWaitingArea"]
+shape = SubResource("RectangleShape2D_8tdcg")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.88, 0.88, 0.88, 1)
@@ -84,7 +94,7 @@ scale = Vector2(0.9, 0.9)
 
 [node name="ShopStartChair" parent="Map" node_paths=PackedStringArray("NavigationDestination") instance=ExtResource("6_j4pho")]
 position = Vector2(416, 192)
-NavigationDestination = NodePath("../Navigation/CustomerWaitingArea")
+NavigationDestination = NodePath("../../ShopOrchestrator/CustomerWaitingArea")
 
 [node name="ServiceDesk" parent="Map" instance=ExtResource("8_6qy1r")]
 position = Vector2(416, 226)
@@ -110,12 +120,6 @@ scale = Vector2(0.49999997, 0.49999997)
 position = Vector2(856, 672.00006)
 navigation_polygon = SubResource("NavigationPolygon_nwy4l")
 
-[node name="CustomerWaitingArea" type="Area2D" parent="Map/Navigation"]
-position = Vector2(863.99994, 528)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Navigation/CustomerWaitingArea"]
-shape = SubResource("RectangleShape2D_8tdcg")
-
 [node name="Npcs" type="Node2D" parent="."]
 
 [node name="Rhydian" parent="Npcs" instance=ExtResource("12_nwy4l")]
@@ -130,8 +134,9 @@ scale = Vector2(2, 2)
 position = Vector2(867, 864)
 scale = Vector2(3.5, 3.5)
 ObjectToSpawn = ExtResource("10_pfjd0")
-NumberToSpawn = 3
 
+[connection signal="PlayerSpawned" from="." to="ShopOrchestrator" method="SetPlayer"]
+[connection signal="InitNumberOfCustomers" from="ShopOrchestrator" to="NpcSpawner" method="SetNumberToSpawn"]
 [connection signal="SpawnShopNpc" from="ShopOrchestrator" to="NpcSpawner" method="SetDestination"]
 [connection signal="ShopStartChairInteraction" from="Map/ShopStartChair" to="ShopOrchestrator" method="ShopStart"]
 [connection signal="ServiceDeskInteract" from="Map/ServiceDesk" to="ShopOrchestrator" method="ServeNextCustomer"]

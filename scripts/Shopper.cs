@@ -1,13 +1,14 @@
 using Godot;
 using Godot.Collections;
 
-public partial class Dude : CharacterBody2D, INavigator
+public partial class Shopper : CharacterBody2D, INavigator
 {
     [Export] private NavigationAgent2D _navigationAgent2D;
     [Export] private AnimationPlayer _animationPlayer;
     [Export] private float _movementSpeed = 50f;
 
     [Signal] public delegate void DialogueVariablesReadyEventHandler(Dictionary<string, string> variables);
+    [Signal] public delegate void ShopCounterInteractEventHandler(Player player);
 
     private float _movementDelta;
 
@@ -21,6 +22,9 @@ public partial class Dude : CharacterBody2D, INavigator
     {
         _navigationAgent2D.TargetPosition = dest;
     }
+
+    public void OnShopCounterInteract(Player player)
+        => EmitSignal(SignalName.ShopCounterInteract, player);
 
     public override void _PhysicsProcess(double delta)
     {

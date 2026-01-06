@@ -18,3 +18,9 @@ title: ShowItem
     Dude: What? I don't need that.
 <<endif>>
 ===
+
+title: ShopOrder
+---
+Dude: Text for ordering goes here
+
+===

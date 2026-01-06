@@ -3,7 +3,7 @@ using Godot.Collections;
 
 public partial class DialogueStarter : Node2D, ICharacterInteractable
 {
-    [Export] public string DialogueNode;
+    [Export] public string DefaultDialogueNode;
 
     private Dictionary<string, string> _initialDialogueVariables;
     private bool hadFirstInteraction;
@@ -14,13 +14,18 @@ public partial class DialogueStarter : Node2D, ICharacterInteractable
     {
         if (hadFirstInteraction)
         {
-            UICanvas.Instance.StartDialogue(DialogueNode, (Player)interactedBy);
+            UICanvas.Instance.StartDialogue(DefaultDialogueNode, (Player)interactedBy);
         }
         else
         {
-            UICanvas.Instance.StartDialogue(DialogueNode, (Player)interactedBy, _initialDialogueVariables);
+            UICanvas.Instance.StartDialogue(DefaultDialogueNode, (Player)interactedBy, _initialDialogueVariables);
         }
 
         hadFirstInteraction = true;
+    }
+
+    public void ShopCounterInteract(Node2D interactedBy)
+    {
+        UICanvas.Instance.StartDialogue("ShopOrder", (Player)interactedBy);
     }
 }

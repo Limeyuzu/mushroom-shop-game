@@ -3,11 +3,13 @@ using Godot;
 public partial class Spawner : Node2D
 {
     [Export] PackedScene ObjectToSpawn;
-    [Export] int NumberToSpawn = 1;
 
+    private int _numberToSpawn = 1;
     private Vector2 _destination;
     private bool _startSpawning;
     private int _spawnedAmount;
+
+    public void SetNumberToSpawn(int num) => _numberToSpawn = num;
 
     public void SetDestination(Vector2 destination)
     {
@@ -29,7 +31,7 @@ public partial class Spawner : Node2D
         AddChild(spawn);
 
         _spawnedAmount++;
-        if (_spawnedAmount >= NumberToSpawn)
+        if (_spawnedAmount >= _numberToSpawn)
         {
             Reset();
         }

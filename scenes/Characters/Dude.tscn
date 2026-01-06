@@ -1,14 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmk58phke3yc6"]
 
 [ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Characters/NpcBase.tscn" id="1_cxdbq"]
-[ext_resource type="Script" uid="uid://bi28o02afhxpe" path="res://scripts/Npcs/Dude.cs" id="2_jr8js"]
+[ext_resource type="Script" uid="uid://lkf6bvyhcewl" path="res://scripts/Shopper.cs" id="2_jr8js"]
 
 [node name="Dude" node_paths=PackedStringArray("_navigationAgent2D", "_animationPlayer") instance=ExtResource("1_cxdbq")]
+collision_layer = 3
 script = ExtResource("2_jr8js")
 _navigationAgent2D = NodePath("NavigationAgent2D")
 _animationPlayer = NodePath("AnimationPlayer")
+
+[node name="DialogueStarter" parent="." index="5"]
+DefaultDialogueNode = "Dude"
 
 [node name="NavigationAgent2D" parent="." index="6"]
 avoidance_enabled = false
 
 [connection signal="DialogueVariablesReady" from="." to="DialogueStarter" method="SetInitialDialogueVariables"]
+[connection signal="ShopCounterInteract" from="." to="DialogueStarter" method="ShopCounterInteract"]
