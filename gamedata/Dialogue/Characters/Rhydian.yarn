@@ -38,11 +38,11 @@ when: $rhydian_quest_active
 ---
 <<if $rhydianOpinion == "NEUTRAL">>
     Rhydian: Hey, innkeep. Got that \[color=orange\]{$rhydian_desired_item}\[/color\] I asked for? 
-    <<OpenInventory DialogueRunnerCanvas>>
+    <<OpenInventory DialogueCanvas>>
 <<elseif $rhydianOpinion == "HIGH">>
     Rhydian: Hey! Look who it is! The best potion brewer in town!
     Rhydian: You must have my \[color=orange\]{$rhydian_desired_item}\[/color\] for me, am I right?
-    <<OpenInventory DialogueRunnerCanvas>>
+    <<OpenInventory DialogueCanvas>>
 <<else>>
     Rhydian: Yeah, look, I'm not so sure I want that \[color=orange\]{$rhydian_desired_item}\[/color\] any more.
     Rhydian: I think I'd get better quality if I got it somewhere else.  

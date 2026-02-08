@@ -23,9 +23,4 @@ public partial class DialogueStarter : Node2D, ICharacterInteractable
 
         hadFirstInteraction = true;
     }
-
-    public void ShopCounterInteract(Node2D interactedBy)
-    {
-        UICanvas.Instance.StartDialogue("ShopOrder", (Player)interactedBy);
-    }
 }

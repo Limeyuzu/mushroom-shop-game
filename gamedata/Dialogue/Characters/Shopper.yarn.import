@@ -1,0 +1,14 @@
+[remap]
+
+importer="yarnscript"
+type="Resource"
+uid="uid://doojb5juwfljy"
+path="res://.godot/imported/Shopper.yarn-27f3df341470525a27b79b04ade56f34.tres"
+
+[deps]
+
+source_file="res://gamedata/Dialogue/Characters/Shopper.yarn"
+dest_files=["res://.godot/imported/Shopper.yarn-27f3df341470525a27b79b04ade56f34.tres"]
+
+[params]
+

@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public partial class Rhydian : CharacterBody2D
+public partial class Rhydian : Node2D
 {
     [Signal] public delegate void DialogueVariablesReadyEventHandler(Dictionary<string, string> variables);
 

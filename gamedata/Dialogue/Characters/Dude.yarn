@@ -3,7 +3,7 @@
 <<declare $desiredItem = "">>
 Dude: I want a \[color=orange\]{$desiredItem}\[/color\]. Do you have it?
     -> I have one here. (Show item)
-        <<OpenInventory DialogueRunnerCanvas>>
+        <<OpenInventory DialogueCanvas>>
     -> Sorry, don't have any.
 ===
 
@@ -17,10 +17,4 @@ title: ShowItem
 <<else>>
     Dude: What? I don't need that.
 <<endif>>
-===
-
-title: ShopOrder
----
-Dude: Text for ordering goes here
-
 ===

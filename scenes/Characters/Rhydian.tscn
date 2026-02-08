@@ -7,11 +7,11 @@
 [node name="Rhydian" instance=ExtResource("1_4oju3")]
 script = ExtResource("2_c5ca3")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="Body" index="3"]
 texture = ExtResource("3_x6xbf")
 region_rect = Rect2(0, 0, 96, 128)
 
-[node name="DialogueStarter" parent="." index="5"]
-DialogueNode = "RhydianGreeting"
+[node name="DialogueStarter" parent="." index="2"]
+DefaultDialogueNode = "RhydianGreeting"
 
 [connection signal="DialogueVariablesReady" from="." to="DialogueStarter" method="SetInitialDialogueVariables"]

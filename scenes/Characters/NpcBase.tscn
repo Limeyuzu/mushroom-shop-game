@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dbgtrq6dsnbid"]
+[gd_scene load_steps=14 format=3 uid="uid://dbgtrq6dsnbid"]
 
 [ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/characters/free_character_1-3.png" id="1_cmt6h"]
 [ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/characters/Shadow.png" id="1_kbq3v"]
+[ext_resource type="Script" uid="uid://5oh8mgqvqyj" path="res://scripts/Npcs/Navigation.cs" id="1_oeegy"]
 [ext_resource type="Script" uid="uid://d1flsbybomg0t" path="res://scripts/InteractionBehaviour/DialogueStarter.cs" id="4_4yuql"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="4_7n8xq"]
 
@@ -13,7 +14,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,7 +31,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,7 +48,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -64,7 +65,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -81,7 +82,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Body/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -103,15 +104,27 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkm7j"]
 size = Vector2(20, 24)
 
-[node name="NpcBase" type="CharacterBody2D"]
-motion_mode = 1
+[node name="NpcBase" type="Node2D"]
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Body" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_animationPlayer", "_navigationAgent2D")]
+collision_layer = 3
+script = ExtResource("1_oeegy")
+_animationPlayer = NodePath("AnimationPlayer")
+_navigationAgent2D = NodePath("NavigationAgent2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_x770g")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
+avoidance_enabled = true
+
+[node name="Shadow" type="Sprite2D" parent="Body"]
 position = Vector2(-0.5, -3)
 scale = Vector2(0.9, 0.891)
 texture = ExtResource("1_kbq3v")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
 texture = ExtResource("1_cmt6h")
 hframes = 3
 vframes = 4
@@ -119,11 +132,8 @@ frame = 1
 region_enabled = true
 region_rect = Rect2(0, 0, 48, 80)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_x770g")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_yeuv6")
 }
@@ -142,10 +152,6 @@ debug_color = Color(0.323463, 0.605189, 0.441858, 0.42)
 
 [node name="DialogueStarter" type="Node2D" parent="."]
 script = ExtResource("4_4yuql")
-DialogueNode = "Dude"
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
 
 [connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="OnAreaEntered"]
 [connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="OnAreaExited"]

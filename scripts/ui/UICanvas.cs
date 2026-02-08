@@ -29,6 +29,7 @@ public partial class UICanvas : CanvasLayer
 
     public void OpenInventory(Inventory inventory, Node openInventoryActionRequester)
         => EmitSignal(SignalName.OpenInventoryCommand, inventory, openInventoryActionRequester);
+
     public void ToggleInventoryWindow(Inventory inventory, Node openInventoryActionRequester)
     {
         if (_isInventoryOpen)

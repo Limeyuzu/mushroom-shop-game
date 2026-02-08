@@ -23,9 +23,9 @@ public partial class ShopOrchestrator : Node
     public void ServeNextCustomer()
     {
         var body = CustomerWaitingArea.GetOverlappingBodies().FirstOrDefault();
-        if (body != null && body is Shopper shopper)
+        if (body != null && body.GetOwner() is Shopper shopper)
         {
-            shopper.OnShopCounterInteract(Player);
+            shopper.ShopCounterInteract(Player);
         }
     }
 }

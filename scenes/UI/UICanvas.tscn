@@ -9,7 +9,7 @@
 [node name="UICanvas" type="CanvasLayer"]
 script = ExtResource("1_mmoom")
 
-[node name="DialogueRunnerCanvas" parent="." instance=ExtResource("2_biu0c")]
+[node name="DialogueCanvas" parent="." instance=ExtResource("2_biu0c")]
 
 [node name="ElementalCraftingCanvas" parent="." instance=ExtResource("3_crwjp")]
 InitiallyVisible = false
@@ -24,14 +24,14 @@ InitiallyVisible = false
 [connection signal="OpenCraftingCommand" from="." to="CraftingCanvas" method="OpenCrafting"]
 [connection signal="OpenElementalCraftingCommand" from="." to="ElementalCraftingCanvas" method="OpenInventory"]
 [connection signal="OpenInventoryCommand" from="." to="InventoryCanvas" method="OpenInventory"]
-[connection signal="StartDialogueAttempt" from="." to="DialogueRunnerCanvas" method="OnInteractionStartAttempt"]
-[connection signal="DialogueCompleted" from="DialogueRunnerCanvas" to="." method="OnDialogueCompleted"]
-[connection signal="DialogueStarted" from="DialogueRunnerCanvas" to="." method="OnDialogueStarted"]
-[connection signal="OpenInventoryRequested" from="DialogueRunnerCanvas" to="InventoryCanvas" method="OpenInventory"]
+[connection signal="StartDialogueAttempt" from="." to="DialogueCanvas" method="OnInteractionStartAttempt"]
+[connection signal="DialogueCompleted" from="DialogueCanvas" to="." method="OnDialogueCompleted"]
+[connection signal="DialogueStarted" from="DialogueCanvas" to="." method="OnDialogueStarted"]
+[connection signal="OpenInventoryRequested" from="DialogueCanvas" to="InventoryCanvas" method="OpenInventory"]
 [connection signal="ElementalCraftingClosed" from="ElementalCraftingCanvas" to="." method="OnElementalCraftingClosed"]
 [connection signal="ElementalCraftingOpened" from="ElementalCraftingCanvas" to="." method="OnElementalCraftingOpened"]
 [connection signal="InventoryClosed" from="InventoryCanvas" to="." method="OnInventoryClosed"]
 [connection signal="InventoryOpened" from="InventoryCanvas" to="." method="OnInventoryOpened"]
-[connection signal="ItemSelected" from="InventoryCanvas" to="DialogueRunnerCanvas" method="OnItemSelected"]
+[connection signal="ItemSelected" from="InventoryCanvas" to="DialogueCanvas" method="OnItemSelected"]
 [connection signal="CraftingCanvasClosed" from="CraftingCanvas" to="." method="OnCraftingClosed"]
 [connection signal="CraftingCanvasOpened" from="CraftingCanvas" to="." method="OnCraftingOpened"]

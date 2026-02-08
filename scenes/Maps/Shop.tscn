@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cto3o6cvxsxjq" path="res://scenes/Characters/Rhydian.tscn" id="12_nwy4l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8tdcg"]
+size = Vector2(31.99997, 31.99997)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwy4l"]
 vertices = PackedVector2Array(270, -150, 270, -34, 86, -34, -462, -150, 86, 206, -70, 206, -70, -34, -462, -34)
@@ -25,7 +26,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-80, -24, 96, -24, 96, 
 
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")
-SpawnPoints = [NodePath("Map/Zoning/SpawnPoint")]
+SpawnPoints = [NodePath("Zoning/SpawnPoint")]
 
 [node name="ShopOrchestrator" type="Node2D" parent="." node_paths=PackedStringArray("CustomerWaitingArea")]
 script = ExtResource("2_8tdcg")
@@ -38,7 +39,10 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShopOrchestrator/CustomerWaitingArea"]
+position = Vector2(6.1035156e-05, 6.1035156e-05)
+scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_8tdcg")
+debug_color = Color(0.9214601, 0.08052007, 0.6565996, 0.41960785)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.88, 0.88, 0.88, 1)
@@ -85,40 +89,18 @@ position = Vector2(164.5, 192)
 [node name="Window3" parent="Map/Objects" instance=ExtResource("4_pfjd0")]
 position = Vector2(626.5, 222.5)
 
-[node name="CraftingTable" parent="Map" instance=ExtResource("5_hd80v")]
-position = Vector2(493, 173)
+[node name="Zoning" type="Node2D" parent="."]
+position = Vector2(867, 832)
+scale = Vector2(2, 2)
 
-[node name="Cauldron" parent="Map" instance=ExtResource("7_eo1la")]
-position = Vector2(526, 166)
-scale = Vector2(0.9, 0.9)
-
-[node name="ShopStartChair" parent="Map" node_paths=PackedStringArray("NavigationDestination") instance=ExtResource("6_j4pho")]
-position = Vector2(416, 192)
-NavigationDestination = NodePath("../../ShopOrchestrator/CustomerWaitingArea")
-
-[node name="ServiceDesk" parent="Map" instance=ExtResource("8_6qy1r")]
-position = Vector2(416, 226)
-scale = Vector2(0.5, 0.5)
-
-[node name="Zoning" type="Node2D" parent="Map"]
-position = Vector2(433.5, 416)
-
-[node name="ZonePoint" parent="Map/Zoning" instance=ExtResource("3_47hci")]
+[node name="ZonePoint" parent="Zoning" instance=ExtResource("3_47hci")]
 position = Vector2(0, 24)
 scale = Vector2(4, 1)
 NextScenePath = "res://scenes/Maps/Town.tscn"
 DestinationSpawnId = "shop"
 
-[node name="SpawnPoint" parent="Map/Zoning" instance=ExtResource("5_l5adj")]
+[node name="SpawnPoint" parent="Zoning" instance=ExtResource("5_l5adj")]
 SpawnId = "main-door"
-
-[node name="Navigation" type="Node2D" parent="Map"]
-position = Vector2(3.0517578e-05, 0)
-scale = Vector2(0.49999997, 0.49999997)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Map/Navigation"]
-position = Vector2(856, 672.00006)
-navigation_polygon = SubResource("NavigationPolygon_nwy4l")
 
 [node name="Npcs" type="Node2D" parent="."]
 
@@ -130,14 +112,40 @@ scale = Vector2(2, 2)
 position = Vector2(287, 723)
 scale = Vector2(2, 2)
 
-[node name="NpcSpawner" parent="." instance=ExtResource("12_j4pho")]
+[node name="NpcSpawner" parent="Npcs" instance=ExtResource("12_j4pho")]
 position = Vector2(867, 864)
 scale = Vector2(3.5, 3.5)
 ObjectToSpawn = ExtResource("10_pfjd0")
 
+[node name="Navigation" type="Node2D" parent="Npcs"]
+position = Vector2(6.1035156e-05, 0)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Npcs/Navigation"]
+position = Vector2(856, 672.00006)
+navigation_polygon = SubResource("NavigationPolygon_nwy4l")
+
+[node name="InteractableObjects" type="Node2D" parent="."]
+
+[node name="CraftingTable" parent="InteractableObjects" instance=ExtResource("5_hd80v")]
+position = Vector2(986, 346)
+scale = Vector2(2, 2)
+
+[node name="Cauldron" parent="InteractableObjects" instance=ExtResource("7_eo1la")]
+position = Vector2(1052, 332)
+scale = Vector2(1.8, 1.8)
+
+[node name="ShopStartChair" parent="InteractableObjects" node_paths=PackedStringArray("NavigationDestination") instance=ExtResource("6_j4pho")]
+position = Vector2(832, 384)
+scale = Vector2(2, 2)
+NavigationDestination = NodePath("../../ShopOrchestrator/CustomerWaitingArea")
+
+[node name="ServiceDesk" parent="InteractableObjects" instance=ExtResource("8_6qy1r")]
+position = Vector2(832, 452)
+
 [connection signal="PlayerSpawned" from="." to="ShopOrchestrator" method="SetPlayer"]
-[connection signal="InitNumberOfCustomers" from="ShopOrchestrator" to="NpcSpawner" method="SetNumberToSpawn"]
-[connection signal="SpawnShopNpc" from="ShopOrchestrator" to="NpcSpawner" method="SetDestination"]
-[connection signal="ShopStartChairInteraction" from="Map/ShopStartChair" to="ShopOrchestrator" method="ShopStart"]
-[connection signal="ServiceDeskInteract" from="Map/ServiceDesk" to="ShopOrchestrator" method="ServeNextCustomer"]
-[connection signal="MapChange" from="Map/Zoning/ZonePoint" to="." method="OnZonePointEntered"]
+[connection signal="InitNumberOfCustomers" from="ShopOrchestrator" to="Npcs/NpcSpawner" method="SetNumberToSpawn"]
+[connection signal="SpawnShopNpc" from="ShopOrchestrator" to="Npcs/NpcSpawner" method="SetDestination"]
+[connection signal="MapChange" from="Zoning/ZonePoint" to="." method="OnZonePointEntered"]
+[connection signal="ShopStartChairInteraction" from="InteractableObjects/ShopStartChair" to="ShopOrchestrator" method="ShopStart"]
+[connection signal="ServiceDeskInteract" from="InteractableObjects/ServiceDesk" to="ShopOrchestrator" method="ServeNextCustomer"]

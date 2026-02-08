@@ -1,6 +1,5 @@
 using Godot;
-using System;
 
-public partial class Ash : CharacterBody2D
+public partial class Ash : Node2D
 {
 }
