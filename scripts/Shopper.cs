@@ -1,29 +1,35 @@
 using Godot;
-using Godot.Collections;
-using YarnSpinnerGodot;
 
-public partial class Shopper : Node2D, INavigator
+public partial class Shopper : Node2D, INavigator, IItemHandler
 {
-    [Signal] public delegate void DialogueVariablesReadyEventHandler(Dictionary<string, string> variables);
     [Signal] public delegate void SetNavigationDestinationEventHandler(Vector2 destination);
 
     private Player _interactingWith;
-    private Dictionary<string, string> _dialogueVariables;
 
-    public override void _Ready()
-    {
-        _dialogueVariables = new Dictionary<string, string> { { "$desiredItem", GD.Randi() % 2 == 0 ? "weapon" : "potion" } };
-        EmitSignal(SignalName.DialogueVariablesReady, _dialogueVariables);
-    }
+    private string _desiredItem = GD.Randi() % 2 == 0 ? "weapon" : "potion";
 
     public void ShopCounterInteract(Player interactedBy)
     {
         _interactingWith = interactedBy;
-        UICanvas.Instance.StartDialogue("Shopper", interactedBy, _dialogueVariables);
+        // TODO this sets $desiredItem for all instances of this npc type, 
+        // what happens if dialogue is interrupted and a new dialogue starts with another instance
+        DialogueCanvas.Instance.SetVariable("$desiredItem", _desiredItem);
+        UICanvas.Instance.StartDialogue("Shopper", interactedBy);
     }
 
-    [YarnCommand("ShopperOpenInventory")]
-    public void OpenInventory() => UICanvas.Instance.OpenInventory(_interactingWith.Inventory, this);
+    public void HandleItem(InventoryItem item)
+    {
+        DialogueCanvas.Instance.SetVariable("$selectedItem", item.GetName());
+        DialogueCanvas.Instance.SetVariable("$isDesired", IsDesiredItem(item));
+        UICanvas.Instance.StartDialogue("ShopperShowItem", _interactingWith);
+    }
 
     public void SetDestination(Vector2 destination) => EmitSignal(SignalName.SetNavigationDestination, destination);
+
+    private bool IsDesiredItem(InventoryItem item)
+    {
+        GD.Print($"{nameof(DialogueCanvas)}: desired: {_desiredItem}");
+        var isDesired = item.IsTypeOf(_desiredItem);
+        return isDesired;
+    }
 }

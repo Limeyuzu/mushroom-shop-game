@@ -6,10 +6,14 @@
 
 [node name="Ash" instance=ExtResource("1_pdcjn")]
 script = ExtResource("2_x1jqh")
+DefaultDialogueNode = "Ash"
+
+[node name="Shadow" parent="Body" index="2"]
+position = Vector2(0, 5)
 
 [node name="Sprite2D" parent="Body" index="3"]
 texture = ExtResource("3_1k0du")
 region_rect = Rect2(0, 0, 96, 128)
 
-[node name="DialogueStarter" parent="." index="2"]
-DefaultDialogueNode = "Ash"
+[node name="InteractionArea" parent="." index="1" node_paths=PackedStringArray("_subject")]
+_subject = NodePath("..")

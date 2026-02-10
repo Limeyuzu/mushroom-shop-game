@@ -1,13 +1,16 @@
 ﻿title: Shopper
 ---
+<<declare $desiredItem = "">>
 Shopper: I want a \[color=orange\]{$desiredItem}\[/color\]. Do you have it?
     -> I have one here. (Show item)
-        <<OpenInventory DialogueCanvas>>
+        <<ShopperOpenInventory ShopOrchestrator>>
     -> Sorry, don't have any.
 ===
 
 title: ShopperShowItem
 ---
+<<declare $selectedItem = "">>
+<<declare $isDesired = false>>
 
 <<if $isDesired>>
     Shopper: Oooh, a {$selectedItem}. Is it for sale?

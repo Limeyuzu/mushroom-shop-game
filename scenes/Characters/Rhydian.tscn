@@ -6,12 +6,15 @@
 
 [node name="Rhydian" instance=ExtResource("1_4oju3")]
 script = ExtResource("2_c5ca3")
+DefaultDialogueNode = "RhydianGreeting"
+
+[node name="Shadow" parent="Body" index="2"]
+position = Vector2(0, 5)
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" parent="Body" index="3"]
 texture = ExtResource("3_x6xbf")
 region_rect = Rect2(0, 0, 96, 128)
 
-[node name="DialogueStarter" parent="." index="2"]
-DefaultDialogueNode = "RhydianGreeting"
-
-[connection signal="DialogueVariablesReady" from="." to="DialogueStarter" method="SetInitialDialogueVariables"]
+[node name="InteractionArea" parent="." index="1" node_paths=PackedStringArray("_subject")]
+_subject = NodePath("..")

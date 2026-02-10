@@ -22,6 +22,11 @@
 		"name": "Health Potion",
 		"image": "res://sprites/item/potions/fa265.png"
 	},
+	"luck_potion": {
+		"types": ["quest"],
+		"name": "Luck Potion",
+		"image": "res://sprites/item/potions/item_08.png"
+	},
 	"enhance_potion": {
 		"types": ["potion"],
 		"name": "Enhancing Potion",

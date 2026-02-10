@@ -6,8 +6,7 @@
 [node name="Dude" instance=ExtResource("1_cxdbq")]
 script = ExtResource("2_jr8js")
 
-[node name="DialogueStarter" parent="." index="2"]
-DefaultDialogueNode = "Shopper"
+[node name="InteractionArea" parent="." index="1" node_paths=PackedStringArray("_subject")]
+_subject = NodePath("..")
 
-[connection signal="DialogueVariablesReady" from="." to="DialogueStarter" method="SetInitialDialogueVariables"]
 [connection signal="SetNavigationDestination" from="." to="Body" method="SetDestination"]

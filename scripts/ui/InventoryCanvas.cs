@@ -40,9 +40,13 @@ public partial class InventoryCanvas : Control
     {
         EmitSignal(SignalName.InventoryClosed);
         EmitSignal(SignalName.ItemSelected, item, _openInventoryActionRequester);
+        GD.Print($"{nameof(InventoryCanvas)}: selected {item.GetName()}");
+        if (_openInventoryActionRequester is IItemHandler handler)
+        {
+            handler.HandleItem(item);
+        }
         _openInventoryActionRequester = null;
         Visible = false;
-        GD.Print($"{nameof(InventoryCanvas)}: selected {item.GetName()}");
     }
 
     public void OnNoneSelected()

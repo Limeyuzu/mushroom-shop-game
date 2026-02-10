@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbgtrq6dsnbid"]
+[gd_scene load_steps=13 format=3 uid="uid://dbgtrq6dsnbid"]
 
 [ext_resource type="Texture2D" uid="uid://dwe2ea0cyoiay" path="res://sprites/characters/free_character_1-3.png" id="1_cmt6h"]
 [ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/characters/Shadow.png" id="1_kbq3v"]
 [ext_resource type="Script" uid="uid://5oh8mgqvqyj" path="res://scripts/Npcs/Navigation.cs" id="1_oeegy"]
-[ext_resource type="Script" uid="uid://d1flsbybomg0t" path="res://scripts/InteractionBehaviour/DialogueStarter.cs" id="4_4yuql"]
 [ext_resource type="Script" uid="uid://c7jv04slo2cho" path="res://scripts/Player/CharacterInteractionArea.cs" id="4_7n8xq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x770g"]
@@ -139,19 +138,15 @@ libraries = {
 }
 speed_scale = 0.5
 
-[node name="InteractionArea" type="Area2D" parent="." node_paths=PackedStringArray("_subject")]
+[node name="InteractionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_7n8xq")
-_subject = NodePath("../DialogueStarter")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_jkm7j")
 debug_color = Color(0.323463, 0.605189, 0.441858, 0.42)
-
-[node name="DialogueStarter" type="Node2D" parent="."]
-script = ExtResource("4_4yuql")
 
 [connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="OnAreaEntered"]
 [connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="OnAreaExited"]
