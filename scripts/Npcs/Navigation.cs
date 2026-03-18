@@ -24,6 +24,7 @@ public partial class Navigation : CharacterBody2D
             return;
         }
 
+        var nextPathPosition = _navigationAgent2D.GetNextPathPosition();
         if (_navigationAgent2D.IsNavigationFinished())
         {
             _movementDelta = 0;
@@ -31,7 +32,6 @@ public partial class Navigation : CharacterBody2D
         }
 
         _movementDelta = _movementSpeed * (float)delta;
-        var nextPathPosition = _navigationAgent2D.GetNextPathPosition();
         var newVelocity = GlobalPosition.DirectionTo(nextPathPosition) * _movementDelta;
 
         var collision = MoveAndCollide(newVelocity, testOnly: true);

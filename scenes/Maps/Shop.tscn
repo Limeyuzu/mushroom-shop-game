@@ -20,23 +20,24 @@
 size = Vector2(31.99997, 31.99997)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwy4l"]
-vertices = PackedVector2Array(270, -150, 270, -34, 86, -34, -462, -150, 86, 206, -70, 206, -70, -34, -462, -34)
+vertices = PackedVector2Array(270, -150, 270, -42, 78, -42, -446, -150, 78, 214, -62, 214, -62, -42, -446, -42)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6), PackedInt32Array(3, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-80, -24, 96, -24, 96, 216, -80, 216.00006), PackedVector2Array(-80, -24, -472, -24, -472, -160, 280, -160, 280, -24)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-72, 224, -72, -32, -456, -32, -456, -160, 280, -160, 280, -32, 88, -32, 88, 224)])
 
 [node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")
 SpawnPoints = [NodePath("Zoning/SpawnPoint")]
 
-[node name="ShopOrchestrator" type="Node2D" parent="." node_paths=PackedStringArray("CustomerWaitingArea")]
+[node name="ShopOrchestrator" type="Node2D" parent="." node_paths=PackedStringArray("CustomerWaitingArea", "CustomerLeavingArea")]
 script = ExtResource("2_8tdcg")
 CustomerWaitingArea = NodePath("CustomerWaitingArea")
+CustomerLeavingArea = NodePath("../Zoning/ZonePoint")
 
 [node name="CustomerWaitingArea" type="Area2D" parent="ShopOrchestrator"]
 position = Vector2(863.99994, 527.99994)
 scale = Vector2(0.99999994, 0.99999994)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShopOrchestrator/CustomerWaitingArea"]
 position = Vector2(6.1035156e-05, 6.1035156e-05)
@@ -94,8 +95,8 @@ position = Vector2(867, 832)
 scale = Vector2(2, 2)
 
 [node name="ZonePoint" parent="Zoning" instance=ExtResource("3_47hci")]
-position = Vector2(0, 24)
-scale = Vector2(4, 1)
+position = Vector2(0, 28)
+scale = Vector2(4, 0.2)
 NextScenePath = "res://scenes/Maps/Town.tscn"
 DestinationSpawnId = "shop"
 
@@ -113,7 +114,7 @@ position = Vector2(287, 723)
 scale = Vector2(2, 2)
 
 [node name="NpcSpawner" parent="Npcs" instance=ExtResource("12_j4pho")]
-position = Vector2(867, 864)
+position = Vector2(867, 832)
 scale = Vector2(3.5, 3.5)
 ObjectToSpawn = ExtResource("10_pfjd0")
 
@@ -124,24 +125,30 @@ scale = Vector2(0.99999994, 0.99999994)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Npcs/Navigation"]
 position = Vector2(856, 672.00006)
 navigation_polygon = SubResource("NavigationPolygon_nwy4l")
+navigation_layers = 9
 
 [node name="InteractableObjects" type="Node2D" parent="."]
 
 [node name="CraftingTable" parent="InteractableObjects" instance=ExtResource("5_hd80v")]
 position = Vector2(986, 346)
 scale = Vector2(2, 2)
+collision_mask = 2
 
 [node name="Cauldron" parent="InteractableObjects" instance=ExtResource("7_eo1la")]
 position = Vector2(1052, 332)
 scale = Vector2(1.8, 1.8)
+collision_mask = 2
 
-[node name="ShopStartChair" parent="InteractableObjects" node_paths=PackedStringArray("NavigationDestination") instance=ExtResource("6_j4pho")]
+[node name="ShopStartChair" parent="InteractableObjects" instance=ExtResource("6_j4pho")]
 position = Vector2(832, 384)
 scale = Vector2(2, 2)
-NavigationDestination = NodePath("../../ShopOrchestrator/CustomerWaitingArea")
+collision_layer = 0
+collision_mask = 3
 
 [node name="ServiceDesk" parent="InteractableObjects" instance=ExtResource("8_6qy1r")]
 position = Vector2(832, 452)
+collision_layer = 0
+collision_mask = 2
 
 [connection signal="PlayerSpawned" from="." to="ShopOrchestrator" method="SetPlayer"]
 [connection signal="InitNumberOfCustomers" from="ShopOrchestrator" to="Npcs/NpcSpawner" method="SetNumberToSpawn"]

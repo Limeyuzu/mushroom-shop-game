@@ -106,7 +106,7 @@ size = Vector2(20, 24)
 [node name="NpcBase" type="Node2D"]
 
 [node name="Body" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_animationPlayer", "_navigationAgent2D")]
-collision_layer = 3
+collision_layer = 8
 script = ExtResource("1_oeegy")
 _animationPlayer = NodePath("AnimationPlayer")
 _navigationAgent2D = NodePath("NavigationAgent2D")
@@ -116,7 +116,6 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_x770g")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
-avoidance_enabled = true
 
 [node name="Shadow" type="Sprite2D" parent="Body"]
 position = Vector2(-0.5, -3)

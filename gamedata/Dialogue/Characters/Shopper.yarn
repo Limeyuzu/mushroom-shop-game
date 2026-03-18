@@ -5,6 +5,7 @@ Shopper: I want a \[color=orange\]{$desiredItem}\[/color\]. Do you have it?
     -> I have one here. (Show item)
         <<ShopperOpenInventory ShopOrchestrator>>
     -> Sorry, don't have any.
+        <<jump ShopperLeave>>
 ===
 
 title: ShopperShowItem
@@ -17,4 +18,11 @@ title: ShopperShowItem
 <<else>>
     Shopper: What? I don't need that.
 <<endif>>
+<<jump ShopperLeave>>
+===
+
+title: ShopperLeave
+---
+Shopper: Goodbye.
+<<ShopperCompleteShopping ShopOrchestrator>>
 ===

@@ -21,12 +21,13 @@ tile_map_data = PackedByteArray("AAAOAAEABAABAAEAAAAOAAIABAABAAIAAAAOAAMABAABAAM
 tile_set = ExtResource("2_66q70")
 
 [node name="ZonePoint" parent="Map" instance=ExtResource("3_7q67j")]
-position = Vector2(279.75, 80.75)
+position = Vector2(279.75, 98)
+scale = Vector2(1, 0.2)
 NextScenePath = "res://scenes/Maps/Shop.tscn"
 DestinationSpawnId = "main-door"
 
 [node name="SpawnPoint" parent="Map" instance=ExtResource("4_uriv1")]
-position = Vector2(279.75, 106.75)
+position = Vector2(280, 111.75)
 SpawnId = "shop"
 
 [connection signal="MapChange" from="Map/ZonePoint" to="." method="OnZonePointEntered"]

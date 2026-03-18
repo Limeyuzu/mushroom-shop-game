@@ -6,8 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://7i7naijq8d1a" path="res://sprites/characters/Shadow.png" id="3_tecgu"]
 [ext_resource type="Script" uid="uid://cwgwhhj2hodyd" path="res://scripts/Player/PlayerInteractionPointer.cs" id="4_ykpjy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x770g"]
-size = Vector2(12, 10)
+[sub_resource type="CircleShape2D" id="CircleShape2D_8kldo"]
 
 [sub_resource type="Animation" id="Animation_pppxl"]
 resource_name = "walk_down"
@@ -92,6 +91,7 @@ script = ExtResource("1_3tyk6")
 _sprite = NodePath("CharacterBody2D/Sprite2D")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_animationPlayer", "_player")]
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("2_le2lq")
 _animationPlayer = NodePath("AnimationPlayer")
@@ -112,7 +112,8 @@ region_rect = Rect2(48, 1, 48, 80)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_x770g")
+scale = Vector2(0.7, 0.7)
+shape = SubResource("CircleShape2D_8kldo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 root_node = NodePath("../..")
@@ -124,7 +125,7 @@ libraries = {
 zoom = Vector2(1.5, 1.5)
 
 [node name="PlayerInteractionPointer" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("Player")]
-collision_layer = 6
+collision_layer = 2
 collision_mask = 0
 script = ExtResource("4_ykpjy")
 Player = NodePath("../..")

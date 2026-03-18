@@ -6,9 +6,10 @@ public partial class ShopOrchestrator : Node
 {
     [Export] public int NumberOfCustomers = 3;
     [Export] Area2D CustomerWaitingArea;
+    [Export] Area2D CustomerLeavingArea;
 
     [Signal] public delegate void InitNumberOfCustomersEventHandler(int num);
-    [Signal] public delegate void SpawnShopNpcEventHandler(Vector2 npcDestination);
+    [Signal] public delegate void SpawnShopNpcEventHandler();
 
     public Player Player { get; private set; }
 
@@ -21,7 +22,7 @@ public partial class ShopOrchestrator : Node
 
     public void SetPlayer(Player player) => Player = player;
 
-    public void ShopStart(Vector2 npcDestination) => EmitSignal(SignalName.SpawnShopNpc, npcDestination);
+    public void ShopStart() => EmitSignal(SignalName.SpawnShopNpc, CustomerWaitingArea.GlobalPosition);
 
     public void ServeNextCustomer()
     {
@@ -33,7 +34,11 @@ public partial class ShopOrchestrator : Node
         }
     }
 
-    // This is here because YarnCommand only works with a named node. Each instance of shopper has a different node name
+    // These are here because YarnCommand only works with a named node. Each instance of shopper has a different node name
+
     [YarnCommand("ShopperOpenInventory")]
     public void OpenInventory() => UICanvas.Instance.OpenInventory(Player.Inventory, _currentShopper);
+
+    [YarnCommand("ShopperCompleteShopping")]
+    public void CompleteShopping() => _currentShopper.SetDestination(CustomerLeavingArea.GlobalPosition);
 }
