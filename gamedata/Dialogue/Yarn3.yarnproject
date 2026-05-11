@@ -6,6 +6,12 @@
   "excludeFiles": [],
   "localisation": {},
   "baseLanguage": "en",
-  "compilerOptions": {},
-  "definitionsFiles": []
+  "compilerOptions": {
+    "yarnScriptEditor": {
+      "startNode": "Shopper",
+      "saliencyStrategy": "bestLeastRecentlyViewedRandom"
+    }
+  },
+  "definitionsFiles": [],
+  "definitions": "MushroomShop.ysls.json"
 }

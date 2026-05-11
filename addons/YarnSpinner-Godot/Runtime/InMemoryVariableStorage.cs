@@ -54,7 +54,7 @@ public partial class InMemoryVariableStorage : VariableStorageBehaviour, IEnumer
     public override void _Process(double delta)
     {
         // If we have a debug view, show the list of all variables in it
-        if (IsInstanceValid(debugTextView))
+        if (showDebug && IsInstanceValid(debugTextView))
         {
             debugTextView.Text = GetDebugList();
         }

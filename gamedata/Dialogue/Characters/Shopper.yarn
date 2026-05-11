@@ -1,11 +1,12 @@
-﻿title: Shopper
+title: Shopper
 ---
 <<declare $desiredItem = "">>
 Shopper: I want a \[color=orange\]{$desiredItem}\[/color\]. Do you have it?
-    -> I have one here. (Show item)
-        <<ShopperOpenInventory ShopOrchestrator>>
-    -> Sorry, don't have any.
-        <<jump ShopperLeave>>
+-> I have one here. (Show item)
+    <<ShopperOpenInventory ShopOrchestrator>>
+-> Let me check if I have it.
+-> Sorry, don't have it.
+    <<jump ShopperLeaveNegative>>
 ===
 
 title: ShopperShowItem
@@ -14,15 +15,23 @@ title: ShopperShowItem
 <<declare $isDesired = false>>
 
 <<if $isDesired>>
-    Shopper: Oooh, a {$selectedItem}. Is it for sale?
+    => Shopper: Thanks.
+    => Shopper: I'm so glad you have it!
+    <<jump ShopperLeave>>
 <<else>>
     Shopper: What? I don't need that.
 <<endif>>
-<<jump ShopperLeave>>
+<<jump ShopperLeaveNegative>>
 ===
 
 title: ShopperLeave
 ---
-Shopper: Goodbye.
+<<ShopperCompleteShopping ShopOrchestrator>>
+===
+
+title: ShopperLeaveNegative
+---
+=> Shopper: Maybe I'll check in again another time.
+=> Shopper: Thanks for nothing.
 <<ShopperCompleteShopping ShopOrchestrator>>
 ===
