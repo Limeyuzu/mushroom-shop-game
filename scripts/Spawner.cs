@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Spawner : Node2D
 {
-    [Export] PackedScene ObjectToSpawn;
+    [Export] PackedScene[] ObjectsToSpawn;
 
     private int _numberToSpawn = 1;
     private Vector2 _destination;
@@ -21,7 +21,8 @@ public partial class Spawner : Node2D
     {
         if (!_startSpawning) return;
 
-        var spawn = ObjectToSpawn.Instantiate<Node2D>();
+        var chosenObject = ObjectsToSpawn[GD.Randi() % ObjectsToSpawn.Length];
+        var spawn = chosenObject.Instantiate<Node2D>();
 
         if (_destination != Vector2.Zero && spawn is INavigator navigator)
         {

@@ -1,0 +1,14 @@
+[remap]
+
+importer="yarnscript"
+type="Resource"
+uid="uid://dwd313effqpgr"
+path="res://.godot/imported/MercenaryShopper.yarn-69deb1167c0db1ba460dfa0e82fcb0f7.tres"
+
+[deps]
+
+source_file="res://gamedata/Dialogue/Characters/MercenaryShopper.yarn"
+dest_files=["res://.godot/imported/MercenaryShopper.yarn-69deb1167c0db1ba460dfa0e82fcb0f7.tres"]
+
+[params]
+

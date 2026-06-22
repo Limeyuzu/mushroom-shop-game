@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dd3s4nq4pwmvf"]
+[gd_scene load_steps=19 format=4 uid="uid://dd3s4nq4pwmvf"]
 
 [ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_5q7qh"]
 [ext_resource type="Script" uid="uid://c0lf2vut48bbq" path="res://scripts/ShopOrchestrator.cs" id="2_8tdcg"]
@@ -11,8 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dvtjm0c676qlv" path="res://scenes/GameObjects/ShopStartChair.tscn" id="6_j4pho"]
 [ext_resource type="PackedScene" uid="uid://cwcmiy8lxu53n" path="res://scenes/GameObjects/Crafting/Cauldron.tscn" id="7_eo1la"]
 [ext_resource type="PackedScene" uid="uid://b6tq2ydjfhwgo" path="res://scenes/GameObjects/ServiceDesk.tscn" id="8_6qy1r"]
-[ext_resource type="PackedScene" uid="uid://dmk58phke3yc6" path="res://scenes/Characters/Dude.tscn" id="10_pfjd0"]
 [ext_resource type="PackedScene" uid="uid://c8jsb8ram6hi0" path="res://scenes/Characters/Ash.tscn" id="11_5q7qh"]
+[ext_resource type="PackedScene" uid="uid://7o7t7dx8a4qx" path="res://scenes/Characters/Mercenary.tscn" id="11_8tdcg"]
+[ext_resource type="PackedScene" uid="uid://dmk58phke3yc6" path="res://scenes/Characters/Dude.tscn" id="11_nudrg"]
 [ext_resource type="PackedScene" uid="uid://b6rdx4twee0nj" path="res://scenes/NpcSpawner.tscn" id="12_j4pho"]
 [ext_resource type="PackedScene" uid="uid://cto3o6cvxsxjq" path="res://scenes/Characters/Rhydian.tscn" id="12_nwy4l"]
 
@@ -115,8 +116,8 @@ scale = Vector2(2, 2)
 
 [node name="NpcSpawner" parent="Npcs" instance=ExtResource("12_j4pho")]
 position = Vector2(867, 832)
-scale = Vector2(3.5, 3.5)
-ObjectToSpawn = ExtResource("10_pfjd0")
+scale = Vector2(2, 2)
+ObjectsToSpawn = Array[PackedScene]([ExtResource("11_nudrg"), ExtResource("11_8tdcg")])
 
 [node name="Navigation" type="Node2D" parent="Npcs"]
 position = Vector2(6.1035156e-05, 0)

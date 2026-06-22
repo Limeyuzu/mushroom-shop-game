@@ -5,4 +5,9 @@ title: setup
 <<declare $rhydian_quest_active = false>>
 <<declare $rhydian_desired_item = "Luck Potion">>
 <<declare $rhydian_shown_item = "">>
+
+// Shopper
+<<declare $desiredItem = "">>
+<<declare $selectedItem = "">>
+<<declare $isDesired = false>>
 ===

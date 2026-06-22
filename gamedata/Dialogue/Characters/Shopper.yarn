@@ -1,6 +1,5 @@
 title: Shopper
 ---
-<<declare $desiredItem = "">>
 Shopper: I want a \[color=orange\]{$desiredItem}\[/color\]. Do you have it?
 -> I have one here. (Show item)
     <<ShopperOpenInventory ShopOrchestrator>>
@@ -11,9 +10,6 @@ Shopper: I want a \[color=orange\]{$desiredItem}\[/color\]. Do you have it?
 
 title: ShopperShowItem
 ---
-<<declare $selectedItem = "">>
-<<declare $isDesired = false>>
-
 <<if $isDesired>>
     => Shopper: Thanks.
     => Shopper: I'm so glad you have it!

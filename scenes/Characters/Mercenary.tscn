@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://7o7t7dx8a4qx"]
+
+[ext_resource type="PackedScene" uid="uid://dbgtrq6dsnbid" path="res://scenes/Characters/NpcBase.tscn" id="1_4o7nf"]
+[ext_resource type="Texture2D" uid="uid://blcnlbp65wbpn" path="res://sprites/characters/Male/Male 02-2.png" id="2_ba2ul"]
+[ext_resource type="Script" uid="uid://lkf6bvyhcewl" path="res://scripts/Npcs/Shopper.cs" id="2_ww6iw"]
+
+[node name="Mercenary" instance=ExtResource("1_4o7nf")]
+script = ExtResource("2_ww6iw")
+ShopperDialogueStartNode = "MercenaryShopper"
+
+[node name="Shadow" parent="Body" index="2"]
+position = Vector2(0, 5)
+scale = Vector2(1.2499515, 0.92979985)
+
+[node name="Sprite2D" parent="Body" index="3"]
+texture = ExtResource("2_ba2ul")
+region_rect = Rect2(0, 0, 96, 128)
+
+[connection signal="SetNavigationDestination" from="." to="Body" method="SetDestination"]

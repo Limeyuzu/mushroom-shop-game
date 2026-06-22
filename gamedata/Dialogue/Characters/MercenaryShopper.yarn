@@ -1,0 +1,35 @@
+title: MercenaryShopper
+---
+Mercenary: I want the best and cheapest \[color=orange\]{$desiredItem}\[/color\] you got.
+-> I have one here. (Show item)
+    <<ShopperOpenInventory ShopOrchestrator>>
+-> Let me check if I have it.
+-> Cheap or good, pick one. <<once>>
+    Mercenary: Your attitude or your life, pick one.
+    <<jump MercenaryShopper>>
+-> Sorry, don't have it.
+    <<jump MercenaryShopperLeaveNegative>>
+===
+
+title: MercenaryShopperShowItem
+---
+<<if $isDesired>>
+    => Shopper: Thanks.
+    => Shopper: I'm so glad you have it!
+    <<jump MercenaryShopperLeave>>
+<<else>>
+    Mercenary: What? I don't need that.
+<<endif>>
+<<jump MercenaryShopperLeaveNegative>>
+===
+
+title: MercenaryShopperLeave
+---
+<<ShopperCompleteShopping ShopOrchestrator>>
+===
+
+title: MercenaryShopperLeaveNegative
+---
+Mercenary: Worthless shop in a worthless town.
+<<ShopperCompleteShopping ShopOrchestrator>>
+===

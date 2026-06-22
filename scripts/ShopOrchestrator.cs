@@ -9,7 +9,7 @@ public partial class ShopOrchestrator : Node
     [Export] Area2D CustomerLeavingArea;
 
     [Signal] public delegate void InitNumberOfCustomersEventHandler(int num);
-    [Signal] public delegate void SpawnShopNpcEventHandler();
+    [Signal] public delegate void SpawnShopNpcEventHandler(Vector2 spawnLocation);
 
     public Player Player { get; private set; }
 
