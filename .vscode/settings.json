@@ -55,5 +55,8 @@
                 "yarn-comments"
             ]
         }
+    ],
+    "cSpell.words": [
+        "Godot"
     ]
 }

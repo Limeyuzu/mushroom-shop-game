@@ -74,8 +74,8 @@ visible = false
 texture = SubResource("AtlasTexture_51x1i")
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2DOn"]
-position = Vector2(0, -10)
-color = Color(0.8, 0.506667, 0.4, 1)
+position = Vector2(0, -13)
+color = Color(0.7218527, 0.41204098, 1, 1)
 texture = ExtResource("4_4ibn2")
 texture_scale = 0.8
 

@@ -13,7 +13,8 @@ public partial class CombiningResultTextLabel : RichTextLabel
         if (result.Any())
         {
             var item = result.First().CompletedItem;
-            Text = $"[img=64x64]{item.GetImagePath()}[/img] {item.GetName()}";
+            var colour = item is DisguisedInventoryItem ? Colors.MediumPurple : Colors.White;
+            Text = $"[img=64x64]{item.GetImagePath()}[/img] [color=#{colour.ToHtml()}]{item.GetName()}[/color]";
         }
         else
         {

@@ -1,5 +1,6 @@
 {
-	"iron_sword_enhanced": [
-		["broken_sword", "enhance_potion"],
-	]
+	"iron_sword": {
+		"baseIngredient": "broken_sword",
+		"otherIngredients": ["dark_stone"],
+	}
 }

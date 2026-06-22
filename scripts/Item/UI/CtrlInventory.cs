@@ -34,6 +34,10 @@ public partial class CtrlInventory : ItemList
         {
             var listIndex = AddItem(item.GetName(), item.GetImage());
             SetItemMetadata(listIndex, item);
+            if (item is DisguisedInventoryItem)
+            {
+                SetItemCustomFgColor(listIndex, Colors.MediumPurple);
+            }
         }
     }
 

@@ -7,7 +7,7 @@ public partial class CraftingRecipes : Node
     public static CraftingRecipes Instance { get; private set; }
 
     private const string FILE_PATH = "res://gamedata/CraftingRecipes.json";
-    private Dictionary<string, List<List<string>>> _recipes = [];
+    private Dictionary<string, RecipeModel> _recipes = [];
 
     public override void _Ready()
     {
@@ -32,19 +32,17 @@ public partial class CraftingRecipes : Node
         var craftables = new List<Recipe>();
         foreach (var item in _recipes)
         {
-            var recipes = item.Value;
-            foreach (var recipeItemKeys in recipes)
+            var recipeModel = item.Value;
+            var recipeItems = recipeModel.otherIngredients.Concat([recipeModel.baseIngredient]).Select(ItemDB.GetItem).ToList();
+            if (!recipeItems.Except(ingredients).Any()) // are all items in recipe in ingredients 
             {
-                var recipeItems = recipeItemKeys.Select(ItemDB.GetItem).ToList();
-                if (!recipeItems.Except(ingredients).Any()) // are all items in recipe in ingredients 
+                var completedItem = new DisguisedInventoryItem(ItemDB.GetItem(item.Key), ItemDB.GetItem(recipeModel.baseIngredient));
+                var recipe = new Recipe
                 {
-                    var recipeModel = new Recipe
-                    {
-                        CompletedItem = ItemDB.GetItem(item.Key),
-                        Ingredients = recipeItems
-                    };
-                    craftables.Add(recipeModel);
-                }
+                    CompletedItem = completedItem,
+                    Ingredients = recipeItems
+                };
+                craftables.Add(recipe);
             }
         }
         return craftables;
@@ -52,11 +50,28 @@ public partial class CraftingRecipes : Node
 
     private void Deserialise(Variant jsonFile)
     {
-        foreach (var item in jsonFile.As<Godot.Collections.Dictionary<string, Godot.Collections.Array<Godot.Collections.Array<string>>>>())
+        foreach (var item in jsonFile.As<Godot.Collections.Dictionary<string, Variant>>())
         {
             var itemName = item.Key;
-            var recipes = item.Value.Select(i => i.Select(j => j).ToList()).ToList();
-            _recipes.Add(itemName, recipes);
+            RecipeModel recipeModel = new();
+            foreach (var prop in item.Value.As<Godot.Collections.Dictionary<string, Variant>>())
+            {
+                if (prop.Key == "baseIngredient")
+                {
+                    recipeModel.baseIngredient = prop.Value.As<string>();
+                }
+                else if (prop.Key == "otherIngredients")
+                {
+                    recipeModel.otherIngredients = [.. prop.Value.As<Godot.Collections.Array<string>>()];
+                }
+            }
+            _recipes.Add(itemName, recipeModel);
         }
+    }
+
+    public class RecipeModel
+    {
+        public string baseIngredient;
+        public List<string> otherIngredients;
     }
 }
