@@ -27,9 +27,9 @@ public partial class DialogueCanvas : Control
         return success;
     }
 
-    public void OnInteractionStartAttempt(string dialogueNode, Player player)
+    public async void OnInteractionStartAttempt(string dialogueNode, Player player)
     {
-        DialogueRunner.StartDialogue(dialogueNode);
+        await DialogueRunner.StartDialogue(dialogueNode);
         EmitSignal(SignalName.DialogueStarted);
 
         GD.Print($"{nameof(DialogueCanvas)}: interaction started by {player.GetName()}");

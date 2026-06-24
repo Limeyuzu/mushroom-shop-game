@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://dd3s4nq4pwmvf"]
+[gd_scene format=4 uid="uid://dd3s4nq4pwmvf"]
 
 [ext_resource type="Script" uid="uid://dd7orqksalqf3" path="res://scripts/Zoning/MapScene.cs" id="1_5q7qh"]
 [ext_resource type="Script" uid="uid://c0lf2vut48bbq" path="res://scripts/ShopOrchestrator.cs" id="2_8tdcg"]
@@ -25,128 +25,128 @@ vertices = PackedVector2Array(270, -150, 270, -42, 78, -42, -446, -150, 78, 214,
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6), PackedInt32Array(3, 6, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-72, 224, -72, -32, -456, -32, -456, -160, 280, -160, 280, -32, 88, -32, 88, 224)])
 
-[node name="Shop" type="Node2D" node_paths=PackedStringArray("SpawnPoints")]
+[node name="Shop" type="Node2D" unique_id=1198391734 node_paths=PackedStringArray("SpawnPoints")]
 script = ExtResource("1_5q7qh")
 SpawnPoints = [NodePath("Zoning/SpawnPoint")]
 
-[node name="ShopOrchestrator" type="Node2D" parent="." node_paths=PackedStringArray("CustomerWaitingArea", "CustomerLeavingArea")]
+[node name="ShopOrchestrator" type="Node2D" parent="." unique_id=1140041091 node_paths=PackedStringArray("CustomerWaitingArea", "CustomerLeavingArea")]
 script = ExtResource("2_8tdcg")
 CustomerWaitingArea = NodePath("CustomerWaitingArea")
 CustomerLeavingArea = NodePath("../Zoning/ZonePoint")
 
-[node name="CustomerWaitingArea" type="Area2D" parent="ShopOrchestrator"]
+[node name="CustomerWaitingArea" type="Area2D" parent="ShopOrchestrator" unique_id=1633953631]
 position = Vector2(863.99994, 527.99994)
 scale = Vector2(0.99999994, 0.99999994)
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopOrchestrator/CustomerWaitingArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopOrchestrator/CustomerWaitingArea" unique_id=1369161973]
 position = Vector2(6.1035156e-05, 6.1035156e-05)
 scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_8tdcg")
 debug_color = Color(0.9214601, 0.08052007, 0.6565996, 0.41960785)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=478149751]
 color = Color(0.88, 0.88, 0.88, 1)
 
-[node name="Map" type="Node2D" parent="."]
+[node name="Map" type="Node2D" parent="." unique_id=1819310121]
 scale = Vector2(2, 2)
 
-[node name="FloorWall" type="TileMapLayer" parent="Map"]
+[node name="FloorWall" type="TileMapLayer" parent="Map" unique_id=445325987]
 position = Vector2(-0.5, 0.5)
 tile_map_data = PackedByteArray("AAACAAUAAAABAAIAAAACAAYAAAABAAMAAAADAAUAAAABAAIAAAADAAYAAAABAAMAAAAEAAUAAAABAAIAAAAEAAYAAAABAAMAAAAFAAUAAAABAAIAAAAFAAYAAAABAAMAAAAGAAUAAAABAAIAAAAGAAYAAAABAAMAAAAHAAUAAAABAAIAAAAHAAYAAAABAAMAAAAIAAUAAAABAAIAAAAIAAYAAAABAAMAAAAJAAUAAAABAAIAAAAJAAYAAAABAAMAAAAKAAUAAAABAAIAAAAKAAYAAAABAAMAAAALAAYAAAABAAMAAAALAAUAAAABAAIAAAAMAAMAAAABAAIAAAAMAAQAAAABAAMAAAANAAMAAAABAAIAAAANAAQAAAABAAMAAAAOAAMAAAABAAIAAAAOAAQAAAABAAMAAAAPAAMAAAABAAIAAAAPAAQAAAABAAMAAAAQAAMAAAABAAIAAAAQAAQAAAABAAMAAAARAAMAAAABAAIAAAARAAQAAAABAAMAAAAMAAUAAAAAAAYAAAAMAAYAAAAAAAYAAAAMAAcAAAAAAAYAAAAMAAgAAAABAAYAAAAMAAkAAAAAAAYAAAAMAAoAAAAAAAYAAAAMAAsAAAAAAAYAAAAMAAwAAAAAAAYAAAANAAUAAAAAAAYAAAANAAYAAAAAAAYAAAANAAcAAAAAAAYAAAANAAgAAAAAAAYAAAANAAkAAAAAAAYAAAANAAoAAAAAAAYAAAANAAsAAAAAAAYAAAANAAwAAAAAAAYAAAAOAAUAAAAAAAYAAAAOAAYAAAAAAAYAAAAOAAcAAAAAAAYAAAAOAAgAAAAAAAYAAAAOAAkAAAAAAAYAAAAOAAoAAAAAAAYAAAAOAAsAAAAAAAYAAAAPAAUAAAAAAAYAAAAPAAYAAAAAAAYAAAAPAAcAAAAAAAYAAAAPAAgAAAAAAAYAAAAPAAkAAAAAAAYAAAAPAAoAAAAAAAYAAAAPAAsAAAAAAAYAAAAQAAUAAAAAAAYAAAAQAAYAAAAAAAYAAAAQAAcAAAAAAAYAAAAQAAgAAAAAAAYAAAAQAAkAAAAAAAYAAAAQAAoAAAAAAAYAAAAQAAsAAAAAAAYAAAARAAUAAAAAAAYAAAARAAYAAAAAAAYAAAARAAcAAAABAAYAAAARAAgAAAAAAAYAAAARAAkAAAAAAAYAAAARAAoAAAAAAAYAAAARAAsAAAABAAYAAAASAAYAAAACAAIAAAASAAcAAAACAAMAAAASAAgAAAAAAAYAAAASAAkAAAAAAAYAAAASAAoAAAAAAAYAAAASAAsAAAAAAAYAAAATAAYAAAACAAIAAAATAAcAAAACAAMAAAATAAgAAAAAAAYAAAATAAkAAAAAAAYAAAATAAoAAAAAAAYAAAATAAsAAAAAAAYAAAAUAAkAAAAAAAYAAAAUAAoAAAAAAAYAAAAUAAsAAAAAAAYAAAAVAAkAAAAAAAYAAAAVAAoAAAAAAAYAAAAVAAsAAAAAAAYAAAAWAAkAAAAAAAYAAAAWAAoAAAAAAAYAAAAWAAsAAAAAAAYAAAAXAAkAAAAAAAYAAAAXAAoAAAAAAAYAAAAXAAsAAAAAAAYAAAACAAcAAAAAAAYAAAACAAgAAAAAAAYAAAACAAkAAAAAAAYAAAACAAoAAAAAAAYAAAACAAsAAAAAAAYAAAACAAwAAAAAAAYAAAADAAcAAAAAAAYAAAADAAgAAAAAAAYAAAADAAkAAAAAAAYAAAADAAoAAAAAAAYAAAADAAsAAAAAAAYAAAADAAwAAAAAAAYAAAAEAAcAAAAAAAYAAAAEAAgAAAAAAAYAAAAEAAkAAAAAAAYAAAAEAAoAAAAAAAYAAAAEAAsAAAAAAAYAAAAEAAwAAAAAAAYAAAAFAAcAAAAAAAYAAAAFAAgAAAAAAAYAAAAFAAkAAAAAAAYAAAAFAAoAAAAAAAYAAAAFAAsAAAABAAYAAAAFAAwAAAAAAAYAAAAGAAcAAAAAAAYAAAAGAAgAAAAAAAYAAAAGAAkAAAAAAAYAAAAGAAoAAAAAAAYAAAAGAAsAAAAAAAYAAAAGAAwAAAAAAAYAAAAHAAcAAAAAAAYAAAAHAAgAAAABAAYAAAAHAAkAAAAAAAYAAAAHAAoAAAAAAAYAAAAHAAsAAAAAAAYAAAAHAAwAAAAAAAYAAAAIAAcAAAAAAAYAAAAIAAgAAAAAAAYAAAAIAAkAAAAAAAYAAAAIAAoAAAAAAAYAAAAIAAsAAAAAAAYAAAAIAAwAAAAAAAYAAAAJAAcAAAAAAAYAAAAJAAgAAAAAAAYAAAAJAAkAAAAAAAYAAAAJAAoAAAAAAAYAAAAJAAsAAAAAAAYAAAAJAAwAAAAAAAYAAAAKAAcAAAAAAAYAAAAKAAgAAAAAAAYAAAAKAAkAAAAAAAYAAAAKAAoAAAAAAAYAAAAKAAsAAAAAAAYAAAAKAAwAAAAAAAYAAAALAAcAAAAAAAYAAAALAAgAAAAAAAYAAAALAAkAAAAAAAYAAAALAAoAAAAAAAYAAAALAAsAAAABAAYAAAALAAwAAAAAAAYAAAAMAA0AAAAAAAYAAAANAA0AAAAAAAYAAAAUAAcAAAACAAMAAAAVAAcAAAACAAMAAAAWAAcAAAACAAMAAAAXAAcAAAACAAMAAAAUAAYAAAACAAIAAAAVAAYAAAACAAIAAAAWAAYAAAACAAIAAAAXAAYAAAACAAIAAAAUAAgAAAAAAAYAAAAVAAgAAAAAAAYAAAAWAAgAAAAAAAYAAAAXAAgAAAAAAAYAAAAOAAwAAAAAAAYAAAAOAA0AAAAAAAYAAAA=")
 tile_set = ExtResource("4_47hci")
 
-[node name="Carpet" type="TileMapLayer" parent="Map"]
+[node name="Carpet" type="TileMapLayer" parent="Map" unique_id=565913806]
 tile_map_data = PackedByteArray("AAAEAAkAAAAQAAMAAAAEAAoAAAAQAAQAAAAEAAsAAAAQAAUAAAAFAAkAAAARAAMAAAAFAAoAAAARAAQAAAAFAAsAAAARAAUAAAAGAAkAAAARAAMAAAAGAAoAAAARAAQAAAAGAAsAAAARAAUAAAAHAAkAAAARAAMAAAAHAAoAAAARAAQAAAAHAAsAAAARAAUAAAAIAAkAAAARAAMAAAAIAAoAAAARAAQAAAAIAAsAAAARAAUAAAAJAAkAAAASAAMAAAAJAAoAAAASAAQAAAAJAAsAAAASAAUAAAAMAA0AAAAQAAIAAAANAA0AAAARAAIAAAAUAAoAAAAQAAcAAAAUAAsAAAAQAAgAAAAVAAoAAAARAAcAAAAVAAsAAAARAAgAAAAWAAoAAAASAAcAAAAWAAsAAAASAAgAAAAUAAkAAAAQAAYAAAAVAAkAAAARAAYAAAAWAAkAAAASAAYAAAAOAA0AAAASAAIAAAAMAAwAAAAQAAAAAAANAAwAAAARAAAAAAAOAAwAAAASAAAAAAA=")
 tile_set = ExtResource("4_47hci")
 
-[node name="WallBorder" type="TileMapLayer" parent="Map"]
+[node name="WallBorder" type="TileMapLayer" parent="Map" unique_id=1877375704]
 tile_map_data = PackedByteArray("AAACAAQAAAACAAsAAAADAAQAAAACAAsAAAAEAAQAAAACAAsAAAAFAAQAAAACAAsAAAAGAAQAAAACAAsAAAAHAAQAAAACAAsAAAAIAAQAAAACAAsAAAAJAAQAAAACAAsAAAAKAAQAAAACAAsAAAALAAQAAAABAAwAAAALAAMAAAAAAA0AAAALAAUAAAADAAQAAAALAAYAAAADAAUAAAAMAAIAAAACAAsAAAANAAIAAAACAAsAAAAOAAIAAAACAAsAAAAPAAIAAAACAAsAAAAQAAIAAAACAAsAAAARAAIAAAACAAsAAAASAAIAAAAEAAwAAAALAAIAAAABAAsAAAABAAUAAAAAAA0AAAABAAYAAAAAAA0AAAABAAcAAAAAAA0AAAABAAgAAAAAAA0AAAABAAkAAAAAAA0AAAABAAoAAAAAAA0AAAABAAsAAAAAAA0AAAABAAwAAAAAAA0AAAABAAQAAAABAAsAAAACAA0AAAACAA8AAAADAA0AAAACAA8AAAAEAA0AAAACAA8AAAAFAA0AAAACAA8AAAAGAA0AAAACAA8AAAAHAA0AAAACAA8AAAAIAA0AAAACAA8AAAAJAA0AAAACAA8AAAAKAA0AAAACAA8AAAALAA0AAAABAA4AAAABAA0AAAAAAA4AAAAMAA4AAAACAA8AAAANAA4AAAACAA8AAAAOAA4AAAACAA8AAAALAA4AAAABAA8AAAACAAYAAAAdAAAAAAACAAcAAAAdAAEAAAACAAgAAAAdAAIAAAADAAYAAAAeAAAAAAADAAcAAAAeAAEAAAADAAgAAAAeAAIAAAAEAAcAAAAfAAEAAAAEAAgAAAAfAAIAAAASAAUAAAADAAwAAAASAAYAAAABAAQAAAASAAcAAAABAAUAAAASAAQAAAAEAA0AAAASAAMAAAAEAA0AAAATAAUAAAACAAsAAAAUAAUAAAACAAsAAAAVAAUAAAACAAsAAAAWAAUAAAACAAsAAAAXAAUAAAACAAsAAAAYAAUAAAAEAAwAAAAYAAYAAAAEAA0AAAAYAAcAAAAEAA0AAAAYAAgAAAAEAA0AAAAYAAkAAAAEAA0AAAAYAAoAAAAEAA0AAAAYAAsAAAAEAA0AAAAYAAwAAAAEAA4AAAAQAAwAAAACAA8AAAARAAwAAAACAA8AAAASAAwAAAACAA8AAAATAAwAAAACAA8AAAAUAAwAAAACAA8AAAAVAAwAAAACAA8AAAAWAAwAAAACAA8AAAAXAAwAAAACAA8AAAAPAAwAAAADAA4AAAAPAA0AAAAEAA0AAAAPAA4AAAADAA8AAAA=")
 tile_set = ExtResource("4_47hci")
 
-[node name="Objects" type="TileMapLayer" parent="Map"]
+[node name="Objects" type="TileMapLayer" parent="Map" unique_id=1359178997]
 tile_map_data = PackedByteArray("AAAIAAoAAAAMAAQAAAAIAAsAAAAMAAUAAAAIAAwAAAAMAAYAAAAJAAoAAAANAAQAAAAJAAsAAAANAAUAAAAJAAwAAAANAAYAAAAKAAoAAAAOAAQAAAAKAAsAAAAOAAUAAAAKAAwAAAAOAAYAAAADAAgAAAAMAAQAAAADAAkAAAAMAAUAAAADAAoAAAAMAAYAAAAEAAgAAAANAAQAAAAEAAkAAAANAAUAAAAEAAoAAAANAAYAAAAFAAgAAAAOAAQAAAAFAAkAAAAOAAUAAAAFAAoAAAAOAAYAAAANAAMAAAAPAAoAAAAMAAMAAAAPAAoAAAARAAMAAAANAAoAAAAOAAMAAAAMAAoAAAAMAAYAAAAaAA4AAAAMAAUAAAAYAA4AAAACAAkAAAAPAAYAAAALAAsAAAAPAAgAAAAHAAsAAAAPAAYAAAAEAAsAAAAIAAcAAAADAAsAAAAIAAcAAAAMAAcAAAAYAA8AAAANAAcAAAAZAA4AAAAOAAcAAAAZAA4AAAAPAAcAAAAZAA4AAAAQAAcAAAAZAA8AAAAWAAcAAAAdAAQAAAAWAAgAAAAdAAUAAAAXAAYAAAANAAoAAAAUAAcAAAAbAAQAAAAUAAgAAAAbAAUAAAAVAAYAAAAcAAMAAAAVAAcAAAAcAAQAAAAVAAgAAAAcAAUAAAAWAAoAAAANAA0AAAAXAAoAAAAUAAIAAAAWAAkAAAANAAwAAAAXAAkAAAAUAAIAAAASAAcAAAARAA0AAAASAAgAAAARAA4AAAAGAAYAAAAVAAcAAAAGAAcAAAAVAAgAAAAHAAYAAAAWAAcAAAAHAAcAAAAWAAgAAAAIAAYAAAAQAAsAAAAIAAcAAAAQAAwAAAALAAUAAAALAAoAAAALAAYAAAALAAsAAAA=")
 tile_set = ExtResource("4_47hci")
 
-[node name="Tabletop" type="TileMapLayer" parent="Map/Objects"]
+[node name="Tabletop" type="TileMapLayer" parent="Map/Objects" unique_id=1695551986]
 tile_map_data = PackedByteArray("AAAMAAUAAQALAA0AAAA=")
 tile_set = ExtResource("4_47hci")
 
-[node name="Candle" parent="Map/Objects/Tabletop" instance=ExtResource("3_l5adj")]
+[node name="Candle" parent="Map/Objects/Tabletop" unique_id=440540659 instance=ExtResource("3_l5adj")]
 position = Vector2(398.5, 206)
 
-[node name="Candle2" parent="Map/Objects/Tabletop" instance=ExtResource("3_l5adj")]
+[node name="Candle2" parent="Map/Objects/Tabletop" unique_id=421013925 instance=ExtResource("3_l5adj")]
 position = Vector2(142.5, 295.5)
 
-[node name="Candle3" parent="Map/Objects/Tabletop" instance=ExtResource("3_l5adj")]
+[node name="Candle3" parent="Map/Objects/Tabletop" unique_id=591795609 instance=ExtResource("3_l5adj")]
 position = Vector2(301, 359.5)
 
-[node name="Window" parent="Map/Objects" instance=ExtResource("4_pfjd0")]
+[node name="Window" parent="Map/Objects" unique_id=114442796 instance=ExtResource("4_pfjd0")]
 position = Vector2(311, 192)
 
-[node name="Window2" parent="Map/Objects" instance=ExtResource("4_pfjd0")]
+[node name="Window2" parent="Map/Objects" unique_id=914743457 instance=ExtResource("4_pfjd0")]
 position = Vector2(164.5, 192)
 
-[node name="Window3" parent="Map/Objects" instance=ExtResource("4_pfjd0")]
+[node name="Window3" parent="Map/Objects" unique_id=1948575393 instance=ExtResource("4_pfjd0")]
 position = Vector2(626.5, 222.5)
 
-[node name="Zoning" type="Node2D" parent="."]
+[node name="Zoning" type="Node2D" parent="." unique_id=2050284256]
 position = Vector2(867, 832)
 scale = Vector2(2, 2)
 
-[node name="ZonePoint" parent="Zoning" instance=ExtResource("3_47hci")]
+[node name="ZonePoint" parent="Zoning" unique_id=305947494 instance=ExtResource("3_47hci")]
 position = Vector2(0, 28)
 scale = Vector2(4, 0.2)
 NextScenePath = "res://scenes/Maps/Town.tscn"
 DestinationSpawnId = "shop"
 
-[node name="SpawnPoint" parent="Zoning" instance=ExtResource("5_l5adj")]
+[node name="SpawnPoint" parent="Zoning" unique_id=1955381466 instance=ExtResource("5_l5adj")]
 SpawnId = "main-door"
 
-[node name="Npcs" type="Node2D" parent="."]
+[node name="Npcs" type="Node2D" parent="." unique_id=86398276]
 
-[node name="Rhydian" parent="Npcs" instance=ExtResource("12_nwy4l")]
+[node name="Rhydian" parent="Npcs" unique_id=2083698252 instance=ExtResource("12_nwy4l")]
 position = Vector2(1310, 546)
 scale = Vector2(2, 2)
 
-[node name="Ash" parent="Npcs" instance=ExtResource("11_5q7qh")]
+[node name="Ash" parent="Npcs" unique_id=738379171 instance=ExtResource("11_5q7qh")]
 position = Vector2(287, 723)
 scale = Vector2(2, 2)
 
-[node name="NpcSpawner" parent="Npcs" instance=ExtResource("12_j4pho")]
+[node name="NpcSpawner" parent="Npcs" unique_id=1553762026 instance=ExtResource("12_j4pho")]
 position = Vector2(867, 832)
 scale = Vector2(2, 2)
 ObjectsToSpawn = Array[PackedScene]([ExtResource("11_nudrg"), ExtResource("11_8tdcg")])
 
-[node name="Navigation" type="Node2D" parent="Npcs"]
+[node name="Navigation" type="Node2D" parent="Npcs" unique_id=598969820]
 position = Vector2(6.1035156e-05, 0)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Npcs/Navigation"]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Npcs/Navigation" unique_id=1830245502]
 position = Vector2(856, 672.00006)
 navigation_polygon = SubResource("NavigationPolygon_nwy4l")
 navigation_layers = 9
 
-[node name="InteractableObjects" type="Node2D" parent="."]
+[node name="InteractableObjects" type="Node2D" parent="." unique_id=1583012966]
 
-[node name="CraftingTable" parent="InteractableObjects" instance=ExtResource("5_hd80v")]
+[node name="CraftingTable" parent="InteractableObjects" unique_id=471075900 instance=ExtResource("5_hd80v")]
 position = Vector2(986, 346)
 scale = Vector2(2, 2)
 collision_mask = 2
 
-[node name="Cauldron" parent="InteractableObjects" instance=ExtResource("7_eo1la")]
+[node name="Cauldron" parent="InteractableObjects" unique_id=1288190883 instance=ExtResource("7_eo1la")]
 position = Vector2(1052, 332)
 scale = Vector2(1.8, 1.8)
 collision_mask = 2
 
-[node name="ShopStartChair" parent="InteractableObjects" instance=ExtResource("6_j4pho")]
+[node name="ShopStartChair" parent="InteractableObjects" unique_id=954643820 instance=ExtResource("6_j4pho")]
 position = Vector2(832, 384)
 scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 3
 
-[node name="ServiceDesk" parent="InteractableObjects" instance=ExtResource("8_6qy1r")]
+[node name="ServiceDesk" parent="InteractableObjects" unique_id=51966016 instance=ExtResource("8_6qy1r")]
 position = Vector2(832, 452)
 collision_layer = 0
 collision_mask = 2
