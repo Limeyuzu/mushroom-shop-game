@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dxa63xvbge078"]
+
+[ext_resource type="Script" uid="uid://boa4mkgriadg2" path="res://scripts/UI/PauseMenu.cs" id="1_fsae6"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1460696410]
+process_mode = 2
+script = ExtResource("1_fsae6")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=112344903]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=1412557240]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Paused"

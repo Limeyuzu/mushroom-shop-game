@@ -1,30 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwgfgorbsy4qp"]
+[gd_scene format=3 uid="uid://bwgfgorbsy4qp"]
 
 [ext_resource type="PackedScene" uid="uid://ck5f6f0halm2g" path="res://scenes/UI/UICanvas.tscn" id="1_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://dxa63xvbge078" path="res://scenes/UI/PauseMenu.tscn" id="1_vcsgt"]
 [ext_resource type="Script" uid="uid://nvhb140d4id6" path="res://scripts/Zoning/MapLoader.cs" id="2_rarhs"]
 [ext_resource type="PackedScene" uid="uid://uti1acrmf4mg" path="res://scenes/Characters/Player.tscn" id="2_vcsgt"]
 [ext_resource type="Script" uid="uid://d3m6sgicj2cul" path="res://scripts/Item/Core/Inventory.cs" id="3_c01mt"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=789997973]
 
-[node name="UICanvas" parent="." instance=ExtResource("1_0bbpv")]
+[node name="PauseMenu" parent="." unique_id=1460696410 instance=ExtResource("1_vcsgt")]
+process_mode = 3
+visible = false
 
-[node name="MapLoader" type="Node2D" parent="." node_paths=PackedStringArray("_player")]
+[node name="UI" parent="." unique_id=864386131 instance=ExtResource("1_0bbpv")]
+process_mode = 1
+
+[node name="Game" type="Node2D" parent="." unique_id=1155832502]
+process_mode = 1
+
+[node name="MapLoader" type="Node2D" parent="Game" unique_id=120547435 node_paths=PackedStringArray("_player")]
 script = ExtResource("2_rarhs")
 _initialScenePath = "res://scenes/Maps/Shop.tscn"
 _initialSpawnLocationId = "main-door"
 _player = NodePath("../Player")
 
-[node name="Player" parent="." node_paths=PackedStringArray("Inventory", "UICanvas") instance=ExtResource("2_vcsgt")]
+[node name="Player" parent="Game" unique_id=1940908631 node_paths=PackedStringArray("Inventory", "UICanvas") instance=ExtResource("2_vcsgt")]
 position = Vector2(833, 840)
 scale = Vector2(3.5, 3.5)
 Inventory = NodePath("Inventory")
-UICanvas = NodePath("../UICanvas")
+UICanvas = NodePath("../../UI")
 InitialFacing = Vector2(0, -1)
 
-[node name="Inventory" type="Node" parent="Player"]
+[node name="Inventory" type="Node" parent="Game/Player" unique_id=622607618]
 script = ExtResource("3_c01mt")
 _itemNames = Array[String](["broken_sword", "chanterelle", "chanterelle", "penny_bun", "penny_bun", "aspen", "aspen", "iron_sword", "luck_potion", "dark_stone"])
 metadata/_custom_type_script = "uid://d3m6sgicj2cul"
 
-[connection signal="ToggleInventoryWindowRequested" from="Player" to="UICanvas" method="ToggleInventoryWindow"]
+[connection signal="ToggleInventoryWindowRequested" from="Game/Player" to="UI" method="ToggleInventoryWindow"]
